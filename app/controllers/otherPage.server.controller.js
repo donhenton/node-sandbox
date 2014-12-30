@@ -12,7 +12,5 @@ exports.render = function(req, res) {
 	req.session.lastVisit = new Date();
 	
 	// Use the 'response' object to render the 'index' view with a 'title' property
-	res.render('index', {
-		title: 'Get a job, bozo'
-	});
+	res.render('otherPage', null);
 };

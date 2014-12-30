@@ -42,6 +42,8 @@ module.exports = function() {
 
 	// Load the 'index' routing file
 	require('../app/routes/index.server.routes.js')(app);
+        require('../app/routes/otherPage.server.routes.js')(app);
+        require('../app/routes/embeddedJS.server.routes.js')(app);
 
 	// Configure static file serving
 	app.use(express.static('./public'));

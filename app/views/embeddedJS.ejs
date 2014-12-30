@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  		 
+    	<title>Embedded JS Demos</title>
+</head>
+<body>
+        <p>
+	Demonstrations of the <a href="http://www.embeddedjs.com/">
+        Embedded JS Templating Language</a>. 
+        </p><p>
+        The data for this list is in <b>embeddedJS.server.controller.js</b></p>
+
+        <h3>Data List</h3>
+        <ul>
+            <% for(var i=0; i<supplies.length; i++) {%>
+                <li><%= supplies[i] %></li>
+            <% } %>
+        </ul>
+
+        <p>
+        <% if (permissions == 'yes') { %>
+
+            <b><i>You have Permissions</i></b>
+
+        <% } else { %>
+
+            <b><i>You dont' have Permissions</i></b>
+
+        <% } %>
+        </p>
+        
+        <p><a href="/">Return to Main Page</a></p>
+        
+</body>
+</html>
