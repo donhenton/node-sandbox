@@ -33,7 +33,7 @@ module.exports = function (app) {
 
     });
     
-    
+    //@getAllRestaurants
     app.get('/restaurant', function (req, res) {
     res.json(daoService.getAllRestaurants());
 
