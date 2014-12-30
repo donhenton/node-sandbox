@@ -69,8 +69,69 @@ module.exports = function (app) {
 
     });
 
+//@remove restaurant
+    app.delete('/restaurant/:id', function (req, res) {
+        // console.log(req.body);
+        var restaurantId = parseInt(req.params.id);
+        req.body.id = restaurantId;
+        var errorMessage = daoService.deleteRestaurant(req.body);
+        var resVar = null;
+        if (errorMessage != null)
+        {
+            resVar = daoService.createError('Not Found', "NotFoundClass");
+            res.status(404);
 
+        }
+        res.json(resVar);
 
+    });
+
+//@create review
+    app.post('/restaurant/review/:restaurantId', function (req, res) {
+        var restaurantId = parseInt(req.params.restaurantId);
+        var reviewBody = req.body;
+        var message = daoService.addReview(restaurantId, reviewBody);
+        if (message == null)
+            res.json(daoService.createIdResponse(reviewBody.id));
+        else
+        {
+            var resVar = daoService.createError(message, "NotFoundClass");
+            res.status(404);
+            res.json(resVar);
+        }
+    });
+//@save review
+    app.put('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
+        var restaurantId = parseInt(req.params.restaurantId);
+        var reviewId = parseInt(req.params.reviewId);
+        var reviewBody = req.body;
+        var message = daoService.saveReview(restaurantId, reviewId, reviewBody);
+        if (message == null)
+            return res.json(null);
+        else
+        {
+            var resVar = daoService.createError(message, "NotFoundClass");
+            res.status(404);
+            res.json(resVar);
+        }
+    });
+
+//@delete review
+
+    app.delete('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
+        var restaurantId = parseInt(req.params.restaurantId);
+        var reviewId = parseInt(req.params.reviewId);
+
+        var message = daoService.deleteReview(restaurantId, reviewId);
+        if (message == null)
+            return res.json(null);
+        else
+        {
+            var resVar = daoService.createError(message, "NotFoundClass");
+            res.status(404);
+            res.json(resVar);
+        }
+    });
 
 
 };
