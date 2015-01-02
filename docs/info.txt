@@ -20,3 +20,22 @@ youtube for mongodb and nodejs and the nodejs mongodb driver
 
  https://www.youtube.com/watch?v=e36OwQlgBm8
 https://www.youtube.com/results?search_query=nodejs+mongodb+driver
+
+
+********************
+https://github.com/mongodb/node-mongodb-native
+http://docs.mongodb.org/manual/tutorial/query-documents/
+
+http://www.hacksparrow.com/the-mongodb-tutorial.html
+
+database : database
+collection : table
+document : row
+field : -
+{key:value} : -
+********************
+
+DAO PATTERN 
+https://gist.github.com/lifecoder/920582
+http://www.slideshare.net/miguro1/nodejs-dao
+http://www.edave.net/2011/03/22/a-layered-node-js-architecture-using-express/
