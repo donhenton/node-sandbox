@@ -1,0 +1,22 @@
+Mongoose refs
+
+https://github.com/mongolab/hello-mongoose
+http://blog.modulus.io/getting-started-with-mongoose
+http://mongoosejs.com/
+
+
+
+Node js driver refs
+
+http://learnmongodbthehardway.com/
+
+to use the express generator npm install
+$ npm install -g express-generator
+
+then call express -h in a folder to create a sample app
+
+=================
+youtube for mongodb and nodejs and the nodejs mongodb driver
+
+ https://www.youtube.com/watch?v=e36OwQlgBm8
+https://www.youtube.com/results?search_query=nodejs+mongodb+driver
