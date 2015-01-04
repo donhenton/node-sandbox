@@ -25,6 +25,11 @@ https://www.youtube.com/results?search_query=nodejs+mongodb+driver
 ********************
 https://github.com/mongodb/node-mongodb-native
 http://docs.mongodb.org/manual/tutorial/query-documents/
+http://theholmesoffice.com/how-to-ge-data-from-mongodb-into-node-js/
+
+!!!!!!
+http://mongodb.github.io/node-mongodb-native/2.0/overview/quickstart/
+!!!!!!
 
 http://www.hacksparrow.com/the-mongodb-tutorial.html
 

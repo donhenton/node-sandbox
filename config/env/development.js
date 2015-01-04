@@ -3,5 +3,6 @@
 
 // Set the 'development' environment configuration object
 module.exports = {
-	sessionSecret: 'developmentSessionSecret'
+	sessionSecret: 'developmentSessionSecret',
+        db: {url: 'mongodb://mongouser:mongo9000@ds029811.mongolab.com:29811/restaurants'}
 };

@@ -9,8 +9,12 @@
         var setUpRestaurantList = function ()
 
         {
-            restaurantListIndex = {}
-            daoService.getAllRestaurants().forEach(function (restaurant)
+            
+            var restaurantItems = daoService.getAllRestaurants();
+            if (restaurantItems.length == 0)
+                return;
+            restaurantListIndex = {};
+            restaurantItems.forEach(function (restaurant)
             {
                 restaurantListIndex[restaurant.id] = restaurant;
                 if (typeof restaurant.reviewDTOs == 'undefined')
