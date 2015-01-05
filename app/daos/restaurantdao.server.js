@@ -27,9 +27,14 @@ module.exports = function (app, config) {
         console.log("get all on server "+config.db.url);
         mongoClient.connect(config.db.url, function (err, db) {
              console.log("error "+err);
-            //console.log("Connected correctly to server "+config.db.url);
-
-           // db.close();
+            
+             var col = db.collection('restaurants');
+             console.log("col "+col.length);
+             col.find({}).toArray(function(err, items) {
+                    console.log("XXXXX "+items.length);
+                    db.close();
+             });
+             db.close();
         });
 
 
