@@ -5,26 +5,28 @@
 module.exports = function (app) {
     var daoService = app.daoService;
 
-
-    //@getRestaurant(id)
+    var reportError = function (res, errorString)
+    {
+        res.status(500);
+        res.json(daoService.createError(errorString, "ErrorClass"));
+    }
+    //@getRestaurant(id) ****
     app.get('/restaurant/:id', function (req, res) {
 
         var restaurantId = req.params.id;
-       // console.log("zzzrestaurant id " + restaurantId);
-  
+        // console.log("zzzrestaurant id " + restaurantId);
+
         daoService.getRestaurantById(restaurantId).then(
                 function (restaurantFoundArray)
                 {
-                    
+
 
                     var resVar = {};
                     resVar.biteMe = "get a job";
-
-
                     if (restaurantFoundArray.length == 0)
                     {
-                        resVar = daoService.createError('Not Found', 
-                                 "NotFoundClass");
+                        resVar = daoService.createError('Not Found',
+                                "NotFoundClass");
                         res.status(404);
                         res.json(resVar);
                     }
@@ -32,12 +34,16 @@ module.exports = function (app) {
                     {
                         resVar = restaurantFoundArray[0];
                         res.json(resVar);
+
                     }
-                },console.error);
-
+                },
+                function (err)
+                {
+                    reportError(res, err.toString());
+                }
+        );
     });
-
-    //@getAllRestaurants
+    //@getAllRestaurants ****
     app.get('/restaurant', function (req, res) {
 
         daoService.getAllRestaurants().then(function (items)
@@ -45,21 +51,34 @@ module.exports = function (app) {
             //console.log("items zzz "+items.length);
             res.json(items);
         }
-        , console.error);
-
-
+        , function (err)
+        {
+            reportError(res, err.toString());
+        });
     });
-
-
-    //@create restaurant
+    //@create restaurant ****
     app.post('/restaurant', function (req, res) {
         // console.log(req.body);
-        daoService.createRestaurant(req.body);
-        var resVar = daoService.createIdResponse(req.body.id);
-        res.json(resVar);
+        var success = function(result)
+        {
+           // console.log("ok "+result.result.ok);
+           // console.log("id "+result.ops[0]._id);
+            if (result.result.ok == 1)
+            {
+                var resVar = daoService.createIdResponse(result.ops[0]._id);
+                res.json(resVar);
+            }
+            else
+            {
+                reportError(res, result.writeError.errmsg);
+            }
+            
+        };
+        var error = function(err){reportError(res, err.toString());};
+        
+        daoService.createRestaurant(req.body).then(success,error);
+        
     });
-
-
 //@update restaurant
     app.put('/restaurant/:id', function (req, res) {
         // console.log(req.body);
@@ -77,9 +96,7 @@ module.exports = function (app) {
             res.status(404);
         }
         res.json(resVar);
-
     });
-
 //@remove restaurant
     app.delete('/restaurant/:id', function (req, res) {
         // console.log(req.body);
@@ -91,12 +108,9 @@ module.exports = function (app) {
         {
             resVar = daoService.createError('Not Found', "NotFoundClass");
             res.status(404);
-
         }
         res.json(resVar);
-
     });
-
 //@create review
     app.post('/restaurant/review/:restaurantId', function (req, res) {
         var restaurantId = parseInt(req.params.restaurantId);
@@ -126,13 +140,11 @@ module.exports = function (app) {
             res.json(resVar);
         }
     });
-
 //@delete review
 
     app.delete('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
         var restaurantId = parseInt(req.params.restaurantId);
         var reviewId = parseInt(req.params.reviewId);
-
         var message = daoService.deleteReview(restaurantId, reviewId);
         if (message == null)
             return res.json(null);
@@ -143,8 +155,6 @@ module.exports = function (app) {
             res.json(resVar);
         }
     });
-
-
 };
 
 

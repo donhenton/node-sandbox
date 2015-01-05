@@ -58,16 +58,16 @@ module.exports = function (app, config) {
                 db.close();
             });
             return deferredResult.promise;
-        }
-        return   daoService.promisedConnect().then(success, console.error)
+        };
+        return   daoService.promisedConnect().then(success, console.error);
 
-    }
+    };
 
     daoService.getRestaurantById = function (id)
     {
         var success = function (db)
         {
-            console.log("my id " + id);
+          //  console.log("my id " + id);
             var col = db.collection('restaurants');
             var deferredResult = Q.defer();
             var objId = new ObjectID(id);
@@ -87,12 +87,40 @@ module.exports = function (app, config) {
                 db.close();
             });
             return deferredResult.promise;
-        }
+        };
         return   daoService.promisedConnect().then(success, console.error)
     };
     
     
-    
+    daoService.createRestaurant = function (newRestaurant)
+    {
+        
+         var success = function (db)
+        {
+          //  console.log("my id " + id);
+            var col = db.collection('restaurants');
+            var deferredResult = Q.defer();
+             
+ 
+            col.insert(newRestaurant,function (err, result) {
+                console.log(result);
+                if (err)
+                {
+                    deferredResult.reject(err);
+                }
+                else
+                {
+                    deferredResult.resolve(result);
+                }
+
+                db.close();
+            });
+            return deferredResult.promise;
+        };
+        
+        
+        return   daoService.promisedConnect().then(success, console.error);
+    };
     
     
     app.daoService = daoService;
