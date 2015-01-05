@@ -82,7 +82,7 @@ module.exports = function (app) {
 //@update restaurant
     app.put('/restaurant/:id', function (req, res) {
         // console.log(req.body);
-        var restaurantId = parseInt(req.params.id);
+        var restaurantId =  req.params.id ;
         req.body.id = restaurantId;
         var errorMessage = daoService.saveRestaurant(req.body);
         var resVar = null;

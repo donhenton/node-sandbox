@@ -67,14 +67,14 @@ module.exports = function (app, config) {
     {
         var success = function (db)
         {
-          //  console.log("my id " + id);
+            //  console.log("my id " + id);
             var col = db.collection('restaurants');
             var deferredResult = Q.defer();
             var objId = new ObjectID(id);
-            var searchCriteria = {_id:objId   };
- 
+            var searchCriteria = {_id: objId};
+
             col.find(searchCriteria).toArray(function (err, items) {
- 
+
                 if (err)
                 {
                     deferredResult.reject(err);
@@ -90,19 +90,19 @@ module.exports = function (app, config) {
         };
         return   daoService.promisedConnect().then(success, console.error)
     };
-    
-    
+
+
     daoService.createRestaurant = function (newRestaurant)
     {
-        
-         var success = function (db)
+
+        var success = function (db)
         {
-          //  console.log("my id " + id);
+            //  console.log("my id " + id);
             var col = db.collection('restaurants');
             var deferredResult = Q.defer();
-             
- 
-            col.insert(newRestaurant,function (err, result) {
+
+
+            col.insert(newRestaurant, function (err, result) {
                 console.log(result);
                 if (err)
                 {
@@ -117,11 +117,46 @@ module.exports = function (app, config) {
             });
             return deferredResult.promise;
         };
-        
-        
+
+
         return   daoService.promisedConnect().then(success, console.error);
     };
-    
-    
+
+    daoService.saveRestaurant = function (restaurant)
+    {
+        var id = restaurant.id;
+
+        var success = function (db)
+        {
+
+            var col = db.collection('restaurants');
+            var deferredResult = Q.defer();
+
+
+            col.update({_id: new ObjectID(id)}
+            , {$set: {
+                    name: restaurant.name,
+                    zipCode: restaurant.zipCode,
+                }},
+            function (err, result) {
+                console.log(result);
+                if (err)
+                {
+                    deferredResult.reject(err);
+                }
+                else
+                {
+                    deferredResult.resolve(result);
+                }
+
+                db.close();
+            });
+            return deferredResult.promise;
+        };
+        return   daoService.promisedConnect().then(success, console.error);
+    };
+
+
+
     app.daoService = daoService;
 };
