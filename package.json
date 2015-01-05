@@ -9,6 +9,7 @@
 		"method-override": "~2.2.0",
 		"express-session": "~1.7.6",
                 "mongodb": "~2.0",
+                "q": "~1.0.0",
 		"ejs": "~1.0.0"
 	}
 }

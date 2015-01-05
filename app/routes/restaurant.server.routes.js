@@ -35,7 +35,14 @@ module.exports = function (app) {
 
     //@getAllRestaurants
     app.get('/restaurant', function (req, res) {
-        res.json(daoService.getAllRestaurants());
+        
+        daoService.getAllRestaurants().then(function(items)
+        {
+            //console.log("items zzz "+items.length);
+            res.json(items);
+        }
+        ,console.error);
+        
 
     });
 

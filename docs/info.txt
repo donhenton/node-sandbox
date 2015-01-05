@@ -67,3 +67,12 @@ http://www.edave.net/2011/03/22/a-layered-node-js-architecture-using-express/
  *       db.close();
  *     });
  *   });
+
+
+//////// promises ////////////////////////////////////
+http://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/
+http://strongloop.com/strongblog/how-to-compose-node-js-promises-with-q/
+http://satokolomblog.azurewebsites.net/promises-in-node-js-with-q/
+http://strongloop.com/strongblog/how-to-compose-node-js-promises-with-q/
+http://stackoverflow.com/questions/19112801/node-js-using-promises-with-mongodb
+http://stackoverflow.com/questions/23597059/promise-and-nodejs-mongodb-driver?rq=1

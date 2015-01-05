@@ -6,6 +6,23 @@ module.exports = function (app, config) {
 
 
     var mongoClient = require('mongodb').MongoClient;
+    var Q = require('q');
+
+
+    daoService.promisedConnect = function ()
+    {
+        var deferredDbConnection = Q.defer();
+        mongoClient.connect(config.db.url, function (err, database) {
+            if (err) {
+                deferredDbConnection.reject(err);
+                return;
+            }
+            deferredDbConnection.resolve(database);
+        });
+
+
+        return deferredDbConnection.promise;
+    }
 
 
     daoService.createIdResponse = function (idValue)
@@ -24,22 +41,39 @@ module.exports = function (app, config) {
 
     daoService.getAllRestaurants = function ()
     {
-        console.log("get all on server "+config.db.url);
-        mongoClient.connect(config.db.url, function (err, db) {
-             console.log("error "+err);
-            
-             var col = db.collection('restaurants');
-             console.log("col "+col.length);
-             col.find({}).toArray(function(err, items) {
-                    console.log("XXXXX "+items.length);
-                    db.close();
-             });
-             db.close();
-        });
+         
+    //    console.log(config.db.url);
 
 
-        return [];
-    };
+        var success = function (db)
+        {
+
+            var col = db.collection('restaurants');
+            var deferredResult = Q.defer();
+
+            col.find({}).toArray(function (err, items) {
+               // console.log("error " + err);
+                if (err)
+                {
+                    deferredResult.reject(err);
+                }
+                else
+                {
+                    deferredResult.resolve(items);
+
+                }
+
+                db.close();
+            });
+
+
+
+            return deferredResult.promise;
+        }
+        return   daoService.promisedConnect().then(success, console.error)
+
+    }
+
 
     var setUpRestaurantList = function ()
 
