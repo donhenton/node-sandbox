@@ -9,40 +9,44 @@ module.exports = function (app) {
     //@getRestaurant(id)
     app.get('/restaurant/:id', function (req, res) {
 
-        var restaurantId = parseInt(req.params.id);
-        console.log("restaurant id " + restaurantId);
-        var restaurantFound = daoService.getRestaurantById(restaurantId);
-        console.log("found " + restaurantFound);
+        var restaurantId = req.params.id;
+       // console.log("zzzrestaurant id " + restaurantId);
+  
+        daoService.getRestaurantById(restaurantId).then(
+                function (restaurantFoundArray)
+                {
+                    
 
-        var resVar = {};
-        resVar.biteMe = "get a job";
+                    var resVar = {};
+                    resVar.biteMe = "get a job";
 
 
-        if (restaurantFound == null)
-        {
-            resVar = daoService.createError('Not Found', "NotFoundClass");
-            res.status(404);
-            res.json(resVar);
-        }
-        else
-        {
-            resVar = restaurantFound;
-            res.json(resVar);
-        }
-
+                    if (restaurantFoundArray.length == 0)
+                    {
+                        resVar = daoService.createError('Not Found', 
+                                 "NotFoundClass");
+                        res.status(404);
+                        res.json(resVar);
+                    }
+                    else
+                    {
+                        resVar = restaurantFoundArray[0];
+                        res.json(resVar);
+                    }
+                },console.error);
 
     });
 
     //@getAllRestaurants
     app.get('/restaurant', function (req, res) {
-        
-        daoService.getAllRestaurants().then(function(items)
+
+        daoService.getAllRestaurants().then(function (items)
         {
             //console.log("items zzz "+items.length);
             res.json(items);
         }
-        ,console.error);
-        
+        , console.error);
+
 
     });
 

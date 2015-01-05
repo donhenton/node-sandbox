@@ -3,12 +3,9 @@ module.exports = function (app, config) {
     var daoService = {};
     //console.log("config in dao "+config.db);
     var restaurantListIndex = {};
-
-
     var mongoClient = require('mongodb').MongoClient;
+    var ObjectID = require('mongodb').ObjectID;
     var Q = require('q');
-
-
     daoService.promisedConnect = function ()
     {
         var deferredDbConnection = Q.defer();
@@ -19,8 +16,6 @@ module.exports = function (app, config) {
             }
             deferredDbConnection.resolve(database);
         });
-
-
         return deferredDbConnection.promise;
     }
 
@@ -38,11 +33,10 @@ module.exports = function (app, config) {
         e["errorClass"] = classVar;
         return e;
     };
-
     daoService.getAllRestaurants = function ()
     {
-         
-    //    console.log(config.db.url);
+
+        //    console.log(config.db.url);
 
 
         var success = function (db)
@@ -50,9 +44,8 @@ module.exports = function (app, config) {
 
             var col = db.collection('restaurants');
             var deferredResult = Q.defer();
-
             col.find({}).toArray(function (err, items) {
-               // console.log("error " + err);
+                // console.log("error " + err);
                 if (err)
                 {
                     deferredResult.reject(err);
@@ -60,30 +53,47 @@ module.exports = function (app, config) {
                 else
                 {
                     deferredResult.resolve(items);
-
                 }
 
                 db.close();
             });
-
-
-
             return deferredResult.promise;
         }
         return   daoService.promisedConnect().then(success, console.error)
 
     }
 
-
-    var setUpRestaurantList = function ()
-
+    daoService.getRestaurantById = function (id)
     {
-        console.log("setting list");
-        app.daoService = daoService;
-        restaurantListIndex = {};
+        var success = function (db)
+        {
+            console.log("my id " + id);
+            var col = db.collection('restaurants');
+            var deferredResult = Q.defer();
+            var objId = new ObjectID(id);
+            var searchCriteria = {_id:objId   };
+ 
+            col.find(searchCriteria).toArray(function (err, items) {
+ 
+                if (err)
+                {
+                    deferredResult.reject(err);
+                }
+                else
+                {
+                    deferredResult.resolve(items);
+                }
 
-
+                db.close();
+            });
+            return deferredResult.promise;
+        }
+        return   daoService.promisedConnect().then(success, console.error)
     };
-    setUpRestaurantList();
-
+    
+    
+    
+    
+    
+    app.daoService = daoService;
 };
