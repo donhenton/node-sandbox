@@ -232,8 +232,11 @@ module.exports = function (app) {
             else
             {
                 //success path
-                res.json(result);
-                res.status(200);
+                if (result.ok == 1)
+                {
+                    res.json(null);
+                    res.status(200);
+                }
 
 
             }

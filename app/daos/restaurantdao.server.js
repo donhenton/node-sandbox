@@ -264,25 +264,17 @@ module.exports = function (app, config) {
 
 
             }
-            return restaurantArray[0];
-        }// found the review
-
-        var processReview = function (restaurantWithNewReview)
-        {
-
+            var restaurantWithNewReview =  restaurantArray[0];
             return daoService.saveRestaurant(restaurantWithNewReview,
                     restaurantWithNewReview._id)
                     .then(function (res) {
                         return {ok: 1};
                     }, error);
+            
+        }// found the review
 
-
-        }
-
-
-
-        return daoService.getRestaurantById(restaurantId).then(foundTheReview, error)
-                .then(processReview, error);
+        return daoService.getRestaurantById(restaurantId).then(foundTheReview, error);
+         
 
 
 
