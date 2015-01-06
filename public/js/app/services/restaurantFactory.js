@@ -81,7 +81,7 @@
             destRestaurant.state = "";
             destRestaurant.version = 0;
             destRestaurant.is_current = false;
-            destRestaurant._id = 0;
+            destRestaurant._id = null;
             return destRestaurant;
         }
         /**
@@ -112,7 +112,7 @@
         {
 
 
-            if (newRestaurant._id > 0)
+            if (newRestaurant._id != null)
             {
                 console.log("in save restaurant factory " + newRestaurant._id)
 

@@ -60,7 +60,7 @@
             return  $http.get(g_restaurantUrlBase).
                     success(function (data, status, headers, config) {
                         console.log("dao init ")
-                        console.log(data);
+//                        console.log(data);
                         localRestaurantCopy = data;
                         setUpRestaurantList();
                     }).

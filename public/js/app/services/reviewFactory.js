@@ -21,7 +21,7 @@
 
         factory.transferReview = function (from, to)
         {
-            to.id = from.id;
+            to._id = from._id;
             to.parentRestaurantId = from.parentRestaurantId;
             to.reviewListing = from.reviewListing;
             to.stampDate = from.stampDate;
@@ -36,11 +36,11 @@
         factory.createEmptyReview = function (parentId)
         {
             var to = {};
-            to.id = 0;
+            to._id =null;
             to.parentRestaurantId = parentId;
             to.reviewListing = "";
             to.stampDate = (new Date()).getTime();
-            ;
+            
             to.starRating = 2;
             to.isEditing = false;
             return to;
@@ -58,7 +58,7 @@
                     success(function (data, status, headers, config) {
                         var reviews = currentRestaurant.reviews;
                         reviews.unshift(newReview);
-                        newReview.id = data.id;
+                        newReview._id = data._id;
                     });
 
         }
@@ -71,7 +71,7 @@
                         var reviews = currentRestaurant.reviews;
                         for (var i = 0; i < reviews.length; i++)
                         {
-                            if (reviews[i].id === newReview.id)
+                            if (reviews[i]._id === newReview._id)
                             {
                                 factory.transferReview(newReview, reviews[i]);
                                 break;
@@ -90,7 +90,7 @@
                         var reviews = currentRestaurant.reviews;
                         for (var i = 0; i < reviews.length; i++)
                         {
-                            if (reviews[i].id === newReview.id)
+                            if (reviews[i]._id === newReview._id)
                             {
                                 reviews.splice(i, 1);
                                 console.log("deleteReview " + i)
