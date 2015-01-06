@@ -55,7 +55,17 @@ module.exports = function (app, config) {
                 }
                 else
                 {
-                    deferredResult.resolve(items);
+                    var t = items
+                            .sort(
+                            
+                            function(a,b){ 
+                                var y = a.name.toString() ;
+                                var z = b.name.toString() ;
+                                return 1*
+                                y.localeCompare(z,'en', {'sensitivity': 'base'})}
+                            
+                            );
+                    deferredResult.resolve(t);
                 }
 
                 db.close();
