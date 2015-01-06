@@ -2,8 +2,8 @@
 'use strict';
 
 // Define the routes module' method
-module.exports = function (app) {
-    var daoService = app.daoService;
+module.exports = function (app,daoService) {
+   
 
     var reportError = function (res, errorString)
     {

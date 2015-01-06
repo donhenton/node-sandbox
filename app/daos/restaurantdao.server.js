@@ -1,4 +1,4 @@
-module.exports = function (app, config) {
+module.exports = function (config) {
 
     var daoService = {};
     //console.log("config in dao "+config.db);
@@ -357,7 +357,7 @@ module.exports = function (app, config) {
 
 
 
+    return daoService;
 
-
-    app.daoService = daoService;
+    
 };
