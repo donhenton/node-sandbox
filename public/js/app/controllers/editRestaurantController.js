@@ -36,8 +36,8 @@
         {
             // $log.log("model con " + $scope.editRestaurantForm.name.$dirty)
             // $log.log("ngForm " + $scope.editRestaurantForm.$valid)
-            if (typeof $scope.currentRestaurant.id === 'undefined'
-                    || $scope.currentRestaurant.id == 0)
+            if (typeof $scope.currentRestaurant._id === 'undefined'
+                    || $scope.currentRestaurant._id == 0)
             {
                 //add mode
                 $scope.recordPresent = false;

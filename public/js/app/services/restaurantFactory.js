@@ -81,7 +81,7 @@
             destRestaurant.state = "";
             destRestaurant.version = 0;
             destRestaurant.is_current = false;
-            destRestaurant.id = 0;
+            destRestaurant._id = 0;
             return destRestaurant;
         }
         /**
@@ -112,9 +112,9 @@
         {
 
 
-            if (newRestaurant.id > 0)
+            if (newRestaurant._id > 0)
             {
-                console.log("in save restaurant factory " + newRestaurant.id)
+                console.log("in save restaurant factory " + newRestaurant._id)
 
                 return  restaurantDAOService.saveRestaurant(newRestaurant).
                         success(function (data, status, headers, config) {
@@ -141,13 +141,13 @@
 
         factory.restore = function ()
         {
-            //$log.log("current id in restore id " + currentRestaurant.id  );
-            if (typeof currentRestaurant.id == 'undefined' || currentRestaurant.id != 0)
+            //$log.log("current id in restore id " + currentRestaurant._id  );
+            if (typeof currentRestaurant._id == 'undefined' || currentRestaurant._id != 0)
             {
-                var source = restaurantDAOService.getRestaurantById(currentRestaurant.id)
+                var source = restaurantDAOService.getRestaurantById(currentRestaurant._id)
                 //$log.log("source in restore id " + source.id + " " + source.name);
                 restaurantDAOService.loadRestaurant(currentRestaurant, source);
-                //$log.log("currentRestaurant in restore id " + currentRestaurant.id + " " +
+                //$log.log("currentRestaurant in restore id " + currentRestaurant._id + " " +
                 //        currentRestaurant.name);
             }
 

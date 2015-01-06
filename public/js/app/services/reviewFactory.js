@@ -56,7 +56,7 @@
 
          return   reviewDAOService.addReview(currentRestaurant, newReview).
                     success(function (data, status, headers, config) {
-                        var reviews = currentRestaurant.reviewDTOs;
+                        var reviews = currentRestaurant.reviews;
                         reviews.unshift(newReview);
                         newReview.id = data.id;
                     });
@@ -68,7 +68,7 @@
 
             return reviewDAOService.saveReview(currentRestaurant, newReview).
                     success(function (data, status, headers, config) {
-                        var reviews = currentRestaurant.reviewDTOs;
+                        var reviews = currentRestaurant.reviews;
                         for (var i = 0; i < reviews.length; i++)
                         {
                             if (reviews[i].id === newReview.id)
@@ -87,7 +87,7 @@
         {
             return reviewDAOService.deleteReview(currentRestaurant, newReview).
                     success(function (data, status, headers, config) {
-                        var reviews = currentRestaurant.reviewDTOs;
+                        var reviews = currentRestaurant.reviews;
                         for (var i = 0; i < reviews.length; i++)
                         {
                             if (reviews[i].id === newReview.id)
@@ -111,12 +111,12 @@
                 return [];
             }
 
-            currentRestaurant.reviewDTOs.forEach(function (rev)
+            currentRestaurant.reviews.forEach(function (rev)
             {
                 var newRev = {};
 
                 factory.transferReview(rev, newRev);
-                newRev.parentRestaurantId = currentRestaurant.id
+                newRev.parentRestaurantId = currentRestaurant._id
                 scatteredReviews.push(newRev);
             }
             )

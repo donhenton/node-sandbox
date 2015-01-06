@@ -6,22 +6,22 @@
         
        daoService.addReview = function(currentRestaurant,newReview) 
        {               
-           newReview.parentRestaurantId = currentRestaurant.id;
-           newReview.id = null;
-           return  $http.post(g_restaurantUrlBase+"review/"+currentRestaurant.id, newReview)
+           newReview.parentRestaurantId = currentRestaurant._id;
+           newReview._id = null;
+           return  $http.post(g_restaurantUrlBase+"review/"+currentRestaurant._id, newReview)
        }
        
        daoService.saveReview = function(currentRestaurant,newReview) 
        {
             var saveURL = g_restaurantUrlBase+"review/"
-                    +currentRestaurant.id + "/"+newReview.id;
+                    +currentRestaurant._id + "/"+newReview._id;
             return $http.put(saveURL, newReview);
        }
        
        daoService.deleteReview = function(currentRestaurant,newReview) 
        {
-            var deleteURL = g_restaurantUrlBase+"review/"+currentRestaurant.id +
-                    "/"+newReview.id;
+            var deleteURL = g_restaurantUrlBase+"review/"+currentRestaurant._id +
+                    "/"+newReview._id;
             return $http.delete(deleteURL);
                      
        }

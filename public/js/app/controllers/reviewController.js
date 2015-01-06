@@ -16,7 +16,7 @@
             reviewFactory.changeRestaurant(restaurant);
             $scope.currentReviews = reviewFactory.scatterCurrentReviews();
             $scope.isAdding = false;
-            $scope.addNewReviewBuffer = reviewFactory.createEmptyReview(restaurant.id);
+            $scope.addNewReviewBuffer = reviewFactory.createEmptyReview(restaurant._id);
             resetReviews();
 
         }

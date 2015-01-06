@@ -16,10 +16,10 @@
             restaurantListIndex = {};
             restaurantItems.forEach(function (restaurant)
             {
-                restaurantListIndex[restaurant.id] = restaurant;
-                if (typeof restaurant.reviewDTOs == 'undefined')
+                restaurantListIndex[restaurant._id] = restaurant;
+                if (typeof restaurant.reviews == 'undefined')
                 {
-                    restaurant.reviewDTOs = [];
+                    restaurant.reviews = [];
                 }
             });
 
@@ -34,7 +34,7 @@
             destRestaurant.state = sourceRestaurant.state;
             destRestaurant.version = sourceRestaurant.version;
             destRestaurant.is_current = sourceRestaurant.is_current;
-            destRestaurant.id = sourceRestaurant.id;
+            destRestaurant._id = sourceRestaurant._id;
         }
         //@
         daoService.getRestaurantById = function (id)
@@ -59,7 +59,8 @@
         {
             return  $http.get(g_restaurantUrlBase).
                     success(function (data, status, headers, config) {
-                        console.log("dao init")
+                        console.log("dao init ")
+                        console.log(data);
                         localRestaurantCopy = data;
                         setUpRestaurantList();
                     }).
@@ -76,10 +77,10 @@
          */
         daoService.saveRestaurant = function (newRestaurant)
         {
-            return $http.put(g_restaurantUrlBase  + newRestaurant.id, newRestaurant).
+            return $http.put(g_restaurantUrlBase  + newRestaurant._id, newRestaurant).
                     success(function (data, status, headers, config) {
-                        var lookup = daoService.getRestaurantById(newRestaurant.id);
-                        console.log("save lookup "+lookup.id);
+                        var lookup = daoService.getRestaurantById(newRestaurant._id);
+                        console.log("save lookup "+lookup._id);
                         daoService.loadRestaurant(lookup, newRestaurant);
                     }) ;
 
@@ -92,12 +93,12 @@
          */
         daoService.addRestaurant = function (r)
         {
-            r.id = null;
+            r._id = null;
             return  $http.post(g_restaurantUrlBase, r).
                     success(function (data, status, headers, config) {
                         daoService.getAllRestaurants().unshift(r);
-                        r.reviewDTOs = [];
-                        r.id = data.id;
+                        r.reviews = [];
+                        r._id = data._id;
                     }) ;
              
         }
@@ -106,14 +107,14 @@
         {
 
             console.log("delete restaurant daoService");
-            return  $http.delete(g_restaurantUrlBase  + restaurant.id).
+            return  $http.delete(g_restaurantUrlBase  + restaurant._id).
                     success(function (data, status, headers, config) {
                         console.log("delete restaurant daoService 2");
                         var idx = -1;
                         var resCollection = daoService.getAllRestaurants();
                         for (var i = 0; i < resCollection.length; i++)
                         {
-                            if (resCollection[i].id === restaurant.id)
+                            if (resCollection[i]._id === restaurant._id)
                             {
                                 idx = i;
                                 break;
