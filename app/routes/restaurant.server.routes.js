@@ -146,12 +146,12 @@ module.exports = function (app) {
         }
         daoService.deleteRestaurant(restaurantId).then(success, error);
     });
-//@create review
+//@create review *****
     app.post('/restaurant/review/:restaurantId', function (req, res) {
         var restaurantId = req.params.restaurantId;
         //no _id will be present
         var reviewBody = req.body;
-        
+
 
         var error = function (err) {
             reportError(res, err.toString());
@@ -169,7 +169,7 @@ module.exports = function (app) {
             {
                 res.json(result);
                 res.status(200);
-                 
+
                 //return the id of the new review
             }
 
@@ -199,17 +199,36 @@ module.exports = function (app) {
 //@delete review
 
     app.delete('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
-        var restaurantId = parseInt(req.params.restaurantId);
-        var reviewId = parseInt(req.params.reviewId);
-        var message = daoService.deleteReview(restaurantId, reviewId);
-        if (message == null)
-            return res.json(null);
-        else
+        var restaurantId = req.params.restaurantId;
+        var reviewId = req.params.reviewId;
+        var error = function (err) {
+            reportError(res, err.toString());
+        };
+
+        var success = function (result)
         {
-            var resVar = daoService.createError(message, "NotFoundClass");
-            res.status(404);
-            res.json(resVar);
-        }
+            if (result == null)
+            {
+                //couldn't find restaurant or review
+                var resVar = daoService.createError('Not Found', "NotFoundClass");
+                res.status(404);
+                res.json(resVar);
+            }
+            else
+            {
+                //success path
+                res.json(result);
+                res.status(200);
+
+
+            }
+
+
+
+        };
+
+        daoService.deleteReview(restaurantId, reviewId).then(success, error);
+
     });
 };
 
