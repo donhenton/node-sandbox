@@ -25,6 +25,7 @@ module.exports = function (app, config) {
 
         var id = {};
         id["id"] = idValue;
+        id["_id"] = idValue;
         // console.log(id);
         return id;
     };
