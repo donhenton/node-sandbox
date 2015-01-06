@@ -22,8 +22,10 @@ module.exports = function (app, config) {
 
     daoService.createIdResponse = function (idValue)
     {
+        
         var id = {};
         id["id"] = idValue;
+       // console.log(id);
         return id;
     };
     daoService.createError = function (message, classVar)
@@ -206,33 +208,22 @@ module.exports = function (app, config) {
             {
                 var restaurant = restaurantArray[0];
                 reviewBody._id = new ObjectID();
-                console.log(reviewBody);
+               // console.log(reviewBody._id +" "+restaurant._id);
                 restaurant.reviews.push(reviewBody);
 
-                return  {"restaurant": restaurant, "reviewId": reviewBody._id};
-            }
-        }
-
-        var processReview = function (restaurantWithNewReview)
-        {
-            if (restaurantWithNewReview == null)
-            {
-               // throw new Error("cannot find restaurant " + restaurantId);
-               return null;
-            }
-            else
-            {
-                return daoService.saveRestaurant(restaurantWithNewReview.restaurant,
-                        restaurantWithNewReview.restaurant._id)
+                return daoService.saveRestaurant(restaurant,
+                        restaurant._id)
                         .then(function (res) {
-                            return daoService.createIdResponse(restaurantWithNewReview.reviewId);
+                           
+                            return daoService.createIdResponse(reviewBody._id);
                         }, error);
-
             }
         }
 
-        return daoService.getRestaurantById(restaurantId).then(foundTheReview, console.error)
-                .then(processReview, error);
+        
+
+        return daoService.getRestaurantById(restaurantId)
+                .then(foundTheReview, error);
     }
 
 
