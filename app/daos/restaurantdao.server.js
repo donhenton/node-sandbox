@@ -96,7 +96,11 @@ module.exports = function (app, config) {
 
     daoService.createRestaurant = function (newRestaurant)
     {
-
+         if (newRestaurant.reviews == null || 
+                        (typeof newRestaurant.reviews) == 'undefined')
+                {
+                    newRestaurant.reviews = [];
+                }
         var success = function (db)
         {
             //  console.log("my id " + id);
@@ -209,6 +213,11 @@ module.exports = function (app, config) {
                 var restaurant = restaurantArray[0];
                 reviewBody._id = new ObjectID();
                 // console.log(reviewBody._id +" "+restaurant._id);
+                if (restaurant.reviews == null || 
+                        (typeof restaurant.reviews) == 'undefined')
+                {
+                    restaurant.reviews = [];
+                }
                 restaurant.reviews.push(reviewBody);
 
                 return daoService.saveRestaurant(restaurant,
