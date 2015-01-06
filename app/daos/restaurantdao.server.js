@@ -137,7 +137,8 @@ module.exports = function (app, config) {
                     city: restaurant.city,
                     state: restaurant.state,
                     version: restaurant.version,
-                    zipCode: restaurant.zipCode
+                    zipCode: restaurant.zipCode,
+                    reviews: restaurant.reviews
                 }},
             function (err, result) {
                 //console.log(result);
@@ -166,24 +167,67 @@ module.exports = function (app, config) {
             var deferredResult = Q.defer();
 
 
-            col.remove({_id: new ObjectID(restaurantId)}  ,   
-            function (err, result) {
-                //console.log(result);
-                if (err)
-                {
-                    deferredResult.reject(err);
-                }
-                else
-                {
-                    deferredResult.resolve(result);
-                }
+            col.remove({_id: new ObjectID(restaurantId)},
+                    function (err, result) {
+                        //console.log(result);
+                        if (err)
+                        {
+                            deferredResult.reject(err);
+                        }
+                        else
+                        {
+                            deferredResult.resolve(result);
+                        }
 
-                db.close();
-            });
+                        db.close();
+                    });
             return deferredResult.promise;
         };
         return   daoService.promisedConnect().then(success, console.error);
     };
+
+    ////////////////reviews //////////////////////////////
+
+    daoService.addReview = function (reviewBody, restaurantId)
+    {
+        var success = function (restaurantArray)
+        {
+            if (restaurantArray.length == 0)
+            {
+                console.log("in review zero '" + restaurantId + "'");
+                return null;
+            }
+            else
+            {
+                var restaurant = restaurantArray[0];
+                reviewBody._id = new ObjectID();
+                console.log(reviewBody);
+                restaurant.reviews.push(reviewBody);
+
+                return  {"restaurant": restaurant, "reviewId": reviewBody._id};
+            }
+        }
+
+        var processReview = function (restaurantWithNewReview)
+        {
+            if (restaurantWithNewReview == null)
+            {
+                return null;
+            }
+            else
+            {
+                return daoService.saveRestaurant(restaurantWithNewReview.restaurant,
+                        restaurantWithNewReview.restaurant._id)
+                        .then(function (res) {
+                            return daoService.createIdResponse(restaurantWithNewReview.reviewId);
+                        }, console.error);
+
+            }
+        }
+
+        return daoService.getRestaurantById(restaurantId).then(success, console.error)
+                .then(processReview, console.error);
+    }
 
     app.daoService = daoService;
 };

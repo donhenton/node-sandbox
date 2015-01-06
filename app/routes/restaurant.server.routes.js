@@ -91,7 +91,7 @@ module.exports = function (app) {
 
         var success = function (result)
         {
-             
+
             if (result.result.ok == 1)
             {
                 var resVar = daoService.createIdResponse(restaurantId);
@@ -100,8 +100,8 @@ module.exports = function (app) {
             else
             {
                 //console.log("in error handler "+result)
-                 //console.log(result);
-                reportError(res, "error in success handler "+result.toString());
+                //console.log(result);
+                reportError(res, "error in success handler " + result.toString());
             }
 
         };
@@ -129,35 +129,57 @@ module.exports = function (app) {
                 }
                 else
                 {
-                   var resVar = daoService.createError('Not Found',
-                                "NotFoundClass");
-                        res.status(404);
-                        res.json(resVar);
+                    var resVar = daoService.createError('Not Found',
+                            "NotFoundClass");
+
+                    res.status(404);
+                    res.json(resVar);
                 }
-                
+
             }
             else
             {
                 //console.log("in error handler "+result)
-                 //console.log(result);
-                reportError(res, "error in success handler "+result.toString());
+                //console.log(result);
+                reportError(res, "error in success handler " + result.toString());
             }
         }
         daoService.deleteRestaurant(restaurantId).then(success, error);
     });
 //@create review
     app.post('/restaurant/review/:restaurantId', function (req, res) {
-        var restaurantId = parseInt(req.params.restaurantId);
+        var restaurantId = req.params.restaurantId;
+        //no _id will be present
         var reviewBody = req.body;
-        var message = daoService.addReview(restaurantId, reviewBody);
-        if (message == null)
-            res.json(daoService.createIdResponse(reviewBody.id));
-        else
+        
+
+        var error = function (err) {
+            reportError(res, err.toString());
+        };
+
+        var success = function (result)
         {
-            var resVar = daoService.createError(message, "NotFoundClass");
-            res.status(404);
-            res.json(resVar);
-        }
+            if (result == null)
+            {
+                var resVar = daoService.createError('Not Found', "NotFoundClass");
+                res.status(404);
+                res.json(resVar);
+            }
+            else
+            {
+                res.json(result);
+                res.status(200);
+                 
+                //return the id of the new review
+            }
+
+
+
+        };
+
+
+
+        daoService.addReview(reviewBody, restaurantId).then(success, error);
     });
 //@save review
     app.put('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
