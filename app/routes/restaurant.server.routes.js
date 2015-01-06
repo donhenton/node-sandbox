@@ -59,10 +59,10 @@ module.exports = function (app) {
     //@create restaurant ****
     app.post('/restaurant', function (req, res) {
         // console.log(req.body);
-        var success = function(result)
+        var success = function (result)
         {
-           // console.log("ok "+result.result.ok);
-           // console.log("id "+result.ops[0]._id);
+            // console.log("ok "+result.result.ok);
+            // console.log("id "+result.ops[0]._id);
             if (result.result.ok == 1)
             {
                 var resVar = daoService.createIdResponse(result.ops[0]._id);
@@ -72,44 +72,78 @@ module.exports = function (app) {
             {
                 reportError(res, result.writeError.errmsg);
             }
-            
+
         };
-        var error = function(err){reportError(res, err.toString());};
-        
-        daoService.createRestaurant(req.body).then(success,error);
-        
+        var error = function (err) {
+            reportError(res, err.toString());
+        };
+
+        daoService.createRestaurant(req.body).then(success, error);
+
     });
-//@update restaurant
+//@update restaurant ****
     app.put('/restaurant/:id', function (req, res) {
         // console.log(req.body);
-        var restaurantId =  req.params.id ;
-        req.body.id = restaurantId;
-        var errorMessage = daoService.saveRestaurant(req.body);
-        var resVar = null;
-        if (errorMessage == null)
+        var restaurantId = req.params.id;
+        var error = function (err) {
+            reportError(res, err.toString());
+        };
+
+        var success = function (result)
         {
-            resVar = daoService.createIdResponse(req.body.id);
-        }
-        else
-        {
-            resVar = daoService.createError('Not Found', "NotFoundClass");
-            res.status(404);
-        }
-        res.json(resVar);
+             
+            if (result.result.ok == 1)
+            {
+                var resVar = daoService.createIdResponse(restaurantId);
+                res.json(resVar);
+            }
+            else
+            {
+                //console.log("in error handler "+result)
+                 //console.log(result);
+                reportError(res, "error in success handler "+result.toString());
+            }
+
+        };
+
+
+
+        daoService.saveRestaurant(req.body, restaurantId).then(success, error);
+
     });
-//@remove restaurant
+//@remove restaurant ****
     app.delete('/restaurant/:id', function (req, res) {
         // console.log(req.body);
-        var restaurantId = parseInt(req.params.id);
-        req.body.id = restaurantId;
-        var errorMessage = daoService.deleteRestaurant(req.body);
-        var resVar = null;
-        if (errorMessage != null)
+        var restaurantId = req.params.id;
+        var error = function (err) {
+            reportError(res, err.toString());
+        };
+
+        var success = function (result)
         {
-            resVar = daoService.createError('Not Found', "NotFoundClass");
-            res.status(404);
+            if (result.result.ok == 1)
+            {
+                if (result.result.n == 1)
+                {
+                    res.json(null);
+                }
+                else
+                {
+                   var resVar = daoService.createError('Not Found',
+                                "NotFoundClass");
+                        res.status(404);
+                        res.json(resVar);
+                }
+                
+            }
+            else
+            {
+                //console.log("in error handler "+result)
+                 //console.log(result);
+                reportError(res, "error in success handler "+result.toString());
+            }
         }
-        res.json(resVar);
+        daoService.deleteRestaurant(restaurantId).then(success, error);
     });
 //@create review
     app.post('/restaurant/review/:restaurantId', function (req, res) {

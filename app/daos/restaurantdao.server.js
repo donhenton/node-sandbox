@@ -122,10 +122,8 @@ module.exports = function (app, config) {
         return   daoService.promisedConnect().then(success, console.error);
     };
 
-    daoService.saveRestaurant = function (restaurant)
+    daoService.saveRestaurant = function (restaurant, id)
     {
-        var id = restaurant.id;
-
         var success = function (db)
         {
 
@@ -136,10 +134,13 @@ module.exports = function (app, config) {
             col.update({_id: new ObjectID(id)}
             , {$set: {
                     name: restaurant.name,
-                    zipCode: restaurant.zipCode,
+                    city: restaurant.city,
+                    state: restaurant.state,
+                    version: restaurant.version,
+                    zipCode: restaurant.zipCode
                 }},
             function (err, result) {
-                console.log(result);
+                //console.log(result);
                 if (err)
                 {
                     deferredResult.reject(err);
@@ -156,7 +157,33 @@ module.exports = function (app, config) {
         return   daoService.promisedConnect().then(success, console.error);
     };
 
+    daoService.deleteRestaurant = function (restaurantId)
+    {
+        var success = function (db)
+        {
 
+            var col = db.collection('restaurants');
+            var deferredResult = Q.defer();
+
+
+            col.remove({_id: new ObjectID(restaurantId)}  ,   
+            function (err, result) {
+                //console.log(result);
+                if (err)
+                {
+                    deferredResult.reject(err);
+                }
+                else
+                {
+                    deferredResult.resolve(result);
+                }
+
+                db.close();
+            });
+            return deferredResult.promise;
+        };
+        return   daoService.promisedConnect().then(success, console.error);
+    };
 
     app.daoService = daoService;
 };
