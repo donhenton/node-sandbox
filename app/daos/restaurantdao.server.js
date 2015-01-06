@@ -190,12 +190,17 @@ module.exports = function (app, config) {
 
     daoService.addReview = function (reviewBody, restaurantId)
     {
+
+        var error = function (err) {
+
+            throw new Error(err);
+        };
         var foundTheReview = function (restaurantArray)
         {
             if (restaurantArray.length == 0)
             {
-                console.log("in review zero '" + restaurantId + "'");
                 return null;
+                //throw new Error("cannot find restaurant " + restaurantId);
             }
             else
             {
@@ -212,7 +217,8 @@ module.exports = function (app, config) {
         {
             if (restaurantWithNewReview == null)
             {
-                return null;
+               // throw new Error("cannot find restaurant " + restaurantId);
+               return null;
             }
             else
             {
@@ -220,13 +226,13 @@ module.exports = function (app, config) {
                         restaurantWithNewReview.restaurant._id)
                         .then(function (res) {
                             return daoService.createIdResponse(restaurantWithNewReview.reviewId);
-                        }, console.error);
+                        }, error);
 
             }
         }
 
         return daoService.getRestaurantById(restaurantId).then(foundTheReview, console.error)
-                .then(processReview, console.error);
+                .then(processReview, error);
     }
 
 
@@ -234,7 +240,8 @@ module.exports = function (app, config) {
     {
         var reviewIdObj = new ObjectID(reviewId);
         var error = function (err) {
-            return  daoService.createError(err.toString(), "errorClass");
+
+            throw new Error(err);
         };
         var foundTheReview = function (restaurantArray)
         {
@@ -272,11 +279,11 @@ module.exports = function (app, config) {
         var processReview = function (restaurantWithNewReview)
         {
 
-            return daoService.saveRestaurant(restaurantWithNewReview ,
+            return daoService.saveRestaurant(restaurantWithNewReview,
                     restaurantWithNewReview._id)
                     .then(function (res) {
                         return {ok: 1};
-                    }, console.error);
+                    }, error);
 
 
         }

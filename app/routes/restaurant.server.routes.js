@@ -94,8 +94,22 @@ module.exports = function (app) {
 
             if (result.result.ok == 1)
             {
-                var resVar = daoService.createIdResponse(restaurantId);
-                res.json(resVar);
+                 
+                console.log(result);
+                if (result.result.n == 1)
+                {
+                    res.json(null);
+                }
+                else
+                {
+                    var resVar = daoService.createError('Not Found',
+                            "NotFoundClass");
+
+                    res.status(404);
+                    res.json(resVar);
+                }
+                
+                
             }
             else
             {
@@ -183,8 +197,8 @@ module.exports = function (app) {
     });
 //@save review
     app.put('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
-        var restaurantId = parseInt(req.params.restaurantId);
-        var reviewId = parseInt(req.params.reviewId);
+        var restaurantId = req.params.restaurantId ;
+        var reviewId =  req.params.reviewId ;
         var reviewBody = req.body;
         var message = daoService.saveReview(restaurantId, reviewId, reviewBody);
         if (message == null)
@@ -202,6 +216,7 @@ module.exports = function (app) {
         var restaurantId = req.params.restaurantId;
         var reviewId = req.params.reviewId;
         var error = function (err) {
+             
             reportError(res, err.toString());
         };
 
