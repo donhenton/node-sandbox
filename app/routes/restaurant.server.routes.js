@@ -200,15 +200,38 @@ module.exports = function (app) {
         var restaurantId = req.params.restaurantId ;
         var reviewId =  req.params.reviewId ;
         var reviewBody = req.body;
-        var message = daoService.saveReview(restaurantId, reviewId, reviewBody);
-        if (message == null)
-            return res.json(null);
-        else
+        
+        var error = function (err) {
+             
+            reportError(res, err.toString());
+        };
+        var success = function (result)
         {
-            var resVar = daoService.createError(message, "NotFoundClass");
-            res.status(404);
-            res.json(resVar);
-        }
+            if (result == null)
+            {
+                //couldn't find restaurant or review
+                var resVar = daoService.createError('Not Found', "NotFoundClass");
+                res.status(404);
+                res.json(resVar);
+            }
+            else
+            {
+                //success path
+                if (result.ok == 1)
+                {
+                    res.json(null);
+                    res.status(200);
+                }
+
+
+            }
+
+
+
+        };
+
+        daoService.saveReview(restaurantId, reviewId,reviewBody).then(success, error);
+         
     });
 //@delete review
 

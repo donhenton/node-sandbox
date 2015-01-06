@@ -22,10 +22,10 @@ module.exports = function (app, config) {
 
     daoService.createIdResponse = function (idValue)
     {
-        
+
         var id = {};
         id["id"] = idValue;
-       // console.log(id);
+        // console.log(id);
         return id;
     };
     daoService.createError = function (message, classVar)
@@ -208,19 +208,19 @@ module.exports = function (app, config) {
             {
                 var restaurant = restaurantArray[0];
                 reviewBody._id = new ObjectID();
-               // console.log(reviewBody._id +" "+restaurant._id);
+                // console.log(reviewBody._id +" "+restaurant._id);
                 restaurant.reviews.push(reviewBody);
 
                 return daoService.saveRestaurant(restaurant,
                         restaurant._id)
                         .then(function (res) {
-                           
+
                             return daoService.createIdResponse(reviewBody._id);
                         }, error);
             }
         }
 
-        
+
 
         return daoService.getRestaurantById(restaurantId)
                 .then(foundTheReview, error);
@@ -236,7 +236,7 @@ module.exports = function (app, config) {
         };
         var foundTheReview = function (restaurantArray)
         {
-            console.log("in found review");
+            console.log("in found review delete");
             if (restaurantArray.length == 0)
             {
                 console.log("in review zero '" + restaurantId + "'");
@@ -264,22 +264,76 @@ module.exports = function (app, config) {
 
 
             }
-            var restaurantWithNewReview =  restaurantArray[0];
+            var restaurantWithNewReview = restaurantArray[0];
             return daoService.saveRestaurant(restaurantWithNewReview,
                     restaurantWithNewReview._id)
                     .then(function (res) {
                         return {ok: 1};
                     }, error);
-            
+
         }// found the review
 
         return daoService.getRestaurantById(restaurantId).then(foundTheReview, error);
-         
+
 
 
 
     }//end deleteReview
 
+    daoService.saveReview = function (restaurantId, reviewId,newReviewBody)
+    {
+        var reviewIdObj = new ObjectID(reviewId);
+        var error = function (err) {
+
+            throw new Error(err);
+        };
+        var foundTheReview = function (restaurantArray)
+        {
+            console.log("in found review for save");
+            if (restaurantArray.length == 0)
+            {
+               // console.log("in review zero '" + restaurantId + "'");
+                throw new Error("cannot find restaurant " + restaurantId);
+            }
+            else
+            {
+                // console.log("shifting through reviews ")
+                var foundIt = false;
+                var reviews = restaurantArray[0].reviews;
+                for (var i = 0; i < reviews.length; i++)
+                {
+                    //console.log(reviews[i]._id,reviewIdObj)
+                    if (reviews[i]._id.equals(reviewIdObj))
+                    {
+                        //reviews.splice(i, 1);
+                        reviews[i].starRating = newReviewBody.starRating;
+                        reviews[i].reviewListing = newReviewBody.reviewListing;
+                        foundIt = true;
+                    }
+                }
+
+                if (foundIt == false)
+                {
+                    throw new Error("cannot find review " + reviewId);
+                }
+
+
+            }
+            var restaurantWithNewReview = restaurantArray[0];
+            return daoService.saveRestaurant(restaurantWithNewReview,
+                    restaurantWithNewReview._id)
+                    .then(function (res) {
+                        return {ok: 1};
+                    }, error);
+
+        }// found the review
+
+        return daoService.getRestaurantById(restaurantId).then(foundTheReview, error);
+
+
+
+
+    }//end saveReview
 
 
 
