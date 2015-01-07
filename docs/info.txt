@@ -85,4 +85,4 @@ http://vijayannadi.wordpress.com/tutorials/sample-chat-app-using-nodejs-socketio
 http://aqueous-beyond-8981.herokuapp.com/
 https://github.com/vijayannadi/chat
 
-http://robdodson.me/deploying-your-first-node-dot-js-and-socket-dot-io-app-to-heroku/
+http://socket.io/docs/
