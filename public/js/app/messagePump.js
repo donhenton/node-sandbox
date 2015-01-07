@@ -69,7 +69,7 @@ var messagePump =
                 var i;
                 if (typeof subscribers === "undefined")
                     return;
-                max = subscribers.length;
+                var max = subscribers.length;
 
                 for (i = 0; i < max; i += 1) {
                     if (action === 'raiseEvent') {

@@ -120,7 +120,7 @@ module.exports = function (config) {
 
 
             col.insert(newRestaurant, function (err, result) {
-                console.log(result);
+              //  console.log(result);
                 if (err)
                 {
                     deferredResult.reject(err);
@@ -256,10 +256,10 @@ module.exports = function (config) {
         };
         var foundTheReview = function (restaurantArray)
         {
-            console.log("in found review delete");
+           // console.log("in found review delete");
             if (restaurantArray.length == 0)
             {
-                console.log("in review zero '" + restaurantId + "'");
+              //  console.log("in review zero '" + restaurantId + "'");
                 throw new Error("cannot find restaurant " + restaurantId);
             }
             else
@@ -309,7 +309,7 @@ module.exports = function (config) {
         };
         var foundTheReview = function (restaurantArray)
         {
-            console.log("in found review for save");
+           // console.log("in found review for save");
             if (restaurantArray.length == 0)
             {
                // console.log("in review zero '" + restaurantId + "'");
