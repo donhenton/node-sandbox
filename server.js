@@ -10,7 +10,6 @@ var express = require('./config/express');
 // Create a new Express application instance
 var app = express();
 var server = require('http').Server(app);
-//var io = require('socket.io')(server);
 var io = require('socket.io')(server);
 
 io.on('connection', function (socket) {
