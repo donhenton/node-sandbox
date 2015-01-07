@@ -46,6 +46,7 @@ module.exports = function() {
         
 	require('../app/routes/index.server.routes.js')(app);
         require('../app/routes/otherPage.server.routes.js')(app);
+        require('../app/routes/socketPage.server.routes.js')(app);
         require('../app/routes/embeddedJS.server.routes.js')(app);
         require('../app/routes/restaurant.server.routes.js')(app,daoService);
         
