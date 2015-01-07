@@ -76,3 +76,11 @@ http://satokolomblog.azurewebsites.net/promises-in-node-js-with-q/
 http://strongloop.com/strongblog/how-to-compose-node-js-promises-with-q/
 http://stackoverflow.com/questions/19112801/node-js-using-promises-with-mongodb
 http://stackoverflow.com/questions/23597059/promise-and-nodejs-mongodb-driver?rq=1
+
+
+
+socket io
+
+http://vijayannadi.wordpress.com/tutorials/sample-chat-app-using-nodejs-socketio/
+http://aqueous-beyond-8981.herokuapp.com/
+https://github.com/vijayannadi/chat
