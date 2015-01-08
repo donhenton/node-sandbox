@@ -86,3 +86,6 @@ http://aqueous-beyond-8981.herokuapp.com/
 https://github.com/vijayannadi/chat
 
 http://socket.io/docs/
+
+source of chat app on socket page
+https://github.com/Automattic/socket.io/tree/master/examples/chat
