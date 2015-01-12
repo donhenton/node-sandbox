@@ -96,3 +96,5 @@ websockets and promises
 http://stackoverflow.com/questions/25235784/javascript-angularjs-websocket-with-promises
 http://plnkr.co/edit/ORSqXz07I9cLspZQg1iM?p=preview
 see the plunk zip file 
+
+http://clintberry.com/2013/angular-js-websocket-service/
