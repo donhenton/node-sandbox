@@ -89,3 +89,10 @@ http://socket.io/docs/
 
 source of chat app on socket page
 https://github.com/Automattic/socket.io/tree/master/examples/chat
+
+=============
+websockets and promises
+
+http://stackoverflow.com/questions/25235784/javascript-angularjs-websocket-with-promises
+http://plnkr.co/edit/ORSqXz07I9cLspZQg1iM?p=preview
+see the plunk zip file 
