@@ -99,3 +99,7 @@ see the plunk zip file
 
 http://clintberry.com/2013/angular-js-websocket-service/
 https://github.com/exratione/angularjs-websocket-transport
+
+
+angular component for websockets using socketio
+https://github.com/btford/angular-socket-io
