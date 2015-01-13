@@ -23,7 +23,9 @@ $(function() {
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
 
-  var socket = io();
+  //var socket = io();
+  // https://github.com/Automattic/socket.io/wiki/configuring-socket.io
+  var socket = io.connect("http://localhost:3000");
 
   function addParticipantsMessage (data) {
     var message = '';
