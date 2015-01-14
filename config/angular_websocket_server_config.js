@@ -1,4 +1,6 @@
 // Invoke 'strict' JavaScript mode
+//set up for angular websocket server
+
 'use strict';
 
 // Load the module dependencies
