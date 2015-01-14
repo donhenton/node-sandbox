@@ -1,7 +1,19 @@
 /**
- * This service 
+ * This service owns the socket io web socket. It will use a promise
+ * to reconcile the request/response and is patterned after 'reply-to'
+ * in JMS
+ * see http://clintberry.com/2013/angular-js-websocket-service/
  * @returns {undefined}
+ * 
+ * TODO 
+ * 
+ * requestType: restaurantQuery, insertRestaurant ......
+ * correleationId: used to match request, response
+ * payload:
+ * 
+ * 
  */
+
 
 
 (function () {
@@ -14,7 +26,7 @@
         };
 
         var callbacks = {};
-        var requestId = 0;
+        var correleationId = 0;
 
 
         websocket = io.connect(g_socketBase);
@@ -33,10 +45,12 @@
         };
 
 
-        performRequest = function (data) {
+        performRequest = function (requestType,payload) {
+            correleationId ++;
             var request = {
-                request_id: $scope.getRequestId(),
-                data: data
+                requestType: requestType,
+                correlationId: correleationId,
+                payload: payload
             };
             var deferred = $q.defer();
             callbacks[request.request_id] = deferred;
