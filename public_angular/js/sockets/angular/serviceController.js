@@ -10,7 +10,7 @@
             connectorService.performRestaurantRequest($scope.searchString).
                     then(function (data, status, headers, config) {
                         $scope.restaurantList = data.payload;
-                        console.log("success " + angular.toJson($scope.restaurantList, true));
+                        //console.log("success " + angular.toJson($scope.restaurantList, true));
                         
                     }).
                     catch (function (data, status, headers, config) {

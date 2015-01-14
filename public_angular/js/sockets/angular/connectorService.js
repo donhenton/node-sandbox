@@ -33,7 +33,7 @@
         console.log("did the init")
 
         websocket.on('restaurantResponse', function (dataIn) {
-            console.log("in restaurantResponse "+  angular.toJson(dataIn));
+          //  console.log("in restaurantResponse "+  angular.toJson(dataIn));
             
             var data = angular.fromJson(dataIn);
             if (angular.isDefined(callbacks[data.correlationId])) {
