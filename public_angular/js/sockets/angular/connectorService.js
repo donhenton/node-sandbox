@@ -1,5 +1,11 @@
+/**
+ * This service 
+ * @returns {undefined}
+ */
+
+
 (function () {
-    var socketConnectorFactory = function ($log)
+    var connectorService = function ($log)
     {
         var websocket = null;
         var messages = {
@@ -46,9 +52,8 @@
 
     };
 
-    socketConnectorFactory.$inject = ['$log'];
-    //socketConnectorFactory();
+    connectorService.$inject = ['$log'];
 
-    angular.module('serviceApp').factory('socketConnectorFactory', socketConnectorFactory);
+    angular.module('serviceApp').factory('connectorService', connectorService);
 
 }());
