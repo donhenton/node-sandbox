@@ -5,24 +5,18 @@
 
         $scope.sendMessage = function ()
         {
-            
-            var thing =
-            connectorService.performRestaurantRequest("bonzo");
-            console.log("sending request "+thing);
-            
-            
-            
-           /* 
-            .
-                    success(function (data, status, headers, config) {
-                        $scope.serverResponse = angular.toJson(request, true);
 
+         
+                    connectorService.performRestaurantRequest("bonzo").
+                    then(function (data, status, headers, config) {
+                        $scope.serverResponse = angular.toJson(data, true);
+                        console.log("success " + data);
                     }).
-                    error(function (data, status, headers, config) {
-
+                    catch (function (data, status, headers, config) {
+                        console.log("error " + data);
                     });
-            */
-            
+
+
         };
 
 
