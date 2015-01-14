@@ -9,8 +9,7 @@ module.exports = function (io,restaurantDaoService) {
  
 
     // usernames which are currently connected to the chat
-    var usernames = {};
-    var numUsers = 0;
+     
 
     io.on('connection', function (socket) {
         
@@ -23,16 +22,16 @@ module.exports = function (io,restaurantDaoService) {
 
         // when the client emits 'typing', we broadcast it to others
         socket.on('typing', function () {
-            socket.broadcast.emit('typing', {
-                username: socket.username
-            });
+//            socket.broadcast.emit('typing', {
+//                username: socket.username
+//            });
         });
 
         // when the client emits 'stop typing', we broadcast it to others
         socket.on('stop typing', function () {
-            socket.broadcast.emit('stop typing', {
-                username: socket.username
-            });
+//            socket.broadcast.emit('stop typing', {
+//                username: socket.username
+//            });
         });
 
         // when the user disconnects.. perform this
