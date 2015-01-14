@@ -103,3 +103,16 @@ https://github.com/exratione/angularjs-websocket-transport
 
 angular component for websockets using socketio
 https://github.com/btford/angular-socket-io
+
+========= text index setup in mongodb ===============
+ // create text searchable index can be search by words;
+ 
+ 
+ db.restaurants.ensureIndex({state: "text",name:"text"});
+ 
+ 
+ // get a list of indices
+ db.restaurants.getIndexes();
+ 
+ //drop an index
+ db.restaurants.dropIndex("fff")

@@ -6,11 +6,12 @@
         $scope.sendMessage = function ()
         {
 
-         
-                    connectorService.performRestaurantRequest("bonzo").
+            console.log("searching for '%s'", $scope.searchString);
+            connectorService.performRestaurantRequest($scope.searchString).
                     then(function (data, status, headers, config) {
-                        $scope.serverResponse = angular.toJson(data, true);
-                        console.log("success " + data);
+                        $scope.restaurantList = data.payload;
+                        console.log("success " + angular.toJson($scope.restaurantList, true));
+                        
                     }).
                     catch (function (data, status, headers, config) {
                         console.log("error " + data);
@@ -20,8 +21,8 @@
         };
 
 
-        $scope.serverResponse = "test get a job ";
-
+        $scope.restaurantList = [];
+        $scope.searchString = 'restaurant';
 
 
 

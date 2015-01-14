@@ -48,6 +48,15 @@
 
         var serviceFunctions = {};
 
+        /**
+         * this will search for a restaurant which have the string
+         * in their name
+         * 
+         * @param {type} stringToSearchFor
+         * @returns 
+         * correlationId:
+         * payload is an array of String names, 0...n
+         */
         serviceFunctions.performRestaurantRequest = function (stringToSearchFor) {
             correlationId++;
         var request = {

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-module.exports = function (io, restaurantDaoService,json3) {
+module.exports = function (io, restaurantDaoService, json3) {
 
     var doesExist = function (item)
     {
@@ -24,31 +24,46 @@ module.exports = function (io, restaurantDaoService,json3) {
     io.on('connection', function (socket) {
 
 
-
-
-
-        // when the client emits 'typing', we broadcast it to others
+        /**
+         * this will search for a restaurant which have the string
+         * in their name
+         * 
+         *  
+         * @returns 
+         * correlationId:
+         * payload is an array of String names, 0...n
+         */
         socket.on('restaurantRequest', function (dataInString) {
             var dataIn = json3.parse(dataInString)
             var data = {};
             if (!doesExist(dataIn.correlationId))
             {
-               
-                console.log("correlationId does not exist "+json3.stringify(dataIn));
+
+                console.log("correlationId does not exist " + json3.stringify(dataIn));
                 return;
             }
-            
-            // console.log("zz "+dataIn +" "+dataIn.correlationId);
-            data.correlationId = dataIn.correlationId;
-            data.payload = dataIn.payload+ " get a job from the server";
-            socket.emit('restaurantResponse', data);
+            ////////////
+  
+            restaurantDaoService.getByWordInName(dataIn.payload)
+                    .then(function (items)
+                    {
+                        var restaurantNames = [];
+                        for (var i = 0; i < items.length; i++)
+                        {
+                            restaurantNames.push(items[i].name);
+                        }
+                        ///////////// 
+                        data.correlationId = dataIn.correlationId;
+                        data.payload = restaurantNames;
+                        socket.emit('restaurantResponse', data);
+                    }
+                    , function (err)
+                    {
+                        console.error(err.toString());
+                    });
+
         });
 
-
     });
-
-
-
-
 
 }

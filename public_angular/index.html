@@ -6,22 +6,47 @@
         <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
         <link href="bootstrap2/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap2/css/mainbootstrap2.css" rel="stylesheet" type="text/css"/>
-    
+
     </head>
 
     <body>
-        <h2>Angular Restaurant Application</h2>
-        <div class="span12 ng-cloak" ng-controller="serviceController" ng-cloak>
+        <h2>Angular WebSocket Restaurant Search</h2>
 
-            <div>
-                 {{serverResponse}}
-                
+        <div class="span12 ng-cloak" ng-controller="serviceController" ng-cloak>
+            <div class="well well-small">
+                This is a search service using Angular and Web Sockets. It searches
+                for whole words in the restaurant names, using Mongodb full text
+                search indices
             </div>
-            <div>
-                <button class="btn btn-primary" ng-click="sendMessage()">Send Message</button>
-                
+            <div class="span5">
+
+                <h4>Search String</h4>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on">Name</span>
+                        <input required  id="searchString" name="searchString" class="input-xlarge" placeholder="Search String"  
+                               ng-model="searchString" type="text">
+                    </div>
+
+                </div>
+
+
+
+                <div  style="margin-top:5px">
+                    <button  ng-click="sendMessage()" class="btn btn-small btn-primary"> <i class="icon-edit  icon-white"></i>Search</button>
+
+                </div>
             </div>
-            
+
+            <div class="span5">
+                <ul  ng-repeat="name in restaurantList">
+                    <ol>{{name}}</ol>
+
+                </ul>
+
+
+            </div>
+
         </div>
         <script>
             g_socketBase = "http://localhost:4000/";
@@ -32,7 +57,7 @@
         <script src="js/sockets/angular/serviceApp.js" type="text/javascript"></script>
         <script src="js/sockets/angular/connectorService.js" type="text/javascript"></script>  
         <script src="js/sockets/angular/serviceController.js" type="text/javascript"></script>
-            
+
 
 
     </body>
