@@ -22,11 +22,12 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var daoService = 
   require('./app/daos/restaurantdao.server.js')(config);
+var json3 = require('json3');
 
 //set up the websocket listener code and give it access to the 
 //restaurant dao
 
-require("./app/angular_websocket_server/angular.server.js")(io,daoService);
+require("./app/angular_websocket_server/angular.server.js")(io,daoService,json3);
 
 // Use the Express application instance to listen to the '4000' port
 // app.listen(4000);

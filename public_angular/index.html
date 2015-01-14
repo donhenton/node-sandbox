@@ -11,9 +11,16 @@
 
     <body>
         <h2>Angular Restaurant Application</h2>
-        <div class="well-large   span12 ng-cloak" ng-controller="serviceController" ng-cloak>
+        <div class="span12 ng-cloak" ng-controller="serviceController" ng-cloak>
 
-            {{test}}
+            <div>
+                 {{serverResponse}}
+                
+            </div>
+            <div>
+                <button class="btn btn-primary" ng-click="sendMessage()">Send Message</button>
+                
+            </div>
             
         </div>
         <script>

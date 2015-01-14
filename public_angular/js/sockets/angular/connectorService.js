@@ -7,7 +7,7 @@
  * 
  * TODO 
  * 
- * requestType: restaurantQuery, insertRestaurant ......
+ *  
  * correleationId: used to match request, response
  * payload:
  * 
@@ -17,7 +17,7 @@
 
 
 (function () {
-    var connectorService = function ($log)
+    var connectorService = function ($log, $q)
     {
         var websocket = null;
         var messages = {
@@ -26,47 +26,49 @@
         };
 
         var callbacks = {};
-        var correleationId = 0;
+        var correlationId = 0;
 
 
         websocket = io.connect(g_socketBase);
         console.log("did the init")
 
-        websocket.onmessage = function (event) {
-            var data = angular.fromJson(event.data);
-            if (angular.isDefined(callbacks[data.request_id])) {
-                var callback = callbacks[data.request_id];
-                delete callbacks[data.request_id];
+        websocket.on('restaurantResponse', function (dataIn) {
+            console.log("in restaurantResponse "+  angular.toJson(dataIn));
+            
+            var data = angular.fromJson(dataIn);
+            if (angular.isDefined(callbacks[data.correlationId])) {
+                var callback = callbacks[data.correlationId];
+                delete callbacks[data.correlationId];
                 callback.resolve(data);
             } else {
                 $log.error("Unhandled message: %o", data);
                 messages.unhandled.push(data);
             }
-        };
+        });
 
+        var serviceFunctions = {};
 
-        performRequest = function (requestType,payload) {
-            correleationId ++;
-            var request = {
-                requestType: requestType,
-                correlationId: correleationId,
-                payload: payload
+        serviceFunctions.performRestaurantRequest = function (stringToSearchFor) {
+            correlationId++;
+        var request = {
+                correlationId: correlationId,
+                payload: stringToSearchFor
             };
             var deferred = $q.defer();
-            callbacks[request.request_id] = deferred;
+            callbacks[request.correlationId] = deferred;
             messages.requests.push(request);
-            websocket.send(angular.toJson(request));
+            websocket.emit('restaurantRequest', angular.toJson(request));
             return deferred.promise.then(function (response) {
                 request.response = response;
                 return response;
             });
         };
 
-
+        return serviceFunctions;
 
     };
 
-    connectorService.$inject = ['$log'];
+    connectorService.$inject = ['$log', '$q'];
 
     angular.module('serviceApp').factory('connectorService', connectorService);
 
