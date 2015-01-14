@@ -1,0 +1,92 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+
+http://jsfiddle.net/T9Bhm/7/
+http://jsfiddle.net/drueter/yqgB5/16/
+
+fixed header tables
+   ========================================================================== */
+.restaurantContainer input.ng-invalid.ng-dirty{
+    border: thin solid red;
+}
+.restaurantContainer input.ng-valid.ng-dirty{
+    border: thin solid green;
+}
+.restaurantContainer .restaurantErrorPanel
+{
+     
+    color: red;
+    font-weight:bold;
+    font-style: italic;
+/*    padding:2px;
+    margin-top:5px;*/
+}
+
+.restaurantContainer  .reviewContainer .reviewRow
+{
+    margin: 2px;
+    padding:2px;
+    font-weight:bolder;
+
+}
+
+.restaurantContainer  .reviewContainer   .editingReview
+{
+
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+
+.ptrClass {cursor:pointer }
+
+div.restaurantContainer {
+
+    margin:50px;
+    width:80%
+
+}
+.scrollList td.currentUserRow
+{
+    color: white;
+    background-color: blue;
+
+}
+.restaurantContainer .tableHeader
+{
+
+    font-size: 20px;
+    font-weight: normal;
+
+    color: white;
+    padding: 4px 4px 4px 4px;
+    margin: 5px;
+
+}
+
+.restaurantContainer .scrollHeader
+{
+    background-color: #3a87ad; 
+    height:25px; 
+    padding: 5px ;
+
+}
+
+.restaurantContainer .scrollList
+{
+
+    overflow-y: auto;
+    height: 200px
+
+}
+
+
+.restaurantContainer .editRow {  cursor:pointer }
+.restaurantContainer  td { margin: 3px; padding: 3px}
+.restaurantContainer.ptrClass {cursor:pointer }
+
+

@@ -37,17 +37,7 @@ module.exports = function (io,restaurantDaoService) {
 
         // when the user disconnects.. perform this
         socket.on('disconnect', function () {
-            // remove the username from global usernames list
-            if (addedUser) {
-                delete usernames[socket.username];
-                --numUsers;
-
-                // echo globally that this client has left
-                socket.broadcast.emit('user left', {
-                    username: socket.username,
-                    numUsers: numUsers
-                });
-            }
+            
         });
     });
 
