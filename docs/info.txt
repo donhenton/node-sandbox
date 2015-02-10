@@ -5,6 +5,20 @@ http://blog.modulus.io/getting-started-with-mongoose
 http://mongoosejs.com/
 
 
+materialize css 
+
+http://materializecss.com/modals.html
+
+
+tiles substitution engine ideas for node/express
+
+http://stackoverflow.com/questions/13272335/is-there-any-template-engine-for-node-js-express-quitely-like-jsp
+
+
+
+
+
+
 
 Node js driver refs
 

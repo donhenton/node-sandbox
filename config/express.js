@@ -9,6 +9,8 @@ var config = require('./config'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
 	session = require('express-session');
+var fs = require('fs');
+var vm = require('vm');
 
 // Define the Express configuration method
 module.exports = function() {
@@ -48,6 +50,7 @@ module.exports = function() {
         require('../app/routes/otherPage.server.routes.js')(app);
         require('../app/routes/embeddedJS.server.routes.js')(app);
         require('../app/routes/restaurant.server.routes.js')(app,daoService);
+        require('../app/routes/tmpl.server.routes.js')(app,fs,vm);
         
        
 	// Configure static file serving
