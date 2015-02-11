@@ -1,6 +1,6 @@
 // Invoke 'strict' JavaScript mode
 'use strict';
-
+// this is a demonstration that is not currently used
 // Create a new 'render' controller method
  var renderHTML = function(req, res) {
 	// If the session's 'lastVisit' property is set, print it out in the console 

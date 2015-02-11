@@ -1,7 +1,7 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  this is not currently used but it can be possibly used to create a tiles
+ *  style system. It also illustrates running js files within the context
+ *  of these functions (see vm)
  */
 
 module.exports = function (app, fs, vm) {

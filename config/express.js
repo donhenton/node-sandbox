@@ -46,12 +46,16 @@ module.exports = function() {
         var daoService = 
         require('../app/daos/restaurantdao.server.js')(config);
         
-	require('../app/routes/index.server.routes.js')(app);
+	require('../app/routes/generic.server.routes.js')(app);
         require('../app/routes/otherPage.server.routes.js')(app);
         require('../app/routes/embeddedJS.server.routes.js')(app);
         require('../app/routes/restaurant.server.routes.js')(app,daoService);
-        require('../app/routes/tmpl.server.routes.js')(app,fs,vm);
         
+        /*
+         *  not used at this time
+            require('../app/routes/tmpl.server.routes.js')(app,fs,vm);
+         
+         */
        
 	// Configure static file serving
 	app.use(express.static('./public'));
