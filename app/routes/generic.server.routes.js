@@ -3,10 +3,7 @@
 
 // Define the routes module' method
 module.exports = function (app) {
-    // Load the 'index' controller
-   // var index = require('../controllers/index.server.controller');
-
-    // Mount the 'index' controller's 'render' method
+    
     
     //rendering functions must define these first ////////////////////////////
 
@@ -28,13 +25,22 @@ module.exports = function (app) {
     
     var windowsRender = function(req,res)
     {
-        res.render('windows', {});
+        res.render('windows', {
+            title: 'Windows XP Notes'
+        });
     }
     
+    var newPageRender = function(req,res)
+    {
+        res.render('newpage', {
+            title: 'New Page Notes'
+        });
+    }
     
     ///////////////////////////////////////////////////////////////////////
     // routes
     ///////////////////////////////////////////////////////////////////////
         app.get('/', indexRender);
         app.get('/windows.doc', windowsRender);
+        app.get('/newPage.doc', newPageRender);
 };

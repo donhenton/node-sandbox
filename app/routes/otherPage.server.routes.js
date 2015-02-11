@@ -1,6 +1,7 @@
 // Invoke 'strict' JavaScript mode
 'use strict';
-
+// not used but a demonstration of calling a route and using 
+// a required controller code
 // Define the routes module' method
 module.exports = function(app) {
 	// Load the 'index' controller
