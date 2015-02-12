@@ -20,3 +20,11 @@
      margin-bottom: 7px;
      margin-top: 7px;
  }
+ 
+ .scrollList
+{
+
+    overflow-y: auto;
+    height: 200px
+
+}
