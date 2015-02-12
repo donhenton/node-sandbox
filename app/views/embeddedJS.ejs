@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  		 
-    	<title>Embedded JS Demos</title>
-</head>
-<body>
+  <% include  partials/header %>
         <p>
 	Demonstrations of the <a href="http://www.embeddedjs.com/">
         Embedded JS Templating Language</a>. 
         </p><p>
-        The data for this list is in <b>embeddedJS.server.controller.js</b></p>
+        The controller for this list is in <b>embeddedJS.server.controller.js</b></p>
 
         <h3>Data List</h3>
         <ul>
@@ -18,19 +12,24 @@
             <% } %>
         </ul>
 
-        <p>
+         
+        <div class="row">
         <% if (permissions == 'yes') { %>
-
+            <div class="col s6">
             <b><i>You have Permissions</i></b>
-
+            </div>
+            <div class="col s6">
+             <a href="/embeddedJS.doc" class="waves-effect waves-light btn">Drop Permissions</a>
+             </div>
         <% } else { %>
-
+             <div class="col s6">
             <b><i>You dont' have Permissions</i></b>
+            </div>
+             <div class="col s6">
+            <a href="/embeddedJS.doc?permissions=yes" class="waves-effect waves-light btn">Click Here To Get Some</a>
+            </div>
 
         <% } %>
-        </p>
+        </div>
         
-        <p><a href="/">Return to Main Page</a></p>
-        
-</body>
-</html>
+  <% include  partials/footer %>

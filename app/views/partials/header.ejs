@@ -1,44 +1,46 @@
- <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+<!DOCTYPE html>
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
         <title><%= title %></title>
 
-        <!-- CSS  -->
-         <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    </head>
-    <body>
-        <div class="bodyContainerDiv">
+        <!-- CSS-->
 
+        <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="css/style.css" rel="stylesheet" type="text/css">
 
-            <nav class="light-blue lighten-1" role="navigation">
-                <div class="container">
-                    <div class="nav-wrapper"><a id="logo-container" href="/" class="brand-logo">Node Demo Application</a>
-                        <ul id="nav-mobile" class="right side-nav">
+    <body class="blue lighten-5">
+        <header>
+            <div class="container"><a href="#" data-activates="nav-mobile" class="left button-collapse top-nav"><i class="mdi-navigation-menu medium  white-text blue"></i></a></div>
+            <ul id="nav-mobile" class="side-nav fixed">
+                <li class="bold"><a href="/" class="waves-effect waves-teal">
+                    <i class="mdi-action-home left"></i>Home
+                </a></li>
+                <li class="bold"><a href="http://materializecss.com/getting-started.html" class="waves-effect waves-teal">Getting Started</a></li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-teal">
                            
-                            <li>
-          <a class="collapsible-header dropdown-button"class="" href="#" data-activates="notesMenu">Notes
-                    <i class="mdi-navigation-arrow-drop-down"></i></a>
-          <div class="right side-nav collapsible-body">
-            <ul id='notesMenu' class='dropdown-content'>
-              <li><a href="/newPage.doc">New Page Notes</a></li>
-              <li><a href="/windows.doc">Windows Notes</a></li>
-              <li><a href="#!">Third</a></li>
-              <li><a href="#!">Fourth</a></li>
+                           <i class="mdi-navigation-arrow-drop-down left"></i>Notes</a>
+                            <div class="collapsible-body" style="">
+                                <ul>
+                                   <li><a href="/newPage.doc">New Page Notes</a></li>
+                                   <li><a href="/windows.doc">Windows Notes</a></li>
+                                     
+                                </ul>
+                            </div>
+                        </li>
+                        
+                  </ul>
+                </li>
+                <li class="bold"><a href="/embeddedJS.doc">Template Demo</a></li>
+                
             </ul>
-          </div>
-        </li>
-                        </ul>
-                        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-                    </div>
-                </div>
-            </nav>
+        </header>
+        <div id="mainContainer" class="container">
 
-
-
-            <main>
-                <div class="section"> 
-
-                    <!-- end header ejs -->  
+            <div class="row">
+                <div class="col offset-s2 s12"  id="contentDiv">
+                    <!-- begin content -->

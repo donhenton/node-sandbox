@@ -7,5 +7,5 @@ module.exports = function(app) {
 	var embeddedJS = require('../controllers/embeddedJS.server.controller');
 
 	// Mount the 'index' controller's 'render' method
-	app.get('/embeddedJS.bozo', embeddedJS.render);
+	app.get('/embeddedJS.doc', embeddedJS.render);
 };

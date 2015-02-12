@@ -21,6 +21,7 @@ exports.render = function (req, res) {
     res.render('embeddedJS',
             {
                 'permissions': permissions,
+                'title': 'Templating Demo',
                 "supplies": ['manny', 'moe', 'jack']
             });
 };
