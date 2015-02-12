@@ -44,10 +44,8 @@ module.exports = function() {
 
 	// Load the 'index' routing file
         var daoService = 
-        require('../app/daos/restaurantdao.server.js')(config);
-        
+        require('../app/daos/restaurantdao.server.js')(config);       
 	require('../app/routes/generic.server.routes.js')(app);
-        require('../app/routes/otherPage.server.routes.js')(app);
         require('../app/routes/embeddedJS.server.routes.js')(app);
         require('../app/routes/restaurant.server.routes.js')(app,daoService);
         
