@@ -17,8 +17,19 @@
                 <div class="container">
                     <div class="nav-wrapper"><a id="logo-container" href="/" class="brand-logo">Node Demo Application</a>
                         <ul id="nav-mobile" class="right side-nav">
-                            <li><a href="/newPage.doc">New Page Notes</a></li>
-                            <li><a href="/windows.doc">Windows Notes</a></li>
+                           
+                            <li>
+          <a class="collapsible-header dropdown-button"class="" href="#" data-activates="notesMenu">Notes
+                    <i class="mdi-navigation-arrow-drop-down"></i></a>
+          <div class="right side-nav collapsible-body">
+            <ul id='notesMenu' class='dropdown-content'>
+              <li><a href="/newPage.doc">New Page Notes</a></li>
+              <li><a href="/windows.doc">Windows Notes</a></li>
+              <li><a href="#!">Third</a></li>
+              <li><a href="#!">Fourth</a></li>
+            </ul>
+          </div>
+        </li>
                         </ul>
                         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     </div>
