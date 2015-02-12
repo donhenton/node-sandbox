@@ -6,3 +6,17 @@
  * Made By MaterializeCSS.com
  */
  
+
+.outline
+ {
+      border: thin solid teal;
+      margin: 5px;
+      padding: 5px;
+ }
+
+ 
+ .separator
+ {
+     margin-bottom: 7px;
+     margin-top: 7px;
+ }

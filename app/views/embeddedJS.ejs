@@ -1,35 +1,55 @@
   <% include  partials/header %>
-        <p>
+<h3><%= title %></h3>
+
+        <div>
 	Demonstrations of the <a href="http://www.embeddedjs.com/">
         Embedded JS Templating Language</a>. 
-        </p><p>
-        The controller for this list is in <b>embeddedJS.server.controller.js</b></p>
+        <br>
+        The controller for this list is in <b>embeddedJS.server.controller.js</b></div>
 
-        <h3>Data List</h3>
+        
+        <div class="row outline section">
+        <div class="section">
+        This list is created in the controller, and passed to the page to be
+        rendered here.
+        </div>
+        
+         <table>
+        <thead>
+          <tr>
+              <th data-field="id">Name</th>
+              
+          </tr>
+        </thead>
         <ul>
             <% for(var i=0; i<supplies.length; i++) {%>
-                <li><%= supplies[i] %></li>
+                <tr><td><%= supplies[i] %></td></tr>
             <% } %>
         </ul>
+         </table>
+        </div>
 
-         
+        <div class="row outline section"> 
         <div class="row">
+        <div class="section col s12 separator">In this case,the permissions variable is read from the query string
+        of the page url, and the button passes permissions = 'yes'</div>
         <% if (permissions == 'yes') { %>
-            <div class="col s6">
+            <div class="col s4  separator">
             <b><i>You have Permissions</i></b>
             </div>
-            <div class="col s6">
+            <div class="col s4  separator">
              <a href="/embeddedJS.doc" class="waves-effect waves-light btn">Drop Permissions</a>
              </div>
         <% } else { %>
-             <div class="col s6">
+             <div class="col s4  separator">
             <b><i>You dont' have Permissions</i></b>
             </div>
-             <div class="col s6">
+             <div class="col s4  separator">
             <a href="/embeddedJS.doc?permissions=yes" class="waves-effect waves-light btn">Click Here To Get Some</a>
             </div>
 
         <% } %>
+        </div>
         </div>
         
   <% include  partials/footer %>
