@@ -7,6 +7,7 @@
 
         var init = function()
         {
+            console.log("init--listRestaurantController")
             restaurantFactory.init().
                     success(function (data, status, headers, config) {
                          console.log("controller init")

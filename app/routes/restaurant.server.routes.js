@@ -2,8 +2,15 @@
 'use strict';
 
 // Define the routes module' method
-module.exports = function (app,daoService) {
-   
+module.exports = function (app, daoService) {
+
+
+
+
+    var restaurantController = require('../controllers/restaurant.server.controller');
+    app.get('/restaurant.doc', restaurantController.render);
+
+
 
     var reportError = function (res, errorString)
     {
@@ -94,7 +101,7 @@ module.exports = function (app,daoService) {
 
             if (result.result.ok == 1)
             {
-                 
+
                 console.log(result);
                 if (result.result.n == 1)
                 {
@@ -108,8 +115,8 @@ module.exports = function (app,daoService) {
                     res.status(404);
                     res.json(resVar);
                 }
-                
-                
+
+
             }
             else
             {
@@ -197,12 +204,12 @@ module.exports = function (app,daoService) {
     });
 //@save review
     app.put('/restaurant/review/:restaurantId/:reviewId', function (req, res) {
-        var restaurantId = req.params.restaurantId ;
-        var reviewId =  req.params.reviewId ;
+        var restaurantId = req.params.restaurantId;
+        var reviewId = req.params.reviewId;
         var reviewBody = req.body;
-        
+
         var error = function (err) {
-             
+
             reportError(res, err.toString());
         };
         var success = function (result)
@@ -230,8 +237,8 @@ module.exports = function (app,daoService) {
 
         };
 
-        daoService.saveReview(restaurantId, reviewId,reviewBody).then(success, error);
-         
+        daoService.saveReview(restaurantId, reviewId, reviewBody).then(success, error);
+
     });
 //@delete review
 
@@ -239,7 +246,7 @@ module.exports = function (app,daoService) {
         var restaurantId = req.params.restaurantId;
         var reviewId = req.params.reviewId;
         var error = function (err) {
-             
+
             reportError(res, err.toString());
         };
 

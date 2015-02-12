@@ -1,0 +1,70 @@
+ <% include  partials/header %>
+ <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>	 
+
+
+<h4>Angular Restaurant Application</h4>
+        <div class="container">
+
+
+            <div  class="row" ng-controller="listRestaurantController">
+
+                <div class="row scrollHeader container span12">
+                    <span class="tableHeader" style="position: relative; left:20px">Name</span>
+                    <span class="tableHeader" style="position: relative; left:380px">City</span>
+                    <span class="tableHeader" style="position: relative; left:460px">St.</span>
+                    <span class="tableHeader" style="position: relative; left:480px">Zip</span>
+                    <span class="tableHeader" style="position: relative; left:485px">Ver.</span>
+
+                </div>
+
+                <div class="row scrollList container well well-small span12">
+
+                    <table style="width:100%">
+
+                        <tr ng-repeat="restaurant in restaurantList">
+
+                            <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="span6 editRow" data-id="{{restaurant.id}}">{{restaurant.name}}</td>
+                            <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="span2 editRow">{{restaurant.city}}</td>
+                            <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="span1 editRow">{{restaurant.state}}</td>
+                            <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="span1 editRow">{{restaurant.zipCode}}</td>
+                            <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="span1 editRow">{{restaurant.version}}</td>                            
+                            <td ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]" >
+                                <span data-ng-click="changeRestaurant($event, restaurant)"   class="badge ptrClass badge-info"> <i class="icon-edit icon-white"></i> Edit</span></td>
+                            <td ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]" >
+                                <span data-ng-click="deleteRestaurant(restaurant)"           class="badge ptrClass badge-important"> <i class="icon-remove icon-white"></i> Delete</span></td>
+
+
+                        </tr>    
+                    </table>
+                </div>
+
+                <div class="row container span12 errorPanel restaurantErrorPanel">
+                   &nbsp; {{errorMessage}}
+                </div>
+            </div>
+
+
+
+
+
+
+</div>
+
+
+ <script>
+            g_restaurantUrlBase = "http://localhost:3000/restaurant/";
+            
+        </script>
+        <script src="js/libs/angular.js/angular-resource.js" type="text/javascript"></script>
+        <script src="js/app/app.js" type="text/javascript"></script>
+        <script src="js/app/messagePump.js" type="text/javascript"></script>
+        <script src="js/app/services/restaurantDAOService.js" type="text/javascript"></script>
+        <script src="js/app/services/reviewDAOService.js" type="text/javascript"></script>
+        <script src="js/app/services/messageFactory.js" type="text/javascript"></script>
+        <script src="js/app/services/reviewFactory.js" type="text/javascript"></script>
+        <script src="js/app/services/restaurantFactory.js" type="text/javascript"></script>
+        <script src="js/app/controllers/listRestaurantController.js" type="text/javascript"></script>
+        <script src="js/app/controllers/editRestaurantController.js" type="text/javascript"></script>
+        <script src="js/app/controllers/reviewController.js" type="text/javascript"></script>
+ <% include  partials/footer %>
+	 
