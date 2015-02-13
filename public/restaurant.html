@@ -181,6 +181,12 @@
                                         <div ng-switch="review.isEditing">
                                             <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
 
+                                                <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
+                                                    <i class="glyphicon glyphicon-edit icon-white"></i> 
+                                                </button>
+                                                <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
+                                                    <i class="glyphicon glyphicon-refresh icon-white"></i>  
+                                                </button>
                                                 <input style="margin-right:3px" required class="input-xlarge" ng-model="review.reviewListing" type="text">    
 
 
@@ -200,12 +206,7 @@
                                                     <option>13</option>
 
                                                 </select>    <span  class="glyphicon glyphicon-star  "></span>   s
-                                                <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
-                                                    <i class="glyphicon glyphicon-edit icon-white"></i> 
-                                                </button>
-                                                <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
-                                                    <i class="glyphicon glyphicon-refresh icon-white"></i>  
-                                                </button>
+
 
                                             </div>
                                             <div ng-switch-default  class="row reviewRow">
