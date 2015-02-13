@@ -136,37 +136,39 @@
                         <div ng-switch="isAdding">
                             <!-- begin adding new review -->
                             <form name="addReviewForm" role="form" novalidate>
-                                <div ng-switch-when="true" style="margin-bottom:5px">
+                                <table class="table col-sm-10" ng-switch-when="true" style="margin-bottom:5px">
+                                    <tr>
+                                        <td class="col-sm-3">
+                                            <button  ng-click="saveNewReview()" class="btn btn-sm  btn-primary"> 
+                                                <i class="glyphicon glyphicon-save icon-white"></i></button>
+                                            <button ng-click="cancelNewReview()" class="btn btn-sm  btn-danger">
+                                                <i class="glyphicon glyphicon-refresh icon-white"></i></button>
+                                        </td>
+                                        <td>
+                                            <input required style="margin-right:3px"  ng-model="addNewReviewBuffer.reviewListing" name="reviewListing" id="reviewListing"   class="col-sm-12" type="text">  
 
-                                    <input required style="margin-right:3px"  ng-model="addNewReviewBuffer.reviewListing" name="reviewListing" id="reviewListing"  class="input-xlarge"  type="text">  
+                                        </td>
+                                        <td>
+                                            <select  style="margin-right:2px" ng-model="addNewReviewBuffer.starRating"  class="col-sm-5">  
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                                <option>13</option>
+
+                                            </select>     <span  class="glyphicon glyphicon-star  "></span> 
+                                        </td>
 
 
-                                    <select  style="margin-right:2px" ng-model="addNewReviewBuffer.starRating"  class="input-mini">  
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                        <option>13</option>
-
-                                    </select>     <span  class="glyphicon glyphicon-star  "></span>  
-                                    <div>
-                                        <button  ng-click="saveNewReview()" class="btn btn-small btn-primary"> 
-                                            <i class="icon-edit icon-white"></i> Save 
-                                        </button>
-                                        <button ng-click="cancelNewReview()" class="btn btn-small btn-danger">
-                                            <i class="icon-remove icon-white"></i> Cancel 
-                                        </button>
-                                    </div>
-
-                                </div>
+                                </table>
                             </form>   
                             <form name="editReviewForm" role="form" novalidate>
                                 <div ng-switch-when="false">
