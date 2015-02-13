@@ -24,15 +24,16 @@ fixed header tables
     margin-top:5px;*/
 }
 
-.restaurantContainer  .reviewContainer .reviewRow
+ .reviewRow
 {
-    margin: 2px;
+/*    margin: 2px;
     padding:2px;
-    font-weight:bolder;
+    font-weight:bolder;*/
+    margin-bottom:10px
 
 }
 
-.restaurantContainer  .reviewContainer   .editingReview
+    .editingReview
 {
 
 }

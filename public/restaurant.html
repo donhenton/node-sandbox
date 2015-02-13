@@ -12,7 +12,7 @@
         <link href="css/angular_restaurant.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-         
+
         <div class="container">
 
             <div class="restaurantContainer  ng-cloak"  ng-cloak>
@@ -21,13 +21,6 @@
                 <div  class="row  container col-sm-12" ng-controller="listRestaurantController">
 
                     <div class="row scrollHeader col-sm-12">
-                        <!--
-                        <span class="tableHeader" style="position: relative; left:20px">Name</span>
-                        <span class="tableHeader" style="position: relative; left:380px">City</span>
-                        <span class="tableHeader" style="position: relative; left:460px">St.</span>
-                        <span class="tableHeader" style="position: relative; left:480px">Zip</span>
-                        <span class="tableHeader" style="position: relative; left:485px">Ver.</span>
-                        -->
                         <span class="tableHeader col-sm-6">Name</span>
                         <span class="tableHeader col-sm-1">City</span>
                         <span class="tableHeader col-sm-1">St.</span>
@@ -68,7 +61,7 @@
                 <div class="row">
                     <!--begin edit restaurant column block -->
 
-                    <div  id="editRestaurantController"  ng-controller="editRestaurantController" class="col-sm-6 pull-left">
+                    <div  id="editRestaurantController"  ng-controller="editRestaurantController" style="border: thin solid blue" class="col-sm-5 pull-left">
                         <h4 style="display: inline-block">Restaurants</h4>
                         <div class="form-group">
 
@@ -89,7 +82,7 @@
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="name">Name</label>
-                                <div class="col-sm-5">
+                                <div class="col-sm-8">
 
                                     <input required  id="name" name="name" class="form-control" placeholder="Name"   ng-model="currentRestaurant.name" type="text">
                                 </div>
@@ -97,33 +90,33 @@
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="City">City</label>
-                                <div class="col-sm-5">
+                                <div class="col-sm-8">
 
                                     <input  required  id="city" name="city" class="form-control" placeholder="City"  ng-model="currentRestaurant.city"  type="text">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="state">State</label>
                                 <div class="col-sm-2">
                                     <input required ng-pattern="/[A-Z]{2}/" minlength="2" maxlength="2" id="state" name="state" class="form-control" placeholder="State"   ng-model="currentRestaurant.state" type="text">
-                                    
+
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="zipCode">Zip Code</label>
                                 <div class="col-sm-4">
-                                        <input required ng-pattern="/[0-9]/" minlength="5" maxlength="5" id="zipCode" name="zipCode"   class="form-control" placeholder="Zip Code"  ng-model="currentRestaurant.zipCode"  type="text">                                    
+                                    <input required ng-pattern="/[0-9]/" minlength="5" maxlength="5" id="zipCode" name="zipCode"   class="form-control" placeholder="Zip Code"  ng-model="currentRestaurant.zipCode"  type="text">                                    
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="version">Version</label>
                                 <div class="col-sm-4">
                                     <input required  ng-pattern="/[0-9]/"   id="version" name="version" class="form-control" placeholder="Version"   ng-model="currentRestaurant.version" type="text">                                </div>
                             </div>
- 
+
                             <div  class="pull-left" style="margin-top:5px" ng-show="recordPresent">
                                 <button  ng-click="saveClick()" class="btn btn-sm btn-primary"> <i class="glyphicon glyphicon-save icon-white"></i>  Save</button>
                                 <button  ng-click="cancelClick()" class="btn btn-sm  btn-primary"> <i class="glyphicon glyphicon-refresh icon-white"></i>  Restore</button>
@@ -135,7 +128,7 @@
 
                     <!--end edit restaurant column block -->
                     <!--begin review column block -->
-                    <div id="reviewController" ng-controller="reviewController" class="col-sm-6 pull-right">
+                    <div id="reviewController" ng-controller="reviewController" style="border: thin solid blue"  class="col-sm-6 pull-right">
 
                         <h4 style="display: inline">Ratings</h4> 
 
@@ -208,26 +201,29 @@
 
                                                 </select>    <span  class="glyphicon glyphicon-star  "></span>   s
                                                 <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
-                                                    <i class="icon-edit icon-white"></i> 
+                                                    <i class="glyphicon glyphicon-edit icon-white"></i> 
                                                 </button>
                                                 <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
-                                                    <i class="icon-refresh  icon-white"></i>  
+                                                    <i class="glyphicon glyphicon-refresh icon-white"></i>  
                                                 </button>
 
                                             </div>
-                                            <div ng-switch-default  class="reviewRow">
-                                                {{review.reviewListing}} ({{review.starRating}} 
-                                                <span  class="glyphicon glyphicon-star  "></span> s)  <!-- {{review._id}} -->
+                                            <div ng-switch-default  class="row reviewRow">
 
 
-                                                <div style="margin:5px">
-                                                    <button  ng-click="editReview(review)" class="btn btn-mini btn-primary"> 
-                                                        <i class="icon-edit icon-white"></i> Edit
+                                                <div  class="col-sm-3">
+                                                    <button  ng-click="editReview(review)" class="btn btn-sm btn-primary"> 
+                                                        <i class="glyphicon glyphicon-edit icon-white"></i> 
                                                     </button>
-                                                    <button ng-click="deleteReview(review)" class="btn btn-mini btn-danger">
-                                                        <i class="icon-remove icon-white"></i> Delete
+                                                    <button ng-click="deleteReview(review)" class="btn btn-sm btn-danger">
+                                                        <i class="glyphicon glyphicon-remove icon-white"></i> 
                                                     </button>
 
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    {{review.reviewListing}} ({{review.starRating}} 
+
+                                                    <span  class="glyphicon glyphicon-star  "></span> s)  <!-- {{review._id}} -->
                                                 </div>
                                             </div>
                                         </div>
