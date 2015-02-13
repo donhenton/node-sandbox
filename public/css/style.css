@@ -7,6 +7,28 @@
  */
  
 
+/* restaurant */
+
+.ptrClass {cursor:pointer }
+
+.editRow {  cursor:pointer }
+.scrollList td.currentUserRow
+{
+    color: white;
+    background-color: blue;
+
+}
+
+.scrollList
+{
+
+    overflow-y: auto;
+    height: 200px
+
+}
+
+/* restaurant */
+
 .outline
  {
       border: thin solid teal;
@@ -21,14 +43,7 @@
      margin-top: 7px;
  }
  
- .scrollList
-{
-
-    overflow-y: auto;
-    height: 200px
-
-}
-
+ 
   [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
 }
