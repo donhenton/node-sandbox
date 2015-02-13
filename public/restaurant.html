@@ -175,96 +175,107 @@
                                             <i class="icon-pencil icon-white"></i> Add Review</button>
                                     </div>
 
-                                    <!-- end adding new review -->
-
-                                    <div ng-repeat="review in currentReviews">
-                                        <div ng-switch="review.isEditing">
-                                            <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
-                                                <div style="text-align: right" class="col-sm-3">
-                                                    <button  ng-click="saveReviewEdit(review)" class="btn btn-sm btn-primary"> 
-                                                        <i class="glyphicon glyphicon-edit icon-white"></i> 
-                                                    </button>
-                                                    <button ng-click="cancelReviewEdit(review)" class="btn btn-sm btn-danger">
-                                                        <i class="glyphicon glyphicon-refresh icon-white"></i>  
-                                                    </button>
-                                                </div>
-                                                <div class="col-sm-7">
-                                                    <input   required class="col-sm-7" style="margin-right: 5px" ng-model="review.reviewListing" type="text">    
 
 
-                                                    <select  required   ng-model="review.starRating" type="text">  
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                        <option>6</option>
-                                                        <option>7</option>
-                                                        <option>8</option>
-                                                        <option>9</option>
-                                                        <option>10</option>
-                                                        <option>11</option>
-                                                        <option>12</option>
-                                                        <option>13</option>
-
-                                                    </select>    <span  class="glyphicon glyphicon-star  "></span>   s
-                                                </div>
-
-                                            </div>
-                                            <div ng-switch-default  class="row reviewRow">
+                                    <table class="table table-bordered">
 
 
-                                                <div style="text-align: right" class="col-sm-3">
-                                                    <button  ng-click="editReview(review)" class="btn btn-sm btn-primary"> 
-                                                        <i class="glyphicon glyphicon-edit icon-white"></i> 
-                                                    </button>
-                                                    <button ng-click="deleteReview(review)" class="btn btn-sm btn-danger">
-                                                        <i class="glyphicon glyphicon-remove icon-white"></i> 
-                                                    </button>
+                                        <tr ng-repeat="review in currentReviews">
 
-                                                </div>
-                                                <div class="col-sm-9">
-                                                    {{review.reviewListing}} ({{review.starRating}} 
+                                            <td>
+                                                <span ng-switch="review.isEditing">
+                                                    <span ng-switch-when="true">
+                                                        <button  ng-click="saveReviewEdit(review)" class="btn btn-sm btn-primary"> 
+                                                            <i class="glyphicon glyphicon-save icon-white"></i> 
+                                                        </button>
+                                                        <button ng-click="cancelReviewEdit(review)" class="btn btn-sm btn-danger">
+                                                            <i class="glyphicon glyphicon-refresh icon-white"></i>  
+                                                        </button>
+                                                    </span>    
+                                                    <span ng-switch-default>
 
-                                                    <span  class="glyphicon glyphicon-star  "></span> s)  <!-- {{review._id}} -->
-                                                </div>
-                                            </div>
-                                        </div>
+                                                        <button  ng-click="editReview(review)" class="btn btn-sm btn-primary"> 
+                                                            <i class="glyphicon glyphicon-edit icon-white"></i> 
+                                                        </button>
+                                                        <button ng-click="deleteReview(review)" class="btn btn-sm btn-danger">
+                                                            <i class="glyphicon glyphicon-remove icon-white"></i> 
+                                                        </button>
+                                                    </span>
+                                                </span>
 
-                                    </div>
+                                            </td>
 
-                                </div>
+
+                                            <td>
+                                                <span ng-switch="review.isEditing">
+                                                    <span ng-switch-when="true">
+
+
+                                                        <input   required class="col-sm-7" style="margin-right: 5px" ng-model="review.reviewListing" type="text">    
+
+
+                                                        <select  required   ng-model="review.starRating" type="text">  
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                            <option>6</option>
+                                                            <option>7</option>
+                                                            <option>8</option>
+                                                            <option>9</option>
+                                                            <option>10</option>
+                                                            <option>11</option>
+                                                            <option>12</option>
+                                                            <option>13</option>
+
+                                                        </select>    <span  class="glyphicon glyphicon-star  "></span>   s
+
+                                                    </span>
+
+
+                                                    <span ng-switch-default>
+
+                                                        {{review.reviewListing}} 
+                                                    </span>
+
+                                                </span>
+
+
+                                            </td>
+                                        </tr>
+                                    </table>
                             </form>
                         </div>
-
-
                     </div>
-                    <!-- end review column block -->
+
+                </div>
+                <!-- end review column block -->
 
 
-                </div><!-- edit and review container -->        
-            </div>
-
-
-
+            </div><!-- edit and review container -->        
         </div>
 
 
-        <script>
-            g_restaurantUrlBase = "http://localhost:3000/restaurant/";
 
-        </script>
-        <script src="js/libs/angular.js/angular-resource.js" type="text/javascript"></script>
-        <script src="js/app/app.js" type="text/javascript"></script>
-        <script src="js/app/messagePump.js" type="text/javascript"></script>
-        <script src="js/app/services/restaurantDAOService.js" type="text/javascript"></script>
-        <script src="js/app/services/reviewDAOService.js" type="text/javascript"></script>
-        <script src="js/app/services/messageFactory.js" type="text/javascript"></script>
-        <script src="js/app/services/reviewFactory.js" type="text/javascript"></script>
-        <script src="js/app/services/restaurantFactory.js" type="text/javascript"></script>
-        <script src="js/app/controllers/listRestaurantController.js" type="text/javascript"></script>
-        <script src="js/app/controllers/editRestaurantController.js" type="text/javascript"></script>
-        <script src="js/app/controllers/reviewController.js" type="text/javascript"></script>
+    </div>
 
-    </body>
+
+    <script>
+        g_restaurantUrlBase = "http://localhost:3000/restaurant/";
+
+    </script>
+    <script src="js/libs/angular.js/angular-resource.js" type="text/javascript"></script>
+    <script src="js/app/app.js" type="text/javascript"></script>
+    <script src="js/app/messagePump.js" type="text/javascript"></script>
+    <script src="js/app/services/restaurantDAOService.js" type="text/javascript"></script>
+    <script src="js/app/services/reviewDAOService.js" type="text/javascript"></script>
+    <script src="js/app/services/messageFactory.js" type="text/javascript"></script>
+    <script src="js/app/services/reviewFactory.js" type="text/javascript"></script>
+    <script src="js/app/services/restaurantFactory.js" type="text/javascript"></script>
+    <script src="js/app/controllers/listRestaurantController.js" type="text/javascript"></script>
+    <script src="js/app/controllers/editRestaurantController.js" type="text/javascript"></script>
+    <script src="js/app/controllers/reviewController.js" type="text/javascript"></script>
+
+</body>
 </html>
