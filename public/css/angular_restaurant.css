@@ -44,6 +44,7 @@ fixed header tables
 
 .ptrClass {cursor:pointer }
 
+/*
  div.restaurantContainer {
 
     margin-left:5px;
@@ -51,6 +52,7 @@ fixed header tables
     width:90%
 
 }  
+*/
 .scrollList td.currentUserRow
 {
     color: white;
@@ -64,16 +66,16 @@ fixed header tables
     font-weight: normal;
 
     color: white;
-    padding: 4px 4px 4px 4px;
-    margin: 5px;
+   
+    
 
 }
 
 .restaurantContainer .scrollHeader
 {
     background-color: #3a87ad; 
-    height:25px; 
-    padding: 5px ;
+      
+    margin-bottom: 5px ;
 
 }
 
