@@ -180,33 +180,35 @@
                                     <div ng-repeat="review in currentReviews">
                                         <div ng-switch="review.isEditing">
                                             <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
+                                                <div style="text-align: right" class="col-sm-3">
+                                                    <button  ng-click="saveReviewEdit(review)" class="btn btn-sm btn-primary"> 
+                                                        <i class="glyphicon glyphicon-edit icon-white"></i> 
+                                                    </button>
+                                                    <button ng-click="cancelReviewEdit(review)" class="btn btn-sm btn-danger">
+                                                        <i class="glyphicon glyphicon-refresh icon-white"></i>  
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    <input   required class="col-sm-7" style="margin-right: 5px" ng-model="review.reviewListing" type="text">    
 
-                                                <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
-                                                    <i class="glyphicon glyphicon-edit icon-white"></i> 
-                                                </button>
-                                                <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
-                                                    <i class="glyphicon glyphicon-refresh icon-white"></i>  
-                                                </button>
-                                                <input style="margin-right:3px" required class="input-xlarge" ng-model="review.reviewListing" type="text">    
 
+                                                    <select  required   ng-model="review.starRating" type="text">  
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                        <option>13</option>
 
-                                                <select  style="margin-right:2px" required class="input-mini" ng-model="review.starRating" type="text">  
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                    <option>8</option>
-                                                    <option>9</option>
-                                                    <option>10</option>
-                                                    <option>11</option>
-                                                    <option>12</option>
-                                                    <option>13</option>
-
-                                                </select>    <span  class="glyphicon glyphicon-star  "></span>   s
-
+                                                    </select>    <span  class="glyphicon glyphicon-star  "></span>   s
+                                                </div>
 
                                             </div>
                                             <div ng-switch-default  class="row reviewRow">
