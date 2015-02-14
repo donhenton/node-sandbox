@@ -110,7 +110,11 @@
                 // $log.log("current res null in reviewFactory")
                 return [];
             }
-
+            if (currentRestaurant.reviews == null || 
+                    typeof currentRestaurant.reviews == 'undefined')
+            {
+                currentRestaurant.reviews = [];
+            }
             currentRestaurant.reviews.forEach(function (rev)
             {
                 var newRev = {};

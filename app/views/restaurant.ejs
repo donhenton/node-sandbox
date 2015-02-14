@@ -1,114 +1,142 @@
   <% include  partials/header %>
- 
-        <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
-  
+ <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
+<link href="css/angular_restaurant.css" rel="stylesheet" type="text/css"/>
+         <div  ng-app="restaurantApp">
+            <h3>Angular Restaurant App</h3>
+            <div class="restaurantContainer  ng-cloak"  ng-cloak>
 
 
-        <div  ng-app="restaurantApp">
-            <h4>Angular Restaurant Application</h4>
-            <div class="ng-cloak"  ng-cloak>
+                <div  class="row  container col-sm-12" ng-controller="listRestaurantController">
 
-                <!-- start  restaurantListController -->
-                <div  id="restaurantListRow" class="row" ng-controller="listRestaurantController">
+                    <div class="row scrollHeader col-sm-12">
+                        <span class="tableHeader col-sm-6">Name</span>
+                        <span class="tableHeader col-sm-1">City</span>
+                        <span class="tableHeader col-sm-1">St.</span>
+                        <span class="tableHeader col-sm-1">Zip</span>
+                        <span class="tableHeader col-sm-1">Ver.</span>
 
+                    </div>
 
-                  
-                    <div    class="scrollList">
-                        <table>
-                            <thead>
-                                <tr >
-                                    <th class="col s6">Name</th>
-                                    <th class="col s4">City</th>
-                                    <th class="col s1">St.</th>
-                                    <th class="col s1"> </th>
-                                    <th class="col s1"> </th>
-                                     
-                                </tr>
-                            </thead>
-                            <tbody>    
+                    <div class="row scrollList container well well-small col-sm-12">
 
-                                <tr  ng-repeat="restaurant in restaurantList">
+                        <table class="table-bordered" style="width:100%">
 
-                                    <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="col s6 editRow" data-id="{{restaurant.id}}">{{restaurant.name}}</td>
-                                    <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="col s4 editRow">{{restaurant.city}}</td>
-                                    <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="col s1 editRow">{{restaurant.state}}</td>
-                                    
-                                    <td ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]" >
-                                        <span data-ng-click="changeRestaurant($event, restaurant)"   class=" btn ptrClass white-text teal">Edit <i class="mdi-editor-mode-edit text-white"></i> </span></td>
-                                    <td ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]" >
-                                        <span data-ng-click="deleteRestaurant(restaurant)"           class=" btn ptrClass white-text teal">Delete<i class="mdi-action-delete text-white"></i>  </span></td>
+                            <tr ng-repeat="restaurant in restaurantList">
+
+                                <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="col-sm-6 editRow" data-id="{{restaurant.id}}">{{restaurant.name}}</td>
+                                <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="col-sm-1  editRow">{{restaurant.city}}</td>
+                                <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="col-sm-1  editRow">{{restaurant.state}}</td>
+                                <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="col-sm-1  editRow">{{restaurant.zipCode}}</td>
+                                <td  data-ng-click="changeRestaurant($event, restaurant)" ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]"   class="col-sm-1  editRow">{{restaurant.version}}</td>                            
+                                <td ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]" >
+                                    <span data-ng-click="changeRestaurant($event, restaurant)"   class="btn btn-sm  btn-primary"> <i class="glyphicon glyphicon-edit icon-white"></i> Edit</span></td>
+                                <td ng-class= "{true: 'currentUserRow', false: ''}[restaurant.is_current]" >
+                                    <span data-ng-click="deleteRestaurant(restaurant)"           class="btn btn-sm btn-danger"> <i class="glyphicon glyphicon-remove icon-white"></i> Delete</span></td>
 
 
-                                </tr>   
-                            </tbody>
-
+                            </tr>    
                         </table>
                     </div>
 
-                    <div class="row container errorPanel restaurantErrorPanel">
+                    <div class="row container span12 errorPanel restaurantErrorPanel">
                         &nbsp; {{errorMessage}}
                     </div>
                 </div>
-                <!-- end restaurantListController -->
+                <!-- end listview row -->
+                <!-- edit and review container -->
+                <!-- https://docs.angularjs.org/api/ng/directive/input -->
 
-                <!-- begin reviewController -->
-                <div id="reviewController" ng-controller="reviewController" class="row">
+                <div class="row">
+                    <!--begin edit restaurant column block -->
 
-                    <h4 style="display: inline">Ratings</h4> 
+                    <div  id="editRestaurantController"  ng-controller="editRestaurantController" class="col-sm-5 pull-left">
+                        <h4 style="display: inline-block">Restaurants</h4>
+                        <div class="form-group">
 
-                    <span class="restaurantErrorPanel" ng-show="addReviewForm.reviewListing.$error.required">Review Cannot be blank.</span>
-                    <div ng-switch="isAdding">
-                        <!-- begin adding new review -->
-                        <form name="addReviewForm" role="form" novalidate>
-                            <div ng-switch-when="true" style="margin-bottom:5px">
+                            <button  ng-show="canAdd" ng-click="addNewRestaurant()"   class="btn btn-sm btn-primary"><i class="icon-pencil icon-white"></i> Add New Restaurant</button>
 
-                                <input required style="margin-right:3px"  ng-model="addNewReviewBuffer.reviewListing" name="reviewListing" id="reviewListing"  class="input-xlarge"  type="text">  
+                        </div>
+                        <!-- form validation http://www.ng-newsletter.com/posts/validations.html 
+                        <div id="formError" style="border: thin solid red">
+                            {{editRestaurantForm.name.$error}}
+                            {{editRestaurantForm.name.$invalid}}
+                            <span class="error" ng-show="editRestaurantForm.name.$invalid">Name Required!</span><br>
+
+                        </div>
+                        -->
 
 
-                                <select  style="margin-right:2px" ng-model="addNewReviewBuffer.starRating"  class="input-mini">  
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                    <option>13</option>
+                        <form class="form-horizontal" name="editRestaurantForm"  novalidate ng-show="recordPresent">
 
-                                </select>    <span class="icon-star"></span> s
-                                <div>
-                                    <button  ng-click="saveNewReview()" class="btn btn-small btn-primary"> 
-                                        <i class="icon-edit icon-white"></i> Save 
-                                    </button>
-                                    <button ng-click="cancelNewReview()" class="btn btn-small btn-danger">
-                                        <i class="icon-remove icon-white"></i> Cancel 
-                                    </button>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="name">Name</label>
+                                <div class="col-sm-8">
+
+                                    <input required  id="name" name="name" class="form-control" placeholder="Name"   ng-model="currentRestaurant.name" type="text">
                                 </div>
-
                             </div>
-                        </form>   
-                        <form name="editReviewForm" role="form" novalidate>
-                            <div ng-switch-when="false">
-                                <div   ng-show="hasCurrentRestaurant()"  style="margin-bottom:5px">
-                                    <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-small btn-primary'>
-                                        <i class="icon-pencil icon-white"></i> Add Review</button>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="City">City</label>
+                                <div class="col-sm-8">
+
+                                    <input  required  id="city" name="city" class="form-control" placeholder="City"  ng-model="currentRestaurant.city"  type="text">
                                 </div>
+                            </div>
 
-                                <!-- end adding new review -->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="state">State</label>
+                                <div class="col-sm-4">
+                                    <input required ng-pattern="/[A-Z]{2}/" minlength="2" maxlength="2" id="state" name="state" class="form-control" placeholder="State"   ng-model="currentRestaurant.state" type="text">
 
-                                <div ng-repeat="review in currentReviews">
-                                    <div ng-switch="review.isEditing">
-                                        <div ng-switch-when="true" class="reviewRow" ng-class= "{true: 'editingReview', false: ''}[review.isEditing]">
+                                </div>
+                          
+                                <label class="col-sm-2 control-label" for="zipCode">Zip</label>
+                                <div class="col-sm-4">
+                                    <input required ng-pattern="/[0-9]/" minlength="5" maxlength="5" id="zipCode" name="zipCode"   class="form-control" placeholder="Zip Code"  ng-model="currentRestaurant.zipCode"  type="text">                                    
+                                </div>
+                            </div>
 
-                                            <input style="margin-right:3px" required class="input-xlarge" ng-model="review.reviewListing" type="text">    
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="version">Version</label>
+                                <div class="col-sm-4">
+                                    <input required  ng-pattern="/[0-9]/"   id="version" name="version" class="form-control" placeholder="Version"   ng-model="currentRestaurant.version" type="text">                                </div>
+                            
 
+                                <div   style="margin-top:5px" ng-show="recordPresent">
+                                    <button  ng-click="saveClick()" class="btn btn-sm btn-primary"> <i class="glyphicon glyphicon-save icon-white"></i>  Save</button>
+                                    <button  ng-click="cancelClick()" class="btn btn-sm  btn-primary"> <i class="glyphicon glyphicon-refresh icon-white"></i>  Restore</button>
+                                </div>
+                            </div>
 
-                                            <select  style="margin-right:2px" required class="input-mini" ng-model="review.starRating" type="text">  
+                        </form>
+
+                    </div><!-- end editRestaurantController -->
+
+                    <!--end edit restaurant column block -->
+                    <!--begin review column block -->
+                    <div id="reviewController" ng-controller="reviewController"   class="col-sm-6 pull-right">
+
+                        <h4 style="display: inline">Ratings</h4> 
+
+                        <span class="restaurantErrorPanel" ng-show="addReviewForm.reviewListing.$error.required">Review Cannot be blank.</span>
+                        <div ng-switch="isAdding">
+                            <!-- begin adding new review -->
+                            <form name="addReviewForm" role="form" novalidate>
+                                <table class="table col-sm-10" ng-switch-when="true" style="margin-bottom:5px">
+                                    <tr>
+                                        <td class="col-sm-3">
+                                            <button  ng-click="saveNewReview()" class="btn btn-sm  btn-primary"> 
+                                                <i class="glyphicon glyphicon-save icon-white"></i></button>
+                                            <button ng-click="cancelNewReview()" class="btn btn-sm  btn-danger">
+                                                <i class="glyphicon glyphicon-refresh icon-white"></i></button>
+                                        </td>
+                                        <td>
+                                            <input required style="margin-right:3px"  ng-model="addNewReviewBuffer.reviewListing" name="reviewListing" id="reviewListing"   class="col-sm-12" type="text">  
+
+                                        </td>
+                                        <td>
+                                            <select  style="margin-right:2px" ng-model="addNewReviewBuffer.starRating"  class="col-sm-5">  
                                                 <option>1</option>
                                                 <option>2</option>
                                                 <option>3</option>
@@ -123,112 +151,119 @@
                                                 <option>12</option>
                                                 <option>13</option>
 
-                                            </select>    <span class="icon-star"></span> s
-                                            <button  ng-click="saveReviewEdit(review)" class="btn btn-mini btn-primary"> 
-                                                <i class="icon-edit icon-white"></i> 
-                                            </button>
-                                            <button ng-click="cancelReviewEdit(review)" class="btn btn-mini btn-danger">
-                                                <i class="icon-refresh  icon-white"></i>  
-                                            </button>
-
-                                        </div>
-                                        <div ng-switch-default  class="reviewRow">
-                                            {{review.reviewListing}} ({{review.starRating}} 
-                                            <span class="icon-star"></span> s)  <!-- {{review._id}} -->
+                                            </select>     <span  class="glyphicon glyphicon-star  "></span> 
+                                        </td>
 
 
-                                            <div style="margin:5px">
-                                                <button  ng-click="editReview(review)" class="btn btn-mini btn-primary"> 
-                                                    <i class="icon-edit icon-white"></i> Edit
-                                                </button>
-                                                <button ng-click="deleteReview(review)" class="btn btn-mini btn-danger">
-                                                    <i class="icon-remove icon-white"></i> Delete
-                                                </button>
-
-                                            </div>
-                                        </div>
+                                </table>
+                            </form>   
+                            <form name="editReviewForm" role="form" novalidate>
+                                <div ng-switch-when="false">
+                                    <div   ng-show="hasCurrentRestaurant()"  style="margin-bottom:5px">
+                                        <button  id="addReviewButton" ng-click="addNewReview()" class='btn btn-sm btn-primary'>
+                                            <i class="icon-pencil icon-white"></i> Add Review</button>
                                     </div>
 
-                                </div>
 
-                            </div>
-                        </form>
 
+                                    <table class="table col-sm-6">
+
+
+                                        <tr ng-repeat="review in currentReviews">
+
+                                            <td class="col-sm-2">
+                                                <span ng-switch="review.isEditing">
+                                                    <span ng-switch-when="true">
+                                                        <button  ng-click="saveReviewEdit(review)" class="btn btn-sm btn-primary"> 
+                                                            <i class="glyphicon glyphicon-save icon-white"></i> 
+                                                        </button>
+                                                        <button ng-click="cancelReviewEdit(review)" class="btn btn-sm btn-danger">
+                                                            <i class="glyphicon glyphicon-refresh icon-white"></i>  
+                                                        </button>
+                                                    </span>    
+                                                    <span ng-switch-default>
+
+                                                        <button  ng-click="editReview(review)" class="btn btn-sm btn-primary"> 
+                                                            <i class="glyphicon glyphicon-edit icon-white"></i> 
+                                                        </button>
+                                                        <button ng-click="deleteReview(review)" class="btn btn-sm btn-danger">
+                                                            <i class="glyphicon glyphicon-remove icon-white"></i> 
+                                                        </button>
+                                                    </span>
+                                                </span>
+
+                                            </td>
+
+
+                                            <td class="col-sm-6">
+                                                <span ng-switch="review.isEditing">
+                                                    <span ng-switch-when="true">
+
+
+                                                        <input   required class="col-sm-7" style="margin-right: 5px" ng-model="review.reviewListing" type="text">    
+
+
+                                                        <select  required   ng-model="review.starRating" type="text">  
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                            <option>6</option>
+                                                            <option>7</option>
+                                                            <option>8</option>
+                                                            <option>9</option>
+                                                            <option>10</option>
+                                                            <option>11</option>
+                                                            <option>12</option>
+                                                            <option>13</option>
+
+                                                        </select>    <span  class="glyphicon glyphicon-star  "></span>   s
+
+                                                    </span>
+
+
+                                                    <span ng-switch-default>
+
+                                                        {{review.reviewListing}} 
+                                                    </span>
+
+                                                </span>
+
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
-                <!-- end reviewController -->
+                <!-- end review column block -->
 
 
-                <!-- start editRestaurantConroller -->
-                <div  id="editRestaurantController"  ng-controller="editRestaurantController" class="row">
-                     
-                    <div class="form-group">
-
-                        <button  ng-show="canAdd" ng-click="addNewRestaurant()"   class="btn btn-small btn-primary"><i class="icon-pencil icon-white"></i> Add New Restaurant</button>
-
-                    </div>
-
-
-                    <form class="form-inline" name="editRestaurantForm"  role="form" novalidate ng-show="recordPresent">
-                        <label class="control-label" for="name"></label>
-                        <div class="controls">
-                            <div class="input-prepend">
-                                <span class="add-on">Name</span>
-                                <input required  id="name" name="name" class="input-xlarge" placeholder="Name"   ng-model="currentRestaurant.name" type="text">
-                            </div>
-                            <div class="input-prepend">
-                                <span class="add-on">City</span>
-                                <input  required  id="city" name="city" class="input-medium" placeholder="City"  ng-model="currentRestaurant.city"  type="text">
-                            </div>
-                            <div class="input-prepend">
-                                <span class="add-on">State</span>
-                                <input required ng-pattern="/[A-Z]{2}/" minlength="2" maxlength="2" id="state" name="state" class="input-small" placeholder="State"   ng-model="currentRestaurant.state" type="text">
-                            </div>
-                            <div class="input-prepend">
-                                <span class="add-on">Zip Code</span>
-                                <input required ng-pattern="/[0-9]/" minlength="5" maxlength="5" id="zipCode" name="zipCode"   class="input-small" placeholder="Zip Code"  ng-model="currentRestaurant.zipCode"  type="text">
-                            </div>
-                            <div class="input-prepend">
-                                <span class="add-on">Version</span>
-                                <input required  ng-pattern="/[0-9]/"   id="version" name="version" class="input-small" placeholder="Version"   ng-model="currentRestaurant.version" type="text">
-                            </div>
-                        </div>
-                        <div  style="margin-top:5px" ng-show="recordPresent">
-                            <button  ng-click="saveClick()" class="btn btn-small btn-primary"> <i class="icon-edit  icon-white"></i>  Save</button>
-                            <button  ng-click="cancelClick()" class="btn btn-small  btn-primary"> <i class="icon-refresh  icon-white"></i>  Restore</button>
-                        </div>
-
-                    </form>
-
-                </div>
-                <!-- end editRestaurantController -->
+            </div><!-- edit and review container -->        
+        </div>
 
 
 
-            </div><!-- end ng-cloack -->    
-        </div><!-- end ng-app -->
+    </div>
 
 
+    <script>
+        g_restaurantUrlBase = "http://localhost:3000/restaurant/";
 
-
-
-
-
-        <script>
-            g_restaurantUrlBase = "http://localhost:3000/restaurant/";
-            
-        </script>
-        <script src="js/libs/angular.js/angular-resource.js" type="text/javascript"></script>
-        <script src="js/app/app.js" type="text/javascript"></script>
-        <script src="js/app/messagePump.js" type="text/javascript"></script>
-        <script src="js/app/services/restaurantDAOService.js" type="text/javascript"></script>
-        <script src="js/app/services/reviewDAOService.js" type="text/javascript"></script>
-        <script src="js/app/services/messageFactory.js" type="text/javascript"></script>
-        <script src="js/app/services/reviewFactory.js" type="text/javascript"></script>
-        <script src="js/app/services/restaurantFactory.js" type="text/javascript"></script>
-        <script src="js/app/controllers/listRestaurantController.js" type="text/javascript"></script>
-        <script src="js/app/controllers/editRestaurantController.js" type="text/javascript"></script>
-        <script src="js/app/controllers/reviewController.js" type="text/javascript"></script>
+    </script>
+    <script src="js/libs/angular.js/angular-resource.js" type="text/javascript"></script>
+    <script src="js/app/app.js" type="text/javascript"></script>
+    <script src="js/app/messagePump.js" type="text/javascript"></script>
+    <script src="js/app/services/restaurantDAOService.js" type="text/javascript"></script>
+    <script src="js/app/services/reviewDAOService.js" type="text/javascript"></script>
+    <script src="js/app/services/messageFactory.js" type="text/javascript"></script>
+    <script src="js/app/services/reviewFactory.js" type="text/javascript"></script>
+    <script src="js/app/services/restaurantFactory.js" type="text/javascript"></script>
+    <script src="js/app/controllers/listRestaurantController.js" type="text/javascript"></script>
+    <script src="js/app/controllers/editRestaurantController.js" type="text/javascript"></script>
+    <script src="js/app/controllers/reviewController.js" type="text/javascript"></script>
 
     <% include  partials/footer %>
