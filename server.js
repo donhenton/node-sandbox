@@ -17,7 +17,7 @@ var json3 = require('json3');
 
 // Use the Express application instance to listen to the '3000' port
 
-require("./app/angular_websocket_server/angular.server.js")(io,daoService,json3);
+require("./app/websockets/socketServer.js")(io,daoService,json3);
 
 var portVar = 3000;
 if (process.env.NODE_ENV === 'production') {

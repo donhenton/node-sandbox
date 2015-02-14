@@ -44,7 +44,7 @@ module.exports = function (io, restaurantDaoService, json3) {
                 return;
             }
             ////////////
-  
+
             restaurantDaoService.getByWordInName(dataIn.payload)
                     .then(function (items)
                     {
