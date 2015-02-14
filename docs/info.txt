@@ -5,20 +5,6 @@ http://blog.modulus.io/getting-started-with-mongoose
 http://mongoosejs.com/
 
 
-materialize css 
-
-http://materializecss.com/modals.html
-
-
-tiles substitution engine ideas for node/express
-
-http://stackoverflow.com/questions/13272335/is-there-any-template-engine-for-node-js-express-quitely-like-jsp
-
-
-also window.location.port
-var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
-
-
 
 Node js driver refs
 
@@ -28,7 +14,7 @@ to use the express generator npm install
 $ npm install -g express-generator
 
 then call express -h in a folder to create a sample app
-
+xxx
 =================
 youtube for mongodb and nodejs and the nodejs mongodb driver
 
@@ -98,3 +84,35 @@ socket io
 http://vijayannadi.wordpress.com/tutorials/sample-chat-app-using-nodejs-socketio/
 http://aqueous-beyond-8981.herokuapp.com/
 https://github.com/vijayannadi/chat
+
+http://socket.io/docs/
+
+source of chat app on socket page
+https://github.com/Automattic/socket.io/tree/master/examples/chat
+
+=============
+websockets and promises
+
+http://stackoverflow.com/questions/25235784/javascript-angularjs-websocket-with-promises
+http://plnkr.co/edit/ORSqXz07I9cLspZQg1iM?p=preview
+see the plunk zip file 
+
+http://clintberry.com/2013/angular-js-websocket-service/
+https://github.com/exratione/angularjs-websocket-transport
+
+
+angular component for websockets using socketio
+https://github.com/btford/angular-socket-io
+
+========= text index setup in mongodb ===============
+ // create text searchable index can be search by words;
+ 
+ 
+ db.restaurants.ensureIndex({ name:"text"});
+ 
+ 
+ // get a list of indices for deleting
+ db.restaurants.getIndexes();
+ 
+ //drop an index
+ db.restaurants.dropIndex("fff")
