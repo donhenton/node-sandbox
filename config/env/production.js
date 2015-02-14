@@ -3,5 +3,6 @@
 
 // Set the 'production' environment configuration object
 module.exports = {
-	sessionSecret: 'productionSessionSecret'
+	sessionSecret: 'productionSessionSecret',
+        db: {url: "mongodb://mongouser:mongo9000@ds029811.mongolab.com:29811/restaurant_collection"}
 };

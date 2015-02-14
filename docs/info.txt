@@ -15,8 +15,8 @@ tiles substitution engine ideas for node/express
 http://stackoverflow.com/questions/13272335/is-there-any-template-engine-for-node-js-express-quitely-like-jsp
 
 
-
-
+also window.location.port
+var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
 
 
 
