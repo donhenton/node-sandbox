@@ -1,0 +1,67 @@
+  <% include  partials/header %>
+
+<script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
+
+    <div ng-app="serviceApp">
+        <h3>Angular WebSocket Restaurant Search</h3>
+
+        <div class="container  ng-cloak" ng-controller="serviceController" ng-cloak>
+            <div class="row well well-small">
+                This is a search service using Angular and Web Sockets. It searches
+                for whole words in the restaurant names, using Mongodb full text
+                search indices. The call is via promises, which reconciles the
+                asynchronous nature of request response, simulating a synchronous
+                call to a websocket.
+            </div>
+            <div class="row">
+                <div class=" col-sm-offset-1 col-sm-5">
+
+                    
+                    <div class="controls">
+
+                        <form class="form-horizontal" name="searchQueryForm"  novalidate>
+
+                             
+                            <div class="form-group">
+                           
+                            <table class="table table-bordered">
+                            <tr><td>
+                            <button  ng-click="sendMessage()" class="btn btn-small btn-primary">Search</button>
+                            </td><td>
+                            <input required  id="searchString" name="searchString" 
+                                   class="col-sm-12" placeholder="Search String"  
+                                   ng-model="searchString" type="text">
+                            </td></tr>
+                           
+                            </table>
+                             </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-sm-4">
+                    <ul  ng-repeat="name in restaurantList">
+                        <li>{{name}}</li>
+
+                    </ul>
+
+
+                </div>
+            </div>    
+        </div>
+        
+
+
+    </div>
+
+ <script>
+            g_socketBase = "http://"+window.location.host + "/";
+
+        </script>
+        <script src="js/socket.io.js"></script>
+        <script src="js/libs/angular.js/angular-resource.js" type="text/javascript"></script>
+        <script src="js/sockets/angular/serviceApp.js" type="text/javascript"></script>
+        <script src="js/sockets/angular/socketFactory.js" type="text/javascript"></script>  
+        <script src="js/sockets/angular/restaurantQueryService.js" type="text/javascript"></script>  
+        <script src="js/sockets/angular/serviceController.js" type="text/javascript"></script>
+ <% include  partials/footer %>

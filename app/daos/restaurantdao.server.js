@@ -76,6 +76,35 @@ module.exports = function (config) {
 
     };
 
+
+    daoService.getByWordInName = function(word)
+    {
+        var success = function (db)
+        {
+            //  console.log("my id " + id);
+            var col = db.collection('restaurants');
+            var deferredResult = Q.defer();
+             
+            var searchCriteria = {$text: {$search: word}};
+ 
+            col.find(searchCriteria).toArray(function (err, items) {
+
+                if (err)
+                {
+                    deferredResult.reject(err);
+                }
+                else
+                {
+                    deferredResult.resolve(items);
+                }
+
+                db.close();
+            });
+            return deferredResult.promise;
+        };
+        return   daoService.promisedConnect().then(success, console.error)
+    };
+
     daoService.getRestaurantById = function (id)
     {
         var success = function (db)

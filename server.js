@@ -4,21 +4,26 @@
 // Set the 'NODE_ENV' variable
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-
 // Load the 'express' module
 var express = require('./config/express');
-
+var config = require('./config/config');
 // Create a new Express application instance
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var daoService = 
+  require('./app/daos/restaurantdao.server.js')(config);
+var json3 = require('json3');
 
 // Use the Express application instance to listen to the '3000' port
 
+require("./app/angular_websocket_server/angular.server.js")(io,daoService,json3);
 
 var portVar = 3000;
 if (process.env.NODE_ENV === 'production') {
     portVar = process.env.PORT;
 }  
-app.listen(portVar);
+server.listen(portVar);
 // Log the server status to the console
 console.log('Server running at http://localhost:' + portVar+" ("+process.env.NODE_ENV+")");
 
