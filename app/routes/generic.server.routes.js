@@ -32,7 +32,7 @@ module.exports = function (app) {
     
     var newPageRender = function(req,res)
     {
-        res.render('newpage', {
+        res.render('newPage', {
             title: 'New Page Notes'
         });
     }
