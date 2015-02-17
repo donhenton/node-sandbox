@@ -13,6 +13,7 @@ var config = require('./config'),
         session = require('express-session');
 var fs = require('fs');
 var vm = require('vm');
+var cookieParser = require('cookie-parser');
 
 // Define the Express configuration method
 module.exports = function () {
@@ -25,6 +26,11 @@ module.exports = function () {
     } else if (process.env.NODE_ENV === 'production') {
         app.use(compress());
     }
+    var cookieOpts = {};
+    app.use(cookieParser(config.sessionSecret,cookieOpts));
+    
+    // see https://www.npmjs.com/package/cookie for the various options
+    // that can be specificed in the cookieOpts;
 
     // Use the 'body-parser' and 'method-override' middleware functions
     app.use(bodyParser.urlencoded({
@@ -50,13 +56,10 @@ module.exports = function () {
     app.set('view engine', 'ejs');
 
     // Load the 'index' routing file
-    var daoService =
-            require('../app/daos/restaurantdao.server.js')(config);
+    var daoService = require('../app/daos/restaurantdao.server.js')(config);
     require('../app/routes/generic.server.routes.js')(app);
-
-
     require('../app/routes/session.server.routes.js')(app);
-
+    require('../app/routes/cookies.server.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
