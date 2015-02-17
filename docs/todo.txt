@@ -1,10 +1,24 @@
 http://codeforgeek.com/2015/02/desktop-app-node-webkit/     NODE WEBKIT
-http://codeforgeek.com/2014/11/file-uploads-using-node-js/  FILE UPLOADS
-http://codeforgeek.com/2014/11/eventemitter-node-js/ EVENTS IN NODE JS
 http://codeforgeek.com/2014/10/express-complete-tutorial-part-5/ CODE TUNEUP
 
-http://codeforgeek.com/2014/10/express-complete-tutorial-part-4/ SESSIONS
+
+
+SESSIONS  *** DONE
+http://codeforgeek.com/2014/10/express-complete-tutorial-part-4/ 
 http://codeforgeek.com/2014/09/manage-session-using-node-js-express-4/
+http://expressjs-book.com/forums/topic/express-js-sessions-a-detailed-tutorial/
+https://devcenter.heroku.com/articles/node-sessions
+https://github.com/kcbanner/connect-mongo
+
+
+
+EVENTS IN NODE JS
+http://codeforgeek.com/2014/11/eventemitter-node-js/ 
+
+FILE UPLOADS
+http://codeforgeek.com/2014/11/file-uploads-using-node-js/  
+
+ 
 
 COOKIES 
 http://runnable.com/UTlPPF-f2W1TAAET/how-to-use-cookies-in-express-for-node-js
@@ -13,13 +27,19 @@ https://www.npmjs.com/package/cookie-parser
 LOGIN
 http://runnable.com/Uxv5tGdglOI7p8__/node-js-login-logout-for-express-node-js-authentication-and-sessions
 
-
-SESSIONS
-http://expressjs-book.com/forums/topic/express-js-sessions-a-detailed-tutorial/
-https://devcenter.heroku.com/articles/node-sessions
-https://github.com/kcbanner/connect-mongo
-
+ 
 STYLUS CSS Preprocessor
 http://blog.teamtreehouse.com/getting-started-stylus
+
+
+SERVLET LIKE FUNCTIONS
+express.sendfile for sending static html
+ res.redirect('back');
+res.send('Remembered :). Click to <a href="/forget">forget</a>!.');
+res.sendStatus(statusCode)
+see 
+http://runnable.com/UTlPPF-f2W1TAAET/how-to-use-cookies-in-express-for-node-js
+http://expressjs.com/api.html
+
 
 
