@@ -116,3 +116,11 @@ https://github.com/btford/angular-socket-io
  
  //drop an index
  db.restaurants.dropIndex("fff")
+
+
+=====================
+session management node js
+
+http://codeforgeek.com/2014/09/manage-session-using-node-js-express-4/
+
+express.sendfile

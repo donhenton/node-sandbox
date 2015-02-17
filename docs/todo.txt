@@ -1,0 +1,20 @@
+http://codeforgeek.com/2015/02/desktop-app-node-webkit/     NODE WEBKIT
+http://codeforgeek.com/2014/11/file-uploads-using-node-js/  FILE UPLOADS
+http://codeforgeek.com/2014/11/eventemitter-node-js/ EVENTS IN NODE JS
+http://codeforgeek.com/2014/10/express-complete-tutorial-part-5/ CODE TUNEUP
+
+http://codeforgeek.com/2014/10/express-complete-tutorial-part-4/ SESSIONS
+http://codeforgeek.com/2014/09/manage-session-using-node-js-express-4/
+
+COOKIES 
+http://runnable.com/UTlPPF-f2W1TAAET/how-to-use-cookies-in-express-for-node-js
+
+
+SESSIONS
+http://expressjs-book.com/forums/topic/express-js-sessions-a-detailed-tutorial/
+https://devcenter.heroku.com/articles/node-sessions
+
+STYLUS CSS Preprocessor
+http://blog.teamtreehouse.com/getting-started-stylus
+
+
