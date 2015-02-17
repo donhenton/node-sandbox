@@ -13,6 +13,7 @@ http://runnable.com/UTlPPF-f2W1TAAET/how-to-use-cookies-in-express-for-node-js
 SESSIONS
 http://expressjs-book.com/forums/topic/express-js-sessions-a-detailed-tutorial/
 https://devcenter.heroku.com/articles/node-sessions
+https://github.com/kcbanner/connect-mongo
 
 STYLUS CSS Preprocessor
 http://blog.teamtreehouse.com/getting-started-stylus

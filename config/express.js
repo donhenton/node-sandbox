@@ -33,12 +33,17 @@ module.exports = function () {
     app.use(bodyParser.json());
     app.use(methodOverride());
 
-    // Configure the 'session' middleware
+    var MongoStore = require('connect-mongo')(session);
     app.use(session({
-        saveUninitialized: true,
+        secret: config.sessionSecret,
         resave: true,
-        secret: config.sessionSecret
+        saveUninitialized: true,        
+        store: new MongoStore({
+            url: config.db.url,
+        })
     }));
+
+
 
     // Set the application view engine and 'views' folder
     app.set('views', './app/views');
@@ -48,6 +53,10 @@ module.exports = function () {
     var daoService =
             require('../app/daos/restaurantdao.server.js')(config);
     require('../app/routes/generic.server.routes.js')(app);
+
+
+    require('../app/routes/session.server.routes.js')(app);
+
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
