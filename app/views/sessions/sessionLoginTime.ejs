@@ -3,6 +3,24 @@
  
 	 
 	<h3><%= title %></h3>
-        <div> Last Visit: <%= lastVisit %></div>
-        
+
+
+        <div class="well">
+            This page illustrates session variables. They are stored using the
+            <a target="_new" href="https://github.com/kcbanner/connect-mongo">
+            connect-mongo</a> connector, and session information 
+            is stored in Mongodb.
+        </div>
+        <div class="well"> 
+       
+            <div class="row">
+            <table class="col-sm-9">
+                <tr><td>Last Visit To This Page: <span class="badge"><%= lastVisit %></span></td></tr>
+                <tr><td>Visit Time Now Set To: <span class="badge"><%= newLastVisit %></span></td></tr>
+            </table>
+            </div>
+        </div
+
+
+ 
  <% include  ../partials/footer %>
