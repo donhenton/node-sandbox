@@ -20,28 +20,34 @@ module.exports = function (app) {
 
         var local = new Date(date);
         local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-        var finalDate = local.toJSON().slice(0, 10)+" "+local.getUTCHours()+":"
-        + local.getMinutes() ;
-         
+        var finalDate = local.toJSON().slice(0, 10) + " " + local.getUTCHours() + ":"
+                + pad(local.getMinutes(),2);
+
         return finalDate;
 
     }
 
+    function pad(num, size) {
+        var s = num + "";
+        while (s.length < size)
+            s = "0" + s;
+        return s;
+    }
 
 
     //rendering functions must define these first ////////////////////////////
 
     var sessionVariablesRender = function (req, res) {
-        
+
         if (req.session.lastVisit) {
-             console.log("found lastVisit "+req.session.lastVisit);
+            console.log("found lastVisit " + req.session.lastVisit);
         }
         else
         {
             // Set the session's 'lastVisit' property
             req.session.lastVisit = new Date();
         }
-       
+
 
         var lastVisitDate = datePrint(req.session.lastVisit);
         req.session.lastVisit = new Date();

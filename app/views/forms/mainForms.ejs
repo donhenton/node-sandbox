@@ -1,0 +1,94 @@
+<% include  ../partials/header %>
+	 
+
+	 
+
+         <h3><%= title %></h3>
+
+  <div class="well">
+Demonstration of forms processing. Taken from 
+<a target="_new" href="http://www.hacksparrow.com/form-handling-processing-in-express-js.html">here</a>.
+</div>
+
+
+<div class="container">
+        <div class="row">
+                <h4>Form Post</h4>
+                <form class="form-horizontal col-sm-6"  method="post" action="/formsDemoPost.doc"   name="postDemoForm"  novalidate>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="name">Name</label>
+                            <div class="col-sm-8">
+
+                                <input required  id="name" name="name" class="form-control" placeholder="Name"  type="text">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="version">Version</label>
+                            <div class="col-sm-4">
+                                <input required     id="version" name="version" class="form-control" placeholder="Version"   type="text">   
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input  type="submit"  value="Submit" class="btn   btn-primary"> 
+
+                            </div>
+                        </div>
+
+                </form>
+        </div>
+
+
+
+
+        <% if (versionInfo != null) { %><div><%= versionInfo %></div><% } %>
+
+</div>
+
+
+<div class="container">
+        <div class="row">
+                <h4>Form Get</h4>
+                <form class="form-horizontal col-sm-6"  method="get" action="/formsDemoGet.doc"   name="getDemoForm"  novalidate>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="name">Name</label>
+                            <div class="col-sm-8">
+
+                                <input required  id="name" name="name" class="form-control" placeholder="Name"  type="text">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="version">Version</label>
+                            <div class="col-sm-4">
+                                <input required     id="version" name="version" class="form-control" placeholder="Version"   type="text">   
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input  type="submit"  value="Submit" class="btn   btn-primary"> 
+
+                            </div>
+                        </div>
+
+                </form>
+        </div>
+
+
+
+
+        <% if (queryInfo != null) { %><div><%= queryInfo %></div><% } %>
+
+</div>
+
+
+
+
+ <% include  ../partials/footer %>
