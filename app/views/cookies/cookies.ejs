@@ -4,15 +4,31 @@
 	 
 	<h3><%= title %></h3>
 
-
-        <div class="well">
-           cookies
+<div class="row">
+        <div class="well  col-sm-12">
+           This is demonstration of cookie writing. The form will write or erase
+           a persistent cookie that determines the state of the form. See
+           <span class="badge">cookies.server.routes.js</span> for the code.
         </div>
-        <div class="well"> 
+</div>
+        <div class="well  col-sm-6"> 
        
             <div class="row">
             
+                <div>
+                <form method="post" action="<%= action %>" class="form-inline" name="cookieForm"  novalidate">
+
+                        <div class="checkbox col-sm-4">
+                            <label><input id="remember" name="remember" type="checkbox" <%= checked %>  > Remember me</label>
+                        </div>
+                        <button  type="submit" class="btn btn-primary"><%= buttonText %></button>
+                        <i class="col-sm-4 pull-right"> <%= rememberText %></i>
+               </form>
+               
+               </div>
             </div>
+
+             
         </div
 
 
