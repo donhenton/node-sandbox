@@ -60,6 +60,7 @@ module.exports = function () {
     require('../app/routes/generic.server.routes.js')(app);
     require('../app/routes/session.server.routes.js')(app);
     require('../app/routes/cookies.server.routes.js')(app);
+    require('../app/routes/servlets.server.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);

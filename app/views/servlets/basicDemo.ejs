@@ -1,0 +1,37 @@
+<% include  ../partials/header %>
+	 
+ 
+	 
+	<h3><%= title %></h3>
+
+<div class="row">
+        <div class="well  col-sm-12">
+           This is demonstration of basic servlet function. See
+           <span class="badge">servlets.server.routes.js</span> for the code.
+        </div>
+</div>
+        <div class="row">
+       
+             <div class="col-sm-5">
+             <h4>Send to Static File via <a  target="_new" href="http://expressjs.com/api.html#res.sendFile">express.sendFile</a></h4>
+             </div>
+
+             <div class="col-sm-3">
+              <h4><a  target="_new" href="/sendFile.doc">Send To Static File</a></h4> 
+             </div>
+             
+        </div>
+
+        <div class="row">
+       
+             <div class="col-sm-5">
+             <h4>Servlet Println Functionality via <a  target="_new" href="http://expressjs.com/api.html#res.send">express.send</a></h4>
+             </div>
+
+             <div class="col-sm-3">
+              <h4><a  target="_new" href="/sendServletDemo.doc">Send To Println Output</a></h4> 
+             </div>
+             
+        </div>
+ 
+ <% include  ../partials/footer %>
