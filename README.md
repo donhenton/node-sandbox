@@ -2,7 +2,9 @@
 
 This application demonstrates various aspects of NodeJS applications. 
 The server uses <a href="http://www.embeddedjs.com/">EJS</a> for templating.
-It explores routing, controllers and the use of require for modules.
+It explores routing, controllers and the use of require for modules. Basic web site 
+functionality such as cookies and sessions are also demonstrated. Session 
+persistence is via Mongodb.
 Additionally, it demonstrates REST services with Node and Express, and
 Websockets with socket.io.
 
