@@ -1,0 +1,109 @@
+<header class="app-header">
+
+    <nav class="navbar">
+        <ul class="nav nav-tabs">
+            <li>
+
+                <div class="navbar-header">
+
+                    <span class="navbar-brand">Folder Contents For {{folderContents.folder.name}}</span>
+                </div>
+
+            </li>
+
+
+
+            <li class="nav pull-right">
+
+                <a href="#/">Return To Folder List</a> 
+
+            </li>
+
+        </ul>
+    </nav>
+</header>
+<uib-tabset>
+
+
+    <uib-tab heading="Images">
+
+
+
+        <div class="row">
+            <uib-pagination total-items="folderContents.totalImages" 
+                            ng-model="folderContents.currentImagePage" 
+                            items-per-page="folderContents.maxImages" 
+                            ng-change="folderContents.imagePageChanged()"></uib-pagination>
+
+        </div>   
+
+
+        <div deckgrid class="deckgrid" source="folderContents.imageCards">
+            <div class="a-card thumbnail">
+
+                <a target="_new" href="{{card.src}}">
+                    <img  src="" data-ng-src="{{card.src}}">
+                </a>
+            </div>
+        </div>
+
+
+
+
+    </uib-tab>
+
+
+    <uib-tab heading="Pinterest Pins">
+
+         <div class="row">
+            <uib-pagination total-items="folderContents.totalPins" 
+                            ng-model="folderContents.currentPinPage" 
+                            items-per-page="folderContents.maxPins" 
+                            ng-change="folderContents.pinPageChanged()"></uib-pagination>
+
+        </div>   
+
+        <div deckgrid class="deckgrid" source="folderContents.pinCards">
+            <div class="a-card thumbnail">
+
+                <image-widget type="image" url="card.src" />
+
+            </div>
+        </div>
+
+
+
+
+    </uib-tab>
+
+
+
+
+
+
+
+
+    <uib-tab heading="Pinterest Boards" select="folderContents.refreshBoards()">
+        <br>
+        <div class="col-sm-offset-3 col-sm-6">
+
+            <uib-carousel interval="-1" no-wrap="false">
+                <uib-slide ng-repeat="slide in folderContents.slides" active="slide.active">
+
+                    <image-widget type="board" url="slide.image" />
+                </uib-slide>
+
+            </uib-carousel>
+
+        </div>
+
+    </uib-tab>
+
+</uib-tabset>
+
+
+
+
+
+
+
