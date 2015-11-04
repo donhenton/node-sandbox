@@ -64,6 +64,7 @@ module.exports = function () {
     require('../app/routes/forms.server.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
+    require('../app/routes/MorgFile.server.routes.js')(app);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
 
     /*
