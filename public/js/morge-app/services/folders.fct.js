@@ -15,7 +15,7 @@ function folderService($log)
         "saveFolder": saveFolder,
         "bulkAddToFolders": bulkAddToFolders,
         "completeEdit": completeEdit,
-        "loadData": loadData
+        "init": init
 
 
     };
@@ -23,65 +23,24 @@ function folderService($log)
     var folderData = [];
 
 
-    function loadData()
+    function init()
     {
-        var pinData = [
-            "http://pinterest.com/pin/326792516689899699/",
-            "http://pinterest.com/pin/326792516689806026/",
-            "http://pinterest.com/pin/326792516689792890/",
-            "http://pinterest.com/pin/326792516689759204/",
-            "http://pinterest.com/pin/326792516689743807/",
-            "http://pinterest.com/pin/326792516689740948/",
-            "http://pinterest.com/pin/326792516689736735/",
-            "http://pinterest.com/pin/326792516689702649/",
-            "http://pinterest.com/pin/326792516689667808/",
-            "http://pinterest.com/pin/326792516689648168/",
-            "http://pinterest.com/pin/326792516689575883/",
-            "http://pinterest.com/pin/326792516689407007/"
-        ];
 
 
-        var boardData = [
-            "https://www.pinterest.com/MrsPaterson1/windows-doorways/",
-            "https://www.pinterest.com/megazoid4500/painting/",
-            "https://www.pinterest.com/megazoid4500/space-ships/",
-            "https://www.pinterest.com/megazoid4500/inking-study/",
-            "https://www.pinterest.com/megazoid4500/character-design/",
-            "https://www.pinterest.com/megazoid4500/space-suits/",
-            "https://www.pinterest.com/megazoid4500/majipoor/",
-            "https://www.pinterest.com/megazoid4500/syd-mead/",
-            "https://www.pinterest.com/megazoid4500/robots/",
-            "https://www.pinterest.com/megazoid4500/my-work/"
+        return  $http.get(g_morgueUrlBase).
+                success(function (data, status, headers, config) {
+                    console.log("dao init ")
+//                        console.log(data);
+                    localRestaurantCopy = data;
+                    setUpRestaurantList();
+                }).
+                error(function (data, status, headers, config) {
 
-        ];
+                });
 
-        var urlData = ["http://orig14.deviantart.net/1837/f/2015/283/5/1/sample_panel_by_megazoid-d9cnv65.jpg",
-            "http://orig08.deviantart.net/c96a/f/2015/001/a/2/ship1003_by_megazoid-d8c6rli.jpg",
-            "http://orig00.deviantart.net/c15b/f/2014/293/7/a/lynch_by_megazoid-d83lizs.jpg",
-            "http://orig00.deviantart.net/595d/f/2015/071/e/c/black_and_white_illustration_practice_by_megazoid-d8lgwhv.jpg",
-            "http://orig05.deviantart.net/0ee6/f/2015/232/f/b/port11final_by_megazoid-d96ifls.jpg",
-            "http://orig07.deviantart.net/8ad8/f/2015/033/5/a/stand102_by_megazoid-d8ghaa9.jpg",
-            "http://orig00.deviantart.net/e4e4/f/2014/357/b/9/technician_by_megazoid-d8axnyn.jpg",
-            "http://orig00.deviantart.net/7d0c/f/2015/161/c/2/n16_by_userthiago-d8wsz16.png",
-            "http://orig10.deviantart.net/899e/f/2015/282/0/0/n47__by_userthiago-d9cjffy.png",
-            "http://orig14.deviantart.net/e806/f/2015/106/d/f/n45__by_userthiago-d8pyt4x.png"];
-
-        folderData = [
-            {"name": "Sci-fi and space ships", "id": 1, "images": {"urls": urlData, "pins": pinData, "pinterestBoards": boardData}},
-            {"name": "Fantasy", "id": 2, "images": {"urls": urlData, "pins": pinData, "pinterestBoards": boardData}},
-            {"name": "Inking Samples", "id": 3, "images": {"urls": [], "pins": [], "pinterestBoards": []}},
-            {"name": "Anatomy Sample", "id": 4, "images": {"urls": [], "pins": [], "pinterestBoards": []}},
-            {"name": "Animals and Creature Design", "id": 5, "images": {"urls": [], "pins": [], "pinterestBoards": []}},
-            {"name": "Character Design", "id": 6, "images": {"urls": [], "pins": [], "pinterestBoards": []}}
-        ];
 
     }
-    ;
 
-
-
-
-    loadData();
 
     /*
      * add urls to the folder data

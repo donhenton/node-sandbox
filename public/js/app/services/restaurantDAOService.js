@@ -55,6 +55,8 @@
 
         };
 
+        //g_restaurantUrlBase is defined in a script tag in the page
+        //g_restaurantUrlBase = "http://"+window.location.host + "/restaurant/"
         daoService.init = function ()
         {
             return  $http.get(g_restaurantUrlBase).

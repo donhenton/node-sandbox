@@ -2,7 +2,7 @@
 'use strict';
 
 // Define the routes module' method
-module.exports = function (app,morgeService) {
+module.exports = function (app, morgeService) {
     // Load the 'index' controller
 
 
@@ -10,13 +10,13 @@ module.exports = function (app,morgeService) {
 
     var morgeFilePageRender = function (req, res)
     {
-        res.render('morgfile/morgfile', {
-            title: 'Morge File Application'
+        res.render('morguefile/morguefile', {
+            title: 'Morgue File Application'
         });
     }
-    
-        //@getAllRestaurants ****
-    app.get('/morgefile/data', function (req, res) {
+
+    //@getData ****
+    app.get('/morguefile/data', function (req, res) {
 
         morgeService.getData().then(function (items)
         {
@@ -29,8 +29,8 @@ module.exports = function (app,morgeService) {
         });
     });
 
-      app.get('/MorgFile.doc', morgeFilePageRender);
-   // app.get('/chatPage.doc', chatPageRender);
-   
-   
+    app.get('/MorgFile.doc', morgeFilePageRender);
+    // app.get('/chatPage.doc', chatPageRender);
+
+
 };
