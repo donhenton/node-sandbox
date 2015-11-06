@@ -14,13 +14,19 @@ function folderService($log, $http)
         "saveFolder": saveFolder,
         "bulkAddToFolders": bulkAddToFolders,
         "completeEdit": completeEdit,
-        "init": init
+        "init": init,
+        "setFolderData": setFolderData
 
 
     };
     var idCounter = 6;
     var folderData = [];
     var localData = null;
+    
+    function setFolderData(d)
+    {
+        folderData = d;
+    }
 
     function init()
     {

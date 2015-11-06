@@ -4,8 +4,8 @@ angular.module('app').controller('MainController', function (DialogService, Fold
     FolderService.init()
     .success(function (data, status, headers, config) {
 
-//                        console.log(data);
         vm.results =  data.folderData;
+        FolderService.setFolderData(vm.results);
 
     }).error(function (data, status, headers, config) {
                 $log.debug("error in init call " + status);
@@ -28,6 +28,11 @@ angular.module('app').controller('MainController', function (DialogService, Fold
 
 
     };
+    
+    vm.persistChanges = function()
+    {
+        //FolderService.persistChanges(vm.results);
+    }
 
 
 });
