@@ -6,7 +6,7 @@ module.exports = function (app, morgueService) {
 
     // Mount the 'index' controller's 'render' method
 
-    var morgeFilePageRender = function (req, res)
+    var morgueFilePageRender = function (req, res)
     {
         res.render('morguefile/morguefile', {
             title: 'Morgue File Application'
@@ -71,7 +71,7 @@ module.exports = function (app, morgueService) {
     /**
      * route for the page
      */
-    app.get('/MorgFile.doc', morgeFilePageRender);
+    app.get('/MorgueFile.doc', morgueFilePageRender);
     // app.get('/chatPage.doc', chatPageRender);
 
 
