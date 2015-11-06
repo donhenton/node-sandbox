@@ -5,7 +5,7 @@
             <li>
 
                 <a  ng-click="$event.preventDefault();
-                                main.openAddDialog()"    href="#/">Add New Folder</a>
+                            main.openAddDialog()"    href="#/">Add New Folder</a>
 
             </li>
 
@@ -22,15 +22,16 @@
 
 
 
-               
+
 
             </li>
 
-            
+
 
             <li class="nav pull-right">
 
-                <a    href="#/">Save Changes</a>
+                <a  ng-click="$event.preventDefault();
+                            main.saveData()"    href="#/">Save Changes</a>
 
             </li>
 
@@ -40,6 +41,7 @@
 
 
 <div class="container"> 
+   
     <div class="row" ng-if="main.results.length != 0">
         <h3>Morg Folders</h3>
 
@@ -60,5 +62,8 @@
 
     </div>
 
-
+ <div class="row">
+        
+        <h4>{{main.saveMessage}}</h4>
+    </div>
 </div>

@@ -36,12 +36,7 @@ module.exports = function (config) {
 
             col.update({_id: new ObjectID(id)}
             , {$set: {
-                    name: restaurant.name,
-                    city: restaurant.city,
-                    state: restaurant.state,
-                    version: restaurant.version,
-                    zipCode: restaurant.zipCode,
-                    reviews: restaurant.reviews
+                    folderData: userData.folderData
                 }},
             function (err, result) {
                 //console.log(result);

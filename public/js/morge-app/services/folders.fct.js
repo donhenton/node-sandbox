@@ -15,7 +15,8 @@ function folderService($log, $http)
         "bulkAddToFolders": bulkAddToFolders,
         "completeEdit": completeEdit,
         "init": init,
-        "setFolderData": setFolderData
+        "setFullData": setFullData,
+        "saveData": saveData
 
 
     };
@@ -23,28 +24,30 @@ function folderService($log, $http)
     var folderData = [];
     var localData = null;
     
-    function setFolderData(d)
+    
+    function saveData(changedFolders)
     {
-        folderData = d;
+        return  $http.put(g_morgueUrlBase + "saveData",localData) ;
+    }
+    
+    function setFullData(d)
+    {
+        
+        localData = d;
+        folderData = d.folderData;
     }
 
     function init()
     {
 
 
-        return  $http.get(g_morgueUrlBase + "getData").
-                success(function (data, status, headers, config) {
-
-//                        console.log(data);
-                    localData = data;
-                    folderData = data.folderData;
-                    $log.debug("dao init " + angular.toJson(folderData))
-                    return folderData;
-
-                }).
-                error(function (data, status, headers, config) {
-                    $log.debug("error in init " + status);
-                });
+         return  $http.get(g_morgueUrlBase + "getData") ;
+//                success(function (data, status, headers, config) {
+// 
+//                }).
+//                error(function (data, status, headers, config) {
+//                    $log.debug("error in init " + status);
+//                });
 
 
     }
