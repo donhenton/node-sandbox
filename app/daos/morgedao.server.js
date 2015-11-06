@@ -1,8 +1,8 @@
 module.exports = function (config) {
 
     var mongoService = {};
-   
-   
+
+
     var mongoClient = require('mongodb').MongoClient;
     var ObjectID = require('mongodb').ObjectID;
     var Q = require('q');
@@ -18,13 +18,67 @@ module.exports = function (config) {
         });
         return deferredDbConnection.promise;
     }
-    
-    mongoService.getData = function()
+
+
+
+    mongoService.saveData = function (userData)
     {
-        return mongoService.getUserData('1') ;
+
+
+
+        var success = function (db)
+        {
+
+            var col = db.collection('users');
+            var deferredResult = Q.defer();
+            var id = userData._id;
+
+
+            col.update({_id: new ObjectID(id)}
+            , {$set: {
+                    name: restaurant.name,
+                    city: restaurant.city,
+                    state: restaurant.state,
+                    version: restaurant.version,
+                    zipCode: restaurant.zipCode,
+                    reviews: restaurant.reviews
+                }},
+            function (err, result) {
+                //console.log(result);
+                if (err)
+                {
+                    deferredResult.reject(err);
+                }
+                else
+                {
+                    deferredResult.resolve(result);
+                }
+
+                db.close();
+            });
+            return deferredResult.promise;
+        };
+        return   mongoService.promisedConnect().then(success, console.error);
+
+
+    };
+
+
+
+    /**
+     * get main user
+     * @returns {unresolved}
+     */
+    mongoService.getData = function ()
+    {
+        return mongoService.getUserData('1');
     }
-    
-    
+
+    /**
+     * get user data for a given id
+     * @param {type} userId
+     * @returns {unresolved}
+     */
     mongoService.getUserData = function (userId)
     {
         var success = function (db)
@@ -51,14 +105,20 @@ module.exports = function (config) {
             });
             return deferredResult.promise;
         };
-         
-          
-   
+
+
+
         return   mongoService.promisedConnect().then(success, console.error);
     };
-    
-    
-    
+
+    mongoService.createError = function (message, classVar)
+    {
+        var e = {};
+        e["message"] = message;
+        e["errorClass"] = classVar;
+        return e;
+    };
+
     return mongoService;
-    
+
 };

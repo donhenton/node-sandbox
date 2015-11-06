@@ -5,11 +5,10 @@ angular
 
 
 
-function folderService($log)
+function folderService($log, $http)
 {
     var data = {
-        "createEmptyFolderStructure": createEmptyFolderStructure,
-        "getFolders": getFolders,
+        "createEmptyFolderStructure": createEmptyFolderStructure,   
         "getFolder": getFolder,
         "removeFolder": removeFolder,
         "saveFolder": saveFolder,
@@ -21,26 +20,29 @@ function folderService($log)
     };
     var idCounter = 6;
     var folderData = [];
-
+    var localData = null;
 
     function init()
     {
 
 
-        return  $http.get(g_morgueUrlBase).
+        return  $http.get(g_morgueUrlBase + "getData").
                 success(function (data, status, headers, config) {
-                    console.log("dao init ")
+
 //                        console.log(data);
-                    localRestaurantCopy = data;
-                    setUpRestaurantList();
+                    localData = data;
+                    folderData = data.folderData;
+                    $log.debug("dao init " + angular.toJson(folderData))
+                    return folderData;
+
                 }).
                 error(function (data, status, headers, config) {
-
+                    $log.debug("error in init " + status);
                 });
 
 
     }
-
+     
 
     /*
      * add urls to the folder data
@@ -91,6 +93,9 @@ function folderService($log)
     ;
 
     /**
+     * 
+     *  {"name": "Sci-fi and space ships", "id": 1, "images": {"urls": urlData, "pins": pinData, "pinterestBoards": boardData}},
+     * 
      * create an empty folder structure
      * @returns {folderService.createEmptyFolderStructure.newItem}
      */
@@ -99,18 +104,16 @@ function folderService($log)
         idCounter = idCounter + 1;
         var newItem = {"name": "", "id": idCounter};
         newItem.images = {};
-        newItem.images.google = [];
+        newItem.images.urls = [];
         newItem.images.pinterestBoards = [];
-        newItem.images.flickr = [];
+        newItem.images.pins = [];
 
         return newItem;
 
 
     }
 
-    function getFolders() {
-        return folderData;
-    }
+    
     function saveFolder(folder) {
         folderData.push(folder)
     }
