@@ -1,18 +1,22 @@
 angular.module('app').controller('MainController', function (DialogService, FolderService, $log, $timeout) {
     var vm = this;
     vm.results = [];
-    vm.saveMessage = ""
-    FolderService.init()
-            .success(function (data, status, headers, config) {
+    vm.saveMessage = "";
 
-                vm.results = data.folderData;
-                FolderService.setFullData(data);
+    vm.results = FolderService.getFolders();
 
-            }).error(function (data, status, headers, config) {
-        $log.debug("error in init call " + status);
-    });
+    if (vm.results === null)
+    {
+        FolderService.init()
+                .success(function (data, status, headers, config) {
 
+                    vm.results = data.folderData;
+                    FolderService.setFullData(data);
 
+                }).error(function (data, status, headers, config) {
+            $log.debug("error in init call " + status);
+        });
+    }
 
     vm.openAddDialog = function ()
     {
@@ -32,13 +36,13 @@ angular.module('app').controller('MainController', function (DialogService, Fold
 
     vm.saveData = function ()
     {
-        
+
         FolderService.saveData(vm.results)
                 .success(function (data, status, headers, config) {
 
                     vm.saveMessage = "Changes Saved";
                     $timeout(function () {
-                         vm.saveMessage = "";
+                        vm.saveMessage = "";
                     }, 1500);
 
                 }).error(function (data, status, headers, config) {

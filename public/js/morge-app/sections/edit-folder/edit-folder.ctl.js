@@ -67,7 +67,7 @@ angular.module('app').controller('EditFolderController',
                 saveData.urls = fromDataDisplay(vm.generalEntryForm.urls.$viewValue);
                 saveData.pinterestBoards = fromDataDisplay(vm.generalEntryForm.pinterestBoards.$viewValue);
                 saveData.pinterestPins = fromDataDisplay(vm.generalEntryForm.pinterestPins.$viewValue);
-                saveData.name = vm.folder.name;
+                saveData.name = vm.generalEntryForm.name.$viewValue;
                 saveData.id = vm.folder.id;
                 var validationValue = checkTheForm(saveData);
                 if (validationValue.okay)

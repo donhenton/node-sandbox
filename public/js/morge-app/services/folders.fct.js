@@ -8,50 +8,60 @@ angular
 function folderService($log, $http)
 {
     var data = {
-        "createEmptyFolderStructure": createEmptyFolderStructure,   
+        "createEmptyFolderStructure": createEmptyFolderStructure,
         "getFolder": getFolder,
         "removeFolder": removeFolder,
         "saveFolder": saveFolder,
         "bulkAddToFolders": bulkAddToFolders,
         "completeEdit": completeEdit,
         "init": init,
+        "getFolders": getFolders,
         "setFullData": setFullData,
         "saveData": saveData
 
 
     };
-    var idCounter = 6;
-    var folderData = [];
+    var idCounter = -1;
+    var folderData = null;
     var localData = null;
-    
-    
+
+
     function saveData(changedFolders)
     {
-        return  $http.put(g_morgueUrlBase + "saveData",localData) ;
+        return  $http.put(g_morgueUrlBase + "saveData", localData);
     }
-    
+
     function setFullData(d)
     {
-        
+
         localData = d;
         folderData = d.folderData;
+        angular.forEach(folderData, function (value, key) {
+            // value.name = value.name + key;
+            if (idCounter < value.id)
+            {
+                idCounter = value.id;
+            }
+        });
     }
 
     function init()
     {
+        if (localData == null)
+        {
 
-
-         return  $http.get(g_morgueUrlBase + "getData") ;
-//                success(function (data, status, headers, config) {
-// 
-//                }).
-//                error(function (data, status, headers, config) {
-//                    $log.debug("error in init " + status);
-//                });
-
-
+            return  $http.get(g_morgueUrlBase + "getData");
+        }
+        else
+        {
+            //return a promise whose resolve is 
+        }
     }
-     
+
+    function getFolders()
+    {
+        return folderData;
+    }
 
     /*
      * add urls to the folder data
@@ -122,7 +132,7 @@ function folderService($log, $http)
 
     }
 
-    
+
     function saveFolder(folder) {
         folderData.push(folder)
     }
@@ -144,7 +154,7 @@ function folderService($log, $http)
         var value = null;
         for (var i = 0; i < folderData.length; i++)
         {
-            if (folderData[i].id == id)
+            if (folderData[i].id === id)
             {
                 // $log.debug("value "+folderData[i].id+" id "+id +" "+(folderData[i].id == id))
                 value = folderData[i];
