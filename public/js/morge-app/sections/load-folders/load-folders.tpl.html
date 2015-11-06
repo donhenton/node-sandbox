@@ -1,0 +1,72 @@
+<header class="app-header">
+
+    <nav class="navbar">
+        <ul class="nav nav-tabs">
+            <li>
+
+                <div class="navbar-header">
+
+                    <span class="navbar-brand">{{loadFolders.headerDescription}}</span>
+                </div>
+
+            </li>
+
+
+
+            <li class="nav pull-right">
+
+                <a href="#/">Return To Folder List</a> 
+
+            </li>
+
+        </ul>
+    </nav>
+
+
+
+
+
+</header>
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <span ng-if="loadFolders.feedbackMessage != null" class="message success">{{loadFolders.feedbackMessage}}</span>
+    </div>
+</div>
+<form name="loadFolders.boardUrlEntryForm" novalidate>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label">Folders To Add To:</label>
+                <select multiple="true" style="width:100%;height:250px" size="15" name="folderSelections" ng-model="loadFolders.newEntry.folderSelections" id="folderSelections" class="form-control" required>
+                    <option ng-repeat="folder in loadFolders.folders track by folder.id" value="{{folder.id}}">{{folder.name}}</option>
+                </select>
+                <div class="input-error" ng-messages="loadFolders.boardUrlEntryForm.folderSelections.$error">
+                    <div class="message" ng-message="required">This field is required</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label">Add Url One On Each Line</label><br>
+
+                <textarea url-checker="loadFolders.invalidUrl" style="width:100%;height:250px" ng-model="loadFolders.newEntry.urlEntries"  name="urlEntries" id="urlEntries" required>
+                
+                </textarea>
+
+                <div class="input-error" ng-messages="loadFolders.boardUrlEntryForm.urlEntries.$error">
+                    <div class="message" ng-message="required">This field is required</div>
+                    <div class="message" ng-message=" urlChecker">Invalid url {{loadFolders.invalidUrl.url}}</div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button ng-disabled="loadFolders.boardUrlEntryForm.$invalid"  ng-click="loadFolders.saveUrls()" class="btn btn-primary">Submit</button>
+    </div>
+</form>

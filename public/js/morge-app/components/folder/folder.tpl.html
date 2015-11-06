@@ -1,0 +1,24 @@
+<div class="folder">
+    
+    <a href="#/folder-contents/{{folder.id}}">
+        <span class="folderTitle">{{folder.name}}</span></a><br>
+    
+    
+      <a href="#/folder-contents/{{folder.id}}">
+    <i class="spacer glyphicon glyphicon-folder-close"></i>
+    </a>
+      <a href="#/edit-folder/{{folder.id}}">
+        
+        <i  class="spacer glyphicon glyphicon-edit"></i></a>
+        
+        
+        
+    <a href="#" ng-click="$event.preventDefault(); openConfirmDialog(folder )">    
+    <i  class="spacer glyphicon glyphicon-remove-circle"></i></a>
+    
+     <a href="#/folder-contents/{{folder.id}}">  
+    <i  class="spacer glyphicon glyphicon-list-alt"></i></a>
+    
+</div>
+
+ 
