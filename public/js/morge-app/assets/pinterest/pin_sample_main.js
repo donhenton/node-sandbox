@@ -1341,6 +1341,7 @@
               $.f.getPinsIn('pin', '', {'pin_ids': pin});
             }
             $.v.countPin = $.v.countPin + 1;
+             
           },
           embedUser: function (el) {
             $.f.debug('build embedded profile');
@@ -1358,7 +1359,9 @@
               $.f.getPinsIn('board', user + '/' + board + '/pins/');
             }
             $.v.countBoard = $.v.countBoard + 1;
+            
           }
+           
         },
         getPinsIn: function (endpoint, path, params) {
           if (!params) {
@@ -1415,6 +1418,10 @@
               }
             }
           }
+          
+          //dhh insert here
+          messagePump.raiseEvent("build1","PINTEREST_DONE");
+          
         },
         config: function () {
           // find and apply configuration requests passed as data attributes on SCRIPT tag
@@ -1663,7 +1670,7 @@
 
           $.f.presentation();
           $.f.behavior();
-
+          
         }
       };
     }())
