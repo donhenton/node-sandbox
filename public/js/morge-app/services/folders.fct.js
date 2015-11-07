@@ -160,12 +160,12 @@ function folderService($log, $http)
             }
         });
     }
-    function getFolder(id)
+    function getFolder(idAsString)
     {
         var value = null;
         for (var i = 0; i < folderData.length; i++)
         {
-            if (folderData[i].id === id)
+            if (folderData[i].id === parseInt(idAsString))
             {
                 // $log.debug("value "+folderData[i].id+" id "+id +" "+(folderData[i].id == id))
                 value = folderData[i];
