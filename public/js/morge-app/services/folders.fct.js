@@ -28,6 +28,16 @@ function folderService($log, $http)
 
     function saveData(changedFolders)
     {
+        angular.forEach(folderData, function (folder, key) {
+            //urls,pins,pinterestBoards
+              cleanBlanks(folder.images.urls,"urls");
+              cleanBlanks(folder.images.pins,"pins");
+              cleanBlanks(folder.images.pinterestBoards,"boards");
+            
+        });
+        
+        
+        
         return  $http.put(g_morgueUrlBase + "saveData", localData);
     }
 
@@ -38,9 +48,10 @@ function folderService($log, $http)
         folderData = d.folderData;
         angular.forEach(folderData, function (value, key) {
             // value.name = value.name + key;
-            if (idCounter < value.id)
+            var idAsInt = parseInt(value.id)
+            if (idCounter < idAsInt)
             {
-                idCounter = value.id;
+                idCounter = idAsInt;
             }
         });
     }
@@ -149,12 +160,12 @@ function folderService($log, $http)
             }
         });
     }
-    function getFolder(id)
+    function getFolder(idAsString)
     {
         var value = null;
         for (var i = 0; i < folderData.length; i++)
         {
-            if (folderData[i].id === id)
+            if (folderData[i].id === parseInt(idAsString))
             {
                 // $log.debug("value "+folderData[i].id+" id "+id +" "+(folderData[i].id == id))
                 value = folderData[i];
@@ -164,7 +175,19 @@ function folderService($log, $http)
         return value;
     }
 
+    function cleanBlanks(arrayValue, type)
+    {
+        angular.forEach(arrayValue, function (value, key)
+        {
+            if (value.trim() === "")
+            {
+                $log.debug(type+" hit blank at index is "+key+" old len "+arrayValue.length)
+                arrayValue.splice(key, 1);
+                
+            } 
+        });
 
+    }
 
     /**
      * data 

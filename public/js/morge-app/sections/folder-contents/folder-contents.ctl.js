@@ -1,18 +1,41 @@
 angular.module('app').controller('FolderContentsController',
-        function (DialogService, FolderService, $log, $scope, folderItem) {
+        function (DialogService, FolderService,
+                MessagePumpService, $log, $scope, folderItem) {
             var vm = this;
             vm.folder = folderItem.folder;
             vm.slides = [];
             vm.imageCards = [];
             vm.pinCards = [];
-            
-            ///pinterest pins ////////////////////////////////////////////////
-            
+
+            ///pinterest pins  
+
             vm.maxPins = 4;
             vm.pinBuffer = new Array(vm.maxPins);
             vm.currentPinPage = 1;
             vm.totalPins = vm.folder.images.pins.length;
-            
+            vm.pinCounter = 0;
+            //apparently this is only called once/////////////////
+            //listening to events from the pinterest code see pin_sample_main
+            MessagePumpService.register(respondToPinterest,
+                    "PINTEREST_DONE", "editFolder");
+
+                    
+            //not used at this time        
+            function respondToPinterest(ev)
+            {
+
+                vm.pinCounter = vm.pinCounter + 1;
+               // $log.debug("got pinterest done " 
+               //         + ev+" total "+vm.totalPins+" ct "+vm.pinCounter);
+                if (vm.pinCounter === vm.totalPins)
+                {
+                    vm.pinCounter = 0;
+                   // $log.debug("final hit " + vm.totalPins)
+                }
+
+
+            }
+
             vm.pinPageChanged = function ()
             {
 
@@ -58,7 +81,7 @@ angular.module('app').controller('FolderContentsController',
                 {
                     vm.pinBuffer.splice(nullIdx, delCount);
                 }
-                vm.pinCards  = [];
+                vm.pinCards = [];
                 for (var i = 0; i < vm.pinBuffer.length; i++)
                 {
                     var card = {};
@@ -73,14 +96,14 @@ angular.module('app').controller('FolderContentsController',
 
             }
             vm.pinPageChanged();
-            
+
 
             /////////////////image urls/////////////////////////////////////ß
             vm.maxImages = 4;
             vm.imageBuffer = new Array(vm.maxImages);
             vm.currentImagePage = 1;
             vm.totalImages = vm.folder.images.urls.length;
- 
+
             vm.imagePageChanged = function ()
             {
 
@@ -126,7 +149,7 @@ angular.module('app').controller('FolderContentsController',
                 {
                     vm.imageBuffer.splice(nullIdx, delCount);
                 }
-                vm.imageCards  = [];
+                vm.imageCards = [];
                 for (var i = 0; i < vm.imageBuffer.length; i++)
                 {
                     var card = {};
@@ -142,9 +165,9 @@ angular.module('app').controller('FolderContentsController',
             }
             vm.imagePageChanged();
             //////////////////image urls///////////////////////////////////
-            
-            
-            
+
+
+
             for (var i = 0; i < vm.folder.images.pinterestBoards.length; i++)
             {
                 var slide = {};

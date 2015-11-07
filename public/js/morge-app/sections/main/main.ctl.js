@@ -1,4 +1,5 @@
-angular.module('app').controller('MainController', function (DialogService, FolderService, $log, $timeout) {
+angular.module('app').controller('MainController', function (DialogService,
+        FolderService, $scope, $log, $timeout) {
     var vm = this;
     vm.results = [];
     vm.saveMessage = "";
@@ -18,6 +19,19 @@ angular.module('app').controller('MainController', function (DialogService, Fold
         });
     }
 
+
+
+    $scope.$on('folderDeleted', function (ev,folderName) {
+        vm.saveMessage = "Folder '"+ folderName+"' Deleted";
+        $timeout(function () {
+            vm.saveMessage = "";
+        }, 1500);
+
+    });
+
+
+
+
     vm.openAddDialog = function ()
     {
         var newFolder = FolderService.createEmptyFolderStructure();
@@ -29,6 +43,7 @@ angular.module('app').controller('MainController', function (DialogService, Fold
 
             newFolder.name = result;
             FolderService.saveFolder(newFolder);
+            vm.saveData();
         });
 
 

@@ -15,13 +15,15 @@ angular.module('app').directive('folder', function (DialogService, FolderService
             $scope.openConfirmDialog = function (selectedFolderItem)
             {
                 var confirmResult = DialogService.showConfirmDialog("Delete '"
-                        + selectedFolderItem.name + "' ?")
+                        + selectedFolderItem.name + "' ? All data will be lost.")
 
                 confirmResult.then(function (result) {
                     //$log.debug("result is "+result)
                     if (result == 'confirm')
                     {
                         FolderService.removeFolder(selectedFolderItem);
+                        FolderService.saveData();
+                        $scope.$emit('folderDeleted',selectedFolderItem.name);
                     }
                 });
 
