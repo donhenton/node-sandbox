@@ -28,6 +28,16 @@ function folderService($log, $http)
 
     function saveData(changedFolders)
     {
+        angular.forEach(folderData, function (folder, key) {
+            //urls,pins,pinterestBoards
+              cleanBlanks(folder.images.urls,"urls");
+              cleanBlanks(folder.images.pins,"pins");
+              cleanBlanks(folder.images.pinterestBoards,"boards");
+            
+        });
+        
+        
+        
         return  $http.put(g_morgueUrlBase + "saveData", localData);
     }
 
@@ -164,7 +174,19 @@ function folderService($log, $http)
         return value;
     }
 
+    function cleanBlanks(arrayValue, type)
+    {
+        angular.forEach(arrayValue, function (value, key)
+        {
+            if (value.trim() === "")
+            {
+                $log.debug(type+" hit blank at index is "+key+" old len "+arrayValue.length)
+                arrayValue.splice(key, 1);
+                
+            } 
+        });
 
+    }
 
     /**
      * data 
