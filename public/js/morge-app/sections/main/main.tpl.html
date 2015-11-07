@@ -2,20 +2,14 @@
 
     <nav class="navbar">
         <ul class="nav nav-tabs">
-            <li>
+            <li  class="nav">
 
                 <a  ng-click="$event.preventDefault();
                             main.openAddDialog()"    href="#/">Add New Folder</a>
 
             </li>
 
-
-            <li class="nav pull-right">
-
-                <a  ng-click="$event.preventDefault();
-                            main.saveData()"    href="#/">Save Changes</a>
-
-            </li>
+ 
 
         </ul>
     </nav>
@@ -25,7 +19,7 @@
 <div class="container"> 
    
     <div class="row" ng-if="main.results.length != 0">
-        <h3>Morg Folders</h3>
+        <h3>Morgue Folders</h3>
 
         <div id="folderContainer" class="row col-sm-12 folderContainer">
 

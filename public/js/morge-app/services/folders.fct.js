@@ -48,9 +48,10 @@ function folderService($log, $http)
         folderData = d.folderData;
         angular.forEach(folderData, function (value, key) {
             // value.name = value.name + key;
-            if (idCounter < value.id)
+            var idAsInt = parseInt(value.id)
+            if (idCounter < idAsInt)
             {
-                idCounter = value.id;
+                idCounter = idAsInt;
             }
         });
     }

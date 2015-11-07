@@ -10,6 +10,18 @@ angular.module('app').controller('EditFolderController',
             vm.feedbackMessage = null;
 
 
+
+            vm.saveData = function ()
+            {
+
+
+
+
+            }
+
+
+
+
             /**
              * take an array of urls and return a string
              * with a carriage return at the end of an array item
@@ -73,7 +85,21 @@ angular.module('app').controller('EditFolderController',
                 if (validationValue.okay)
                 {
                     FolderService.completeEdit(saveData);
-                    vm.feedbackMessage = "Changes saved!";
+
+                    FolderService.saveData(vm.results)
+                            .success(function (data, status, headers, config) {
+
+                                vm.feedbackMessage = "Changes Saved";
+                                $timeout(function () {
+                                    vm.feedbackMessage = "";
+                                }, 1500);
+
+                            }).error(function (data, status, headers, config) {
+                        vm.feedbackMessage = "error in persist call " + status + " " +
+                                angular.toJson(data)
+
+                    });
+
                 }
                 else
                 {
