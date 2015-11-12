@@ -4,6 +4,14 @@
 // Define the routes module' method
 module.exports = function (app, morgueService) {
 
+
+    app.use(function (req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+
+
     // Mount the 'index' controller's 'render' method
 
     var morgueFilePageRender = function (req, res)
@@ -12,8 +20,8 @@ module.exports = function (app, morgueService) {
             title: 'Morgue File Application'
         });
     }
-    
-     var reportError = function (res, errorString)
+
+    var reportError = function (res, errorString)
     {
         res.status(500);
         res.json(morgueService.createError(errorString, "ErrorClass"));
@@ -67,7 +75,7 @@ module.exports = function (app, morgueService) {
     });
 
 
- 
+
     /**
      * route for the page
      */
