@@ -26,9 +26,7 @@ function utilService()
     function isUrlOkay(url)
     {
         var regex = new RegExp("(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})");
-
-
-        return url.match(regex);
+        return !(url.match(regex) === null)
 
     }
 
