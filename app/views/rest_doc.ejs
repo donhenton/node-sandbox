@@ -1,0 +1,54 @@
+ <% include  partials/header %>
+	 
+         
+       <script>
+       $(document).ready(function() {
+
+            var windowBase = "http://"+window.location.host;
+            g_restaurantUrlBase = windowBase + "/restaurant/"
+
+            $('#restaurantBase').text(g_restaurantUrlBase);
+                var aref = $('<a></a>');
+                var textUrl = g_restaurantUrlBase+'54ac29c3da0620fefbd04c26';
+                aref.attr('href',textUrl);
+                aref.attr("target","_new");
+                aref.text(textUrl);
+                $('#sampleRestaurantUrl').append(aref);
+
+            
+                
+                var mref = $('<a></a>');
+                textUrl = windowBase + "/morguefile/getData";
+                mref.attr('href',textUrl);
+                mref.attr("target","_new");
+                mref.text(textUrl);
+                $('#morgueFileUrl').append(mref);
+
+       });
+    
+        </script>
+	 
+	<h3><%= title %></h3>
+        
+
+        <div class="well">
+        <h5>Restaurant Service</h5>
+        <blockquote>
+        <p>The base url for the restaurant service is <b><span id="restaurantBase"></span></b></p>
+        <p>A sample restaurant would be  <span id="sampleRestaurantUrl"></span></p>
+        </blockquote>
+
+        <h5>MorgueFile Service</h5>
+        
+        <blockquote>
+        <p>The Morgue File GET  would be  <span id="morgueFileUrl"></span></p>
+        </blockquote>
+        </div>
+
+ 
+        
+
+
+
+        
+ <% include  partials/footer %>

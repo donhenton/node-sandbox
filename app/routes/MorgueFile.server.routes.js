@@ -20,6 +20,21 @@ module.exports = function (app, morgueService) {
             title: 'Morgue File Application'
         });
     }
+    
+    /**
+     * route for the page
+     */
+    app.get('/MorgueFile.doc', morgueFilePageRender);
+    // app.get('/chatPage.doc', chatPageRender);
+    
+    app.get('/rest_doc.doc', function(req,res)
+    {
+         res.render('rest_doc', {
+            title: 'Rest Services'
+        });
+    });
+    
+    
 
     var reportError = function (res, errorString)
     {
@@ -76,11 +91,7 @@ module.exports = function (app, morgueService) {
 
 
 
-    /**
-     * route for the page
-     */
-    app.get('/MorgueFile.doc', morgueFilePageRender);
-    // app.get('/chatPage.doc', chatPageRender);
+    
 
 
 };
