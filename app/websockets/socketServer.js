@@ -6,9 +6,7 @@
 
 
 module.exports = function (io, restaurantDaoService, json3) {
-   // not used but this is where calls to websocket modules go
-   // 
-   // require('./chat.server.js')(io);   
+   
     require("./angular.server.js")(io,restaurantDaoService,json3);
 }
 

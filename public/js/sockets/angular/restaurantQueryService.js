@@ -47,7 +47,7 @@
         var serviceFunctions = {};
 
         /**
-         * this will search for a restaurant which have the string
+         * this will search for restaurants which have the string
          * in their name
          * 
          * @param {type} stringToSearchFor
