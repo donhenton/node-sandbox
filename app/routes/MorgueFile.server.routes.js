@@ -34,7 +34,12 @@ module.exports = function (app, morgueService) {
         });
     });
     
-    
+    app.get('/other_apps.doc', function(req,res)
+    {
+         res.render('other_apps', {
+            title: 'Other Demonstrations'
+        });
+    });
 
     var reportError = function (res, errorString)
     {
