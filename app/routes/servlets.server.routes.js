@@ -10,7 +10,13 @@ module.exports = function (app) {
         });
 
     };
-    
+    var middleWareRender = function (req, res) {
+
+        res.render('servlets/middleware', {
+            title: 'MiddleWare Demonstation'
+        });
+
+    };
     var sendFileRender = function (req, res) {
         //you are running in app/routes
         var destFile = path.join(__dirname, '../../public/static', 'layout.html')
@@ -32,5 +38,6 @@ module.exports = function (app) {
         app.get('/basicServletDemo.doc', basicServletDemoRender);
         app.get('/sendFile.doc', sendFileRender);
         app.get('/sendServletDemo.doc', sendRender);
+        app.get('/middleWareDemo.doc', middleWareRender);
 
 }
