@@ -49,7 +49,15 @@ module.exports = function () {
         })
     }));
 
+//    app.dynamicHelpers({
+//        mySession: function(req,res){
+//        return req.session;}
+//    });
 
+    /* setup the MOTD filter */
+    
+    var motdFilter = require('../app/filters/motd');
+    app.use(motdFilter);
 
     // Set the application view engine and 'views' folder
     app.set('views', './app/views');
@@ -76,6 +84,8 @@ module.exports = function () {
 
     // Configure static file serving
     app.use(express.static('./public'));
+    
+    
 
     // Return the Express application instance
     return app;

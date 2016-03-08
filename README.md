@@ -1,4 +1,4 @@
-<h3>Node Demonstration Application</h3>
+# Node Demonstration Application 
 
 This application demonstrates various aspects of NodeJS applications. 
 The server uses <a href="http://www.embeddedjs.com/">EJS</a> for templating.
@@ -10,15 +10,17 @@ Websockets with socket.io.
 
 Also included are two Angular JS applications which use Mongodb for persistence
 
-
-
 This project is the source code for a node demonstration application. The
 application is housed at  
 <a href="http://donhenton-node.herokuapp.com/">http://donhenton-node.herokuapp.com/</a> .
 
 
-Enabling CORS
+### Enabling CORS
 
 http://enable-cors.org/server_expressjs.html
 http://jonathanmh.com/how-to-enable-cors-in-express-js-node-js/
 
+
+### Sessions and Middleware
+
+> https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions/
