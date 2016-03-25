@@ -24,3 +24,25 @@ http://jonathanmh.com/how-to-enable-cors-in-express-js-node-js/
 ### Sessions and Middleware
 
 > https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions/
+
+
+### Running locally
+brew install mongodb
+
+to run
+
+1. create a mongod.conf file
+
+```
+#mongod.conf
+
+#logs
+logpath=/Users/dhenton/mongo_data/logs/mongolog.log
+logappend=true
+
+
+#path to database
+dbpath=/Users/dhenton/mongo_data/db
+```
+
+run mongod -f /Users/dhenton/mongo_data/mongod.conf

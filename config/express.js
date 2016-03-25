@@ -71,6 +71,7 @@ module.exports = function () {
     require('../app/routes/cookies.server.routes.js')(app);
     require('../app/routes/servlets.server.routes.js')(app);
     require('../app/routes/forms.server.routes.js')(app);
+    require('../app/routes/error.handling.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
     require('../app/routes/MorgueFile.server.routes.js')(app,morgueService);

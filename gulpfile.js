@@ -64,7 +64,6 @@ gulp.task('backend', function () {
                         {
                             tasks.push('sass');
                         }
-
                         //
 
                     });
@@ -94,7 +93,7 @@ var watchItems = ['./views/**/*.ejs', './public/**/*.js', './public/**/*.css'];
  * start server
  */
 gulp.task('server-start', function (cb) {
-    exec('node ./bin/www.js', function (err, stdout, stderr) {
+    exec('node ./server.js', function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
         cb(err);
