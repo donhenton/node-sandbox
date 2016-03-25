@@ -19,6 +19,16 @@ module.exports = function (app) {
         });
 
     };
+    
+    var chainedResponseRender = function (req, res) {
+
+        res.render('errorhandling/chainedResponse', {
+            title: 'Chained Response'
+        });
+
+    };
+    
+    
 //    var sendFileRender = function (req, res) {
 //        //you are running in app/routes
 //        var destFile = path.join(__dirname, '../../public/static', 'layout.html')
@@ -39,6 +49,6 @@ module.exports = function (app) {
     ///////////////////////////////////////////////////////////////////////
         app.get('/errorHandling.doc', errorHandlerMainRender);
         app.get('/chainedRequestMain.doc', chainedRequestMainRender);
-       
+        app.post('/chainedResponse.doc', chainedResponseRender);
 
 }

@@ -113,8 +113,9 @@ https://github.com/btford/angular-socket-io
 
 ========= text index setup in mongodb ===============
  // create text searchable index can be search by words;
- 
- 
+ the db is restaurant_collection
+the collection is restaurants
+ this command needs to be run if the db is brought up from scratch
  db.restaurants.ensureIndex({ name:"text"});
  
  
