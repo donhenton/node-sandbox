@@ -4,10 +4,18 @@ module.exports = function (app) {
     //rendering functions must define these first ////////////////////////////
 
      
-    var errorHandlerRender = function (req, res) {
+    var errorHandlerMainRender = function (req, res) {
 
         res.render('errorhandling/main', {
             title: 'Error Handling Demonstation'
+        });
+
+    };
+    
+    var chainedRequestMainRender = function (req, res) {
+
+        res.render('errorhandling/chainedRequestMain', {
+            title: 'Chained Handlers'
         });
 
     };
@@ -29,7 +37,8 @@ module.exports = function (app) {
 ///////////////////////////////////////////////////////////////////////
     // routes
     ///////////////////////////////////////////////////////////////////////
-        app.get('/errorHandling.doc', errorHandlerRender);
+        app.get('/errorHandling.doc', errorHandlerMainRender);
+        app.get('/chainedRequestMain.doc', chainedRequestMainRender);
        
 
 }

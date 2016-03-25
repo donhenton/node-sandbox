@@ -77,6 +77,8 @@ module.exports = function () {
     require('../app/routes/MorgueFile.server.routes.js')(app,morgueService);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
 
+
+
     /*
      *  not used at this time
      require('../app/routes/tmpl.server.routes.js')(app,fs,vm);
