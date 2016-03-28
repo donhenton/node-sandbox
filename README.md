@@ -24,7 +24,7 @@ http://jonathanmh.com/how-to-enable-cors-in-express-js-node-js/
 ### Sessions and Middleware
 
 > https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions/
-
+> http://stackoverflow.com/questions/13133071/express-next-function-what-is-it-really-for
 
 ### Running locally
 brew install mongodb

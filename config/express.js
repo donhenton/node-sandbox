@@ -11,6 +11,7 @@ var config = require('./config'),
         bodyParser = require('body-parser'),
         methodOverride = require('method-override'),
         session = require('express-session');
+        
 var fs = require('fs');
 var vm = require('vm');
 var cookieParser = require('cookie-parser');
@@ -58,6 +59,10 @@ module.exports = function () {
     
     var motdFilter = require('../app/filters/motd');
     app.use(motdFilter);
+    
+    
+    
+    
 
     // Set the application view engine and 'views' folder
     app.set('views', './app/views');
@@ -88,7 +93,11 @@ module.exports = function () {
     // Configure static file serving
     app.use(express.static('./public'));
     
-    
+    /* error handlers must be located at end */
+    var clientErrorProcessor =  require('../app/filters/clientErrorProcessor');
+    var generalErrorProcessor =  require('../app/filters/generalErrorProcessor');
+    app.use(clientErrorProcessor);
+    app.use(generalErrorProcessor);
 
     // Return the Express application instance
     return app;
