@@ -1,0 +1,54 @@
+<% include  ../partials/header %>
+
+
+	<h3><%= title %></h3>  
+
+<div class="row">
+ 
+
+<p>The form will fail if the string 'bozo' is found</p>
+
+
+
+
+</div>
+
+
+ 
+ 
+
+ 
+            <div class="row">
+                <div class=" col-sm-offset-1 col-sm-5">
+
+                    
+                    <div class="controls">
+
+                        <form class="form-horizontal" method="POST"  action="/chainedResponse.doc" name="inputForm"  novalidate>
+
+                             
+                            <div class="form-group">
+                           
+                            <table class="table table-bordered">
+                            <tr><td>
+                            <input type="submit"  class="btn btn-small btn-primary"> 
+                            </td><td>
+                            <input required  id="inputString" name="inputString" 
+                                   class="col-sm-12" placeholder="Input"  
+                                    type="text">
+                            </td></tr>
+                           
+                            </table>
+                             </div>
+                        </form>
+                    </div>
+                </div>
+                
+               
+            </div>    
+
+
+
+ <% include  ../partials/footer %>
+ 
+ 

@@ -19,7 +19,7 @@ global._publicDir = publicDir;
  * the chrome livereload plugin needs to be installed
  * 
  */
-var pageURL = 'http://localhost:3000';
+var pageURL = 'http://localhost:3000/errorHandling.doc';
 
 /**
  * 
@@ -64,7 +64,6 @@ gulp.task('backend', function () {
                         {
                             tasks.push('sass');
                         }
-
                         //
 
                     });
@@ -76,7 +75,7 @@ gulp.task('backend', function () {
             }).on('restart', function ()
     {
         gutil.log('restarted!');
-        livereload.reload(pageURL);
+         livereload.reload(pageURL);
          
     });
 });
@@ -94,7 +93,7 @@ var watchItems = ['./views/**/*.ejs', './public/**/*.js', './public/**/*.css'];
  * start server
  */
 gulp.task('server-start', function (cb) {
-    exec('node ./bin/www.js', function (err, stdout, stderr) {
+    exec('node ./server.js', function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
         cb(err);

@@ -9,7 +9,12 @@ var logger = log4js.getLogger();
 
 module.exports = function (req, res, next) {
 
-    var choices = ['Get a job', 'Have a Nice Day', 'Made It Ma...Top of the World!', 'Carpe Diem', 'Go With The Flow'];
+    var choices = ['Get a job', 'Have a Nice Day',
+        'All things considered, I\'d rather be in Philidelphia than here.',
+        'Never Steal Anything Small',
+        'In the land of the blind, the one eyed man is unemployed',
+        'Things are the way they are because they got that way',
+        'Made It Ma...Top of the World!', 'Carpe Diem', 'Go With The Flow'];
     if (req.session)
     {
 

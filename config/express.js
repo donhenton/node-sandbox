@@ -11,6 +11,7 @@ var config = require('./config'),
         bodyParser = require('body-parser'),
         methodOverride = require('method-override'),
         session = require('express-session');
+        
 var fs = require('fs');
 var vm = require('vm');
 var cookieParser = require('cookie-parser');
@@ -58,6 +59,10 @@ module.exports = function () {
     
     var motdFilter = require('../app/filters/motd');
     app.use(motdFilter);
+    
+    
+    
+    
 
     // Set the application view engine and 'views' folder
     app.set('views', './app/views');
@@ -71,10 +76,13 @@ module.exports = function () {
     require('../app/routes/cookies.server.routes.js')(app);
     require('../app/routes/servlets.server.routes.js')(app);
     require('../app/routes/forms.server.routes.js')(app);
+    require('../app/routes/error.handling.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
     require('../app/routes/MorgueFile.server.routes.js')(app,morgueService);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
+
+    
 
     /*
      *  not used at this time
@@ -85,8 +93,17 @@ module.exports = function () {
     // Configure static file serving
     app.use(express.static('./public'));
     
-    
+    /* error handlers must be located at end */
+    var clientErrorProcessor =  require('../app/filters/clientErrorProcessor');
+    var generalErrorProcessor =  require('../app/filters/generalErrorProcessor');
+    app.use(clientErrorProcessor);
+    app.use(generalErrorProcessor);
 
     // Return the Express application instance
+    
+    //always place this as the last this is the 404 handler
+     require('../app/routes/not.found.routes.js')(app);
+    
+    
     return app;
 };

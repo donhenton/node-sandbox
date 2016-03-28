@@ -8,3 +8,5 @@ module.exports = {
          db: {url: 'mongodb://localhost/restaurant_collection'},
          morgueDb: {url: 'mongodb://localhost/morguefile'}
 };
+
+ 
