@@ -82,7 +82,7 @@ module.exports = function () {
     require('../app/routes/MorgueFile.server.routes.js')(app,morgueService);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
 
-
+    
 
     /*
      *  not used at this time
@@ -100,5 +100,10 @@ module.exports = function () {
     app.use(generalErrorProcessor);
 
     // Return the Express application instance
+    
+    //always place this as the last this is the 404 handler
+     require('../app/routes/not.found.routes.js')(app);
+    
+    
     return app;
 };
