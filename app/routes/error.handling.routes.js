@@ -3,7 +3,15 @@ module.exports = function (app) {
     var path = require('path');
     //rendering functions must define these first ////////////////////////////
 
+    var promisesDemoRender = function (req, res) {
 
+        res.render('errorhandling/promisesDemo', {
+            title: 'Promise Demonstation'
+        });
+
+    };
+    
+    
     var errorHandlerMainRender = function (req, res) {
 
         res.render('errorhandling/main', {
@@ -90,6 +98,6 @@ module.exports = function (app) {
     ///////////////////////////////////////////////////////////////////////
     app.get('/errorHandling.doc', errorHandlerMainRender);
     app.get('/chainedRequestMain.doc', chainedRequestMainRender);
-   
+    app.get('/promisesDemo.doc', promisesDemoRender);
 
 }
