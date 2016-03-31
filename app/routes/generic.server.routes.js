@@ -32,10 +32,17 @@ module.exports = function (app) {
         });
     }
     
+    var loggingRender = function(req,res)
+    {
+        res.render('logging', {
+            title: 'Logging Notes'
+        });
+    }
     ///////////////////////////////////////////////////////////////////////
     // routes
     ///////////////////////////////////////////////////////////////////////
         app.get('/', indexRender);
         app.get('/windows.doc', windowsRender);
         app.get('/newPage.doc', newPageRender);
+        app.get('/logging.doc', loggingRender);
 };

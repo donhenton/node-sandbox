@@ -75,7 +75,8 @@ gulp.task('backend', function () {
             }).on('restart', function ()
     {
         gutil.log('restarted!');
-         livereload.reload(pageURL);
+        livereload.reload(pageURL);
+        livereload.reload(pageURL);
          
     });
 });
