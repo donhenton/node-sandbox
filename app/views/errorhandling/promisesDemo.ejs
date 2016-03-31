@@ -8,7 +8,9 @@
 <h4>Points To Consider</h4>
 <ul>
 <li>See this <a href="http://blog.taylormcgann.com/2014/08/21/catch-errors-javascript-promise-chains/">blog post</a></li>
-<li>Error routines should throw error to send</li>
+<li>When using resolve/reject reject calls should be in the form reject(new Error(message))
+This will be trapped in the catch clause below</li>
+<li>Runtime errors will also be caught by the catch clause</li>
 <li>See promiseDemo.js</li>
 <li>A catch clause should be at the end of the chain to catch errors at the last</li>
 
@@ -25,12 +27,12 @@
 <button class="btn btn-primary" onclick="promiseDemo.showSuccess()">OK Path</button>
 </div>
 
-<div class="col-sm-2">
-<button class="btn btn-primary" onclick="promiseDemo.showErrorInStart()">Error At Start</button>
+<div class="col-sm-3">
+<button class="btn btn-primary" onclick="promiseDemo.showErrorInStart()">Issue Reject With Error</button>
 </div>
 
 <div class="col-sm-2">
-<button class="btn btn-primary" onclick="promiseDemo.showErrorInResolve()">Error At End</button>
+<button class="btn btn-primary" onclick="promiseDemo.doRuntimeError()">Throw Error At Runtime</button>
 </div>
 </div>
 

@@ -1,7 +1,14 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+  This code demonstrates error handling in promises.
+  The idea is to issue calls to reject with errors as parameters (issueReject)
+  or runtimeErrors (throwErrorAtRuntime) which are erros. 
+ 
+  the catch placed at the end of the chain will catch both of these
+  if this code were on the server side in node, the catch clause 
+  would issue a 'next(err)' call to forward to middleware error handlers
+
+
+
  */
 // see http://blog.taylormcgann.com/2014/08/21/catch-errors-javascript-promise-chains/
 var promiseDemo = {};
@@ -9,8 +16,8 @@ promiseDemo.report = function (info)
 {
     $('#resultArea').append("<li>" + info + "</li>");
 }
-promiseDemo.throwError = false;
-promiseDemo.throwErrorInResolve = false;
+promiseDemo.issueReject = false;
+promiseDemo.throwErrorAtRuntime = false;
 
 /**
  * this is Step 3
@@ -21,7 +28,7 @@ promiseDemo.fetchData = function () {
 
     return new Promise(function (resolve, reject)
     {
-        if (promiseDemo.throwError)
+        if (promiseDemo.issueReject)
         {
             promiseDemo.report('fetchData sending an error');
             reject(new Error("get a job"))
@@ -55,13 +62,13 @@ promiseDemo.handleData = function () {
 
 /**
  * Initialized here Step 1 useData --> handleData --> fetchData
- * @param {type} throwError
+ *  
  * @returns {undefined}
  */
 promiseDemo.showErrorInStart = function () {
     $('#resultArea').empty();
-    promiseDemo.throwErrorInResolve = false;
-    promiseDemo.throwError = true;
+    promiseDemo.throwErrorAtRuntime = false;
+    promiseDemo.issueReject = true;
     promiseDemo.useData();
 
 
@@ -76,7 +83,7 @@ promiseDemo.useData = function () {
                 promiseDemo.report('in useData handleData returned ' + result);
                 console.log('using ' + result);
 
-                if (promiseDemo.throwErrorInResolve)
+                if (promiseDemo.throwErrorAtRuntime)
                 {
                     // this should throw an error
                     console.report('using ' + result);
@@ -106,11 +113,11 @@ promiseDemo.useData = function () {
 }
 
 
-promiseDemo.showErrorInResolve = function ()
+promiseDemo.doRuntimeError = function ()
 {
     $('#resultArea').empty();
-    promiseDemo.throwErrorInResolve = true;
-    promiseDemo.throwError = false;
+    promiseDemo.throwErrorAtRuntime = true;
+    promiseDemo.issueReject = false;
     promiseDemo.useData();
 }
 
@@ -118,7 +125,7 @@ promiseDemo.showErrorInResolve = function ()
 promiseDemo.showSuccess = function ()
 {
     $('#resultArea').empty();
-    promiseDemo.throwErrorInResolve = false;
-    promiseDemo.throwError = false;
+    promiseDemo.throwErrorAtRuntime = false;
+    promiseDemo.issueReject = false;
     promiseDemo.useData();
 }
