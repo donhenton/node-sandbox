@@ -19,7 +19,7 @@ global._publicDir = publicDir;
  * the chrome livereload plugin needs to be installed
  * 
  */
-var pageURL = 'http://localhost:3000/errorHandling.doc';
+var pageURL = 'http://localhost:3000/promisesDemo.doc';
 
 /**
  * 
@@ -75,7 +75,8 @@ gulp.task('backend', function () {
             }).on('restart', function ()
     {
         gutil.log('restarted!');
-         livereload.reload(pageURL);
+        livereload.reload(pageURL);
+        livereload.reload(pageURL);
          
     });
 });

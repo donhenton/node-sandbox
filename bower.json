@@ -1,0 +1,29 @@
+{
+  "name": "node-sandbox",
+  "description": "A place to play with node",
+  "main": "",
+  "authors": [
+    "(Don Henton <donhenton@gmail.com>)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "express",
+    "learning"
+  ],
+  "homepage": "https://github.com/donhenton/node-sandbox",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bluebird": "^3.3.4"
+  }
+}
