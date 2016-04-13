@@ -12,7 +12,8 @@ module.exports = function (err, req, res, next) {
     var stack = "";
     if (err.stack)
     {
-        stack = res.json(err.stack);
+        stack = JSON.stringify(err.stack);
+        m = "stacktrace error";
     }
     res.render('errorhandling/errorPage', {
         title: 'Error Page',
