@@ -12,6 +12,19 @@ module.exports = function (app, daoService) {
 
 
 
+
+    /* react app */
+    app.get('/restaurantReact.doc' ,
+      function (req, res) {
+
+        res.render('apps/restaurantReact', {
+            title: 'React Restaurant App'
+        });
+
+    });
+
+
+
     var reportError = function (res, errorString)
     {
         res.status(500);

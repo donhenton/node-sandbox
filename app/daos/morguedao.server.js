@@ -1,3 +1,5 @@
+'use  strict';
+
 module.exports = function (config) {
 
     var mongoService = {};
@@ -17,7 +19,7 @@ module.exports = function (config) {
             deferredDbConnection.resolve(database);
         });
         return deferredDbConnection.promise;
-    }
+    };
 
 
 
@@ -67,7 +69,7 @@ module.exports = function (config) {
     mongoService.getData = function ()
     {
         return mongoService.getUserData('1');
-    }
+    };
 
     /**
      * get user data for a given id
