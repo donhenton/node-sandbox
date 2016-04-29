@@ -17,7 +17,7 @@ module.exports = function (app, daoService) {
     app.get('/restaurantReact.doc' ,
       function (req, res) {
 
-        res.render('apps/restaurantReact', {
+        res.render('apps/restaurantReact/restaurantReact', {
             title: 'React Restaurant App'
         });
 
