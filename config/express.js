@@ -2,6 +2,8 @@
 //set up for angular websocket server
 
 'use strict';
+var codeUtils = new require('./../app/utils/utils')();
+
 
 // Load the module dependencies
 var config = require('./config'),
