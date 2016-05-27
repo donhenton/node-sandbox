@@ -26,6 +26,10 @@
     width: 100%;
     height: 250px;
     overflow: hidden; }
+    .restaurantApp .restaurantListContainer #displayMessage.success {
+      color: blue; }
+    .restaurantApp .restaurantListContainer #displayMessage.error {
+      color: red; }
     .restaurantApp .restaurantListContainer .nameItem {
       width: 45%;
       text-align: left; }

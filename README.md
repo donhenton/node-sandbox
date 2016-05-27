@@ -26,7 +26,9 @@ http://jonathanmh.com/how-to-enable-cors-in-express-js-node-js/
 > https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions/
 > http://stackoverflow.com/questions/13133071/express-next-function-what-is-it-really-for
 
-### Running locally
+##  Running locally
+
+###Start Mongodb
 brew install mongodb
 
 to run
@@ -46,3 +48,8 @@ dbpath=/Users/dhenton/mongo_data/db
 ```
 
 run mongod -f /Users/dhenton/mongo_data/mongod.conf
+or mongod --dbpath=/Users/dhenton/mongo_data/db
+
+### Start node server
+node server.js (at root directory)
+
