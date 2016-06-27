@@ -74,7 +74,12 @@ gulp.task('process-jsx', function () {
     
 });
 
-
+/*
+ * react but not currently used react code is
+ * processed in git project react-restaurant
+ * and the bundle is then included in this app
+ * 
+ 
 gulp.task('react-backend', function () {
 
     livereload.listen();
@@ -116,7 +121,7 @@ gulp.task('react-backend', function () {
     });
 });
 
-
+*/
 
 
 
