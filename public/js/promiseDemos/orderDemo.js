@@ -38,6 +38,12 @@
     getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    
+    getSampleDelay(userId)
+    {
+        return this.getRandomInt(1500,3500) ;   
+        
+    }
      
     getScores(type, userId, holder)
     {
@@ -68,7 +74,7 @@
             resolve(true);
             
 
-        }, this.getRandomInt(1500,3500))
+        }, this.getSampleDelay(userId))
     })
 
      //console.log("p is "+(typeof p))
@@ -100,7 +106,7 @@ let sequentialButton = $('#sequential')
 function button_runJustAtTheEnd()
 {
      
-     let runAtEnd = new JustAtTheEndDemo(justAtEndCallBack);
+     let runAtEnd = new JustAtTheEndDemo(generalCallBack);
      cleanUp();
      runAtEnd.doDemo();
 }
@@ -121,7 +127,7 @@ function cleanUp()
  * state is one of STEP, COMPLETE 
  * 
  */
-function justAtEndCallBack(action)
+function generalCallBack(action)
 {
     if (action.state === "STEP")
     {
