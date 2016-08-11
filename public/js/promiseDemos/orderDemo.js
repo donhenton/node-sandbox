@@ -2,8 +2,7 @@
  class JustAtTheEndDemo
  {
      /**
-      * the constructor takes 2 jquery refs, one to the step reporting 
-      * location, one to the final information location
+      * the constructor takes a callback to report the steps of the process
       * 
       */
      constructor(callback)
@@ -96,6 +95,30 @@
      
      
  }//en justatend class
+ 
+ class SequentialDemo extends JustAtTheEndDemo
+ {
+     
+    doDemo()
+    {
+        let me = this;
+        this.testData.reduce((previous, current, index, array) => {
+        return  previous                                    // initiates the promise chain
+                .then(()=>{
+                    return  this.getScores(current.type,current.userId,this.mainObject)
+                })      //adds .then() promise for each item
+        }, Promise.resolve()).then(() =>
+            {
+                this.stepCallBack({state: 'COMPLETE',message: JSON.stringify(this.mainObject)})
+            })
+    }
+    getSampleDelay(userId)
+    {
+        return userId *500 ;   
+        
+    }
+    
+ }
 
 ///button code /////////////////////////////////////////
 let stepElem = $('#stepList');
