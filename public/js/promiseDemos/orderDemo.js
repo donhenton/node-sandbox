@@ -1,4 +1,27 @@
  'use strict'
+ 
+ 
+ /**
+  * in this demo a series of promises operate on a global object called 
+  * mainObject. Each promise spawns a worker (eg async call) to retrieve
+  * scores for a user on school subjects. these are attached to the mainObject
+  * 
+  *  announceStepComplete is called for each Promise for each demo, but
+  *  the demos have different ways of handling the step
+  *  
+  *  JUST AT THE END. checks a counter to see if the completed requests 
+  *  have reached their end, if so announce complete
+  *  
+  *  SEQUENTIAL simply announces the step, and COMPLETE is done at the
+  *  end of the reduce step
+  * 
+  *  SEQUENTIAL should report user id  in the order supplied which is 3,2,1
+  *  
+  *   
+  */
+ 
+ 
+ 
  class JustAtTheEndDemo
  {
      /**
@@ -124,6 +147,17 @@
         return userId *500 ;   
         
     }
+    
+    announceStepComplete(userId,message)
+    {
+         
+       
+        this.stepCallBack({state: 'STEP',message: "(seq) "+message})
+         
+        
+    }
+    
+    
     
  }
 
