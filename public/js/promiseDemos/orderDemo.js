@@ -6,7 +6,7 @@
       * location, one to the final information location
       * 
       */
-     constructor(stepElem,infoElem,actionButtonElem)
+     constructor(callback)
      {
          this.classNames = {"arts": ["Geography", "English", "Social Studies", "French", "Drawing"],
                             "sciences": ["Math", "Science", "API Trig", "Chemistry", "Physics"]};
@@ -17,27 +17,20 @@
 
         this.stepCounter = 0;
         this.mainObject = []; 
-        this.stepElement = stepElem;
-        this.infoElem = infoElem;
-        this.actionButtonElem = actionButtonElem;
+        this.stepCallBack = callback;
          
      }
      
-     clearReportingArea()
-     {
-        this.stepElement.empty();
-        this.infoElem.empty();
-         
-     }
+
      
     announceStepComplete(userId,message)
     {
         this.stepCounter ++;
-        this.stepElement.append('<li>'+message+'</li>')
+       
+        this.stepCallBack({state: 'STEP',message: message})
         if (this.stepCounter === this.testData.length)
         {
-            this.infoElem.html(JSON.stringify(this.mainObject));
-            this.actionButtonElem.prop('disabled', false);
+           this.stepCallBack({state: 'COMPLETE',message: JSON.stringify(this.mainObject)})
         }
         
     }
@@ -70,10 +63,8 @@
             //console.log("holder "+JSON.stringify(holder))
             holder.push({userId: userId, type: type, scores: scores})
             let endTime = new Date().getTime();
-            let message = "finishing " + userId + " " + (endTime - startTime) + " ms ";
-             
+            let message = "finishing " + userId + " " + (endTime - startTime) + " ms "; 
             this.announceStepComplete(userId,message);
-            
             resolve(true);
             
 
@@ -92,27 +83,55 @@
         
         this.stepCounter = 0;
         this.mainObject = []; 
-        this.actionButtonElem.prop('disabled', true);
-         
         this.testData.forEach((current) => {
             this.getScores(current.type, current.userId, this.mainObject);
         })
     }
      
      
- }
+ }//en justatend class
 
+///button code /////////////////////////////////////////
+let stepElem = $('#stepList');
+let infoElem = $('#infoBox');
+let justAtEndButton = $('#justAtEnd')
+let sequentialButton = $('#sequential')
 
-function runJustAtTheEnd()
+function button_runJustAtTheEnd()
 {
-     let stepElem = $('#stepList');
-     let infoElem = $('#infoBox');
-     let actionButtonElem = $('#justAtEnd')
-     let runAtEnd = new JustAtTheEndDemo(stepElem,infoElem,actionButtonElem);
-     runAtEnd.clearReportingArea();
-
-     stepElem.append("<li>Starting...</li>")
-
      
+     let runAtEnd = new JustAtTheEndDemo(justAtEndCallBack);
+     cleanUp();
      runAtEnd.doDemo();
+}
+////////////////////////////////
+
+function cleanUp()
+{
+    
+     stepElem.empty();
+     infoElem.empty();
+     stepElem.append("<li>Starting...</li>")
+     justAtEndButton.prop('disabled', true);
+     sequentialButton.prop('disabled', true);   
+}
+
+/**
+ * actions {state: string , payload: string}
+ * state is one of STEP, COMPLETE 
+ * 
+ */
+function justAtEndCallBack(action)
+{
+    if (action.state === "STEP")
+    {
+       stepElem.append('<li>'+action.message+'</li>')
+    }
+    if (action.state === "COMPLETE")
+    {
+        infoElem.html(action.message);
+        justAtEndButton.prop('disabled', false);
+        sequentialButton.prop('disabled', false);    
+    
+    }
 }
