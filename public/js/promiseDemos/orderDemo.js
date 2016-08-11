@@ -99,6 +99,13 @@
  class SequentialDemo extends JustAtTheEndDemo
  {
      
+     /**
+      * the use of the reduce function makes the calls to getScore sequential
+      * in the reduce call back the first iteration needs 'previous' to have
+      * a value, and that is done via 2nd param to reduce, Promise.resolve.
+      * the final then is a the place to put code that says 'COMPLETE'
+      */
+     
     doDemo()
     {
         let me = this;
