@@ -13,7 +13,9 @@
   *  have reached their end, if so announce complete
   *  
   *  SEQUENTIAL simply announces the step, and COMPLETE is done at the
-  *  end of the reduce step
+  *  end of the reduce step, The delay times sumbitted are such that if 
+  *  it was based on complete time the order would be 1,2,3. But completion
+  *  is by order submitted which yields 3,2,1
   * 
   *  SEQUENTIAL should report user id  in the order supplied which is 3,2,1
   *  
