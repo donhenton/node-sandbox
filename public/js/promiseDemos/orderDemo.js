@@ -107,12 +107,22 @@ function button_runJustAtTheEnd()
 {
      
      let runAtEnd = new JustAtTheEndDemo(generalCallBack);
-     cleanUp();
+     setUp();
      runAtEnd.doDemo();
 }
+
+function button_sequential()
+{
+     
+     let sequential = new SequentialDemo(generalCallBack);
+     setUp();
+     sequential.doDemo();
+}
+
+
 ////////////////////////////////
 
-function cleanUp()
+function setUp()
 {
     
      stepElem.empty();
