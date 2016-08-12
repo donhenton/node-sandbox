@@ -45,7 +45,11 @@
         }))
         
         
-        
+        app.get('/logout',
+            function(req, res){
+                req.logout();
+                renderSecureMainPage(req,res);
+        });
         
         
  }
