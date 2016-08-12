@@ -1,0 +1,2 @@
+https://blog.risingstack.com/node-hero-node-js-authentication-passport-js/
+https://stormpath.com/blog/choosing-nodejs-authentication-strategy
