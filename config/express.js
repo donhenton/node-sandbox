@@ -65,9 +65,11 @@ module.exports = function () {
     app.use(motdFilter);
     
     /* set up security */
-    //require('../app/authentication').init(app);
-    //app.use(passport.initialize());
-    //app.use(passport.session());
+    require('../app/authentication/initPassport')();
+    app.use(passport.initialize());
+    app.use(passport.session());
+    
+    
     
 
     // Set the application view engine and 'views' folder

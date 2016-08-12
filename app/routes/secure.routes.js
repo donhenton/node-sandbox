@@ -1,15 +1,16 @@
  module.exports = function (app) {
 
     var path = require('path'); 
+    var passport = require('passport')
     //rendering functions must define these first ////////////////////////////
 
-    var renderSecureLogin = function (req, res) {
-
-        res.render('secure/login', {
-            title: 'Login page'
-        });
-
-    };
+//    var renderSecureLogin = function (req, res) {
+//
+//        res.render('secure/login', {
+//            title: 'Login page'
+//        });
+//
+//    };
     var renderSecurePage = function (req, res) {
 
         res.render('secure/securePage', {
@@ -25,15 +26,24 @@
 
     }; 
     
-     
     
-    
-    
-///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     // routes
     ///////////////////////////////////////////////////////////////////////
-        app.get('/secureLogin.doc', renderSecureLogin);
-        app.get('/securePage.doc', renderSecurePage);
+       // app.get('/secureLogin.doc', renderSecureLogin);
+        app.get('/securePage.doc', passport.authenticationMiddleware(), renderSecurePage);
         app.get('/secureMainPage.doc', renderSecureMainPage);
+        
+        /**
+         * setting up the login form
+         */
+        app.post('/login', passport.authenticate('local', {
+             
+            failureRedirect: '/login'
+        }))
+        
+        
+        
+        
         
  }
