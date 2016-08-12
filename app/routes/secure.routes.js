@@ -4,13 +4,13 @@
     var passport = require('passport')
     //rendering functions must define these first ////////////////////////////
 
-//    var renderSecureLogin = function (req, res) {
-//
-//        res.render('secure/login', {
-//            title: 'Login page'
-//        });
-//
-//    };
+    var renderSecureLogin = function (req, res) {
+
+        res.render('secure/login', {
+            title: 'Login page'
+        });
+
+    };
     var renderSecurePage = function (req, res) {
 
         res.render('secure/securePage', {
@@ -33,13 +33,15 @@
        // app.get('/secureLogin.doc', renderSecureLogin);
         app.get('/securePage.doc', passport.authenticationMiddleware(), renderSecurePage);
         app.get('/secureMainPage.doc', renderSecureMainPage);
+        app.get('/login', renderSecureLogin);
         
         /**
          * setting up the login form
          */
         app.post('/login', passport.authenticate('local', {
              
-            failureRedirect: '/login'
+            failureRedirect: '/login',
+            successRedirect: '/securePage.doc'
         }))
         
         
