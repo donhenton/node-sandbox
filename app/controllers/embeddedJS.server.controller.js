@@ -6,7 +6,7 @@ exports.render = function (req, res) {
 
 
     
-    console.log("permissions: "+req.query.permissions);
+    //console.log("permissions: "+req.query.permissions);
     var permissions = 'yes';
     if (typeof req.query.permissions == 'undefined')
     {

@@ -13,7 +13,7 @@
     };
     var renderSecureLocalPage = function (req, res) {
 
-        console.log(JSON.stringify(req.user))
+        //console.log(JSON.stringify(req.user))
         res.render('secureLocal/securePage', {
             title: 'Secured Page',
             user: req.user
