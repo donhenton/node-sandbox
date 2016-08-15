@@ -3,7 +3,7 @@ function authenticationMiddleware () {
     if (req.isAuthenticated()) {
       return next()
     }
-        res.render('secure/login', {
+        res.render('secureLocal/login', {
             title: 'Login page'
         });
   }

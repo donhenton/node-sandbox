@@ -4,25 +4,25 @@
     var passport = require('passport')
     //rendering functions must define these first ////////////////////////////
 
-    var renderSecureLogin = function (req, res) {
+    var renderSecureLocalLogin = function (req, res) {
 
-        res.render('secure/login', {
+        res.render('secureLocal/login', {
             title: 'Login page'
         });
 
     };
-    var renderSecurePage = function (req, res) {
+    var renderSecureLocalPage = function (req, res) {
 
         console.log(JSON.stringify(req.user))
-        res.render('secure/securePage', {
+        res.render('secureLocal/securePage', {
             title: 'Secured Page',
             user: req.user
         });
 
     };
-    var renderSecureMainPage = function (req, res) {
+    var renderSecureLocalMainPage = function (req, res) {
 
-        res.render('secure/mainPage', {
+        res.render('secureLocal/mainPage', {
             title: 'Security Demonstration'
         });
 
@@ -33,24 +33,24 @@
     // routes
     ///////////////////////////////////////////////////////////////////////
        // app.get('/secureLogin.doc', renderSecureLogin);
-        app.get('/securePage.doc', passport.authenticationMiddleware(), renderSecurePage);
-        app.get('/secureMainPage.doc', renderSecureMainPage);
-        app.get('/login', renderSecureLogin);
+        app.get('/secureLocalPage.doc', passport.authenticationMiddleware(), renderSecureLocalPage);
+        app.get('/secureLocalMainPage.doc', renderSecureLocalMainPage);
+        app.get('/loginLocal', renderSecureLocalLogin);
         
         /**
          * setting up the login form
          */
-        app.post('/login', passport.authenticate('local', {
+        app.post('/loginLocal', passport.authenticate('local', {
              
-            failureRedirect: '/login',
-            successRedirect: '/securePage.doc'
+            failureRedirect: '/loginLocal',
+            successRedirect: '/secureLocalPage.doc'
         }))
         
         
-        app.get('/logout',
+        app.get('/logoutLocal',
             function(req, res){
                 req.logout();
-                renderSecureMainPage(req,res);
+                renderSecureLocalMainPage(req,res);
         });
         
         
