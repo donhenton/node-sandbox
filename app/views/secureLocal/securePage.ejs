@@ -1,0 +1,27 @@
+<% include  ../partials/header %>
+	 
+ 
+	 
+	<h3><%= title %></h3>
+
+<div class="row">
+<div class=" col-sm-6">
+         <p>this page is secured</p>
+
+         <p><a href="/logoutLocal">Logout</a></p>
+</div>
+<div class=" col-sm-4">
+          <% if (user.roles.indexOf('alpha') > -1)  { %>
+
+            <div>
+            <b>User <i><%= user.officialName %></i> Roles:</b> <%=  JSON.stringify(user.roles)  %>
+
+            </div>
+
+          <% } %>
+</div>
+
+</div>
+
+
+ <% include  ../partials/footer %>

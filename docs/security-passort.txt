@@ -1,0 +1,9 @@
+https://blog.risingstack.com/node-hero-node-js-authentication-passport-js/
+https://stormpath.com/blog/choosing-nodejs-authentication-strategy
+http://toon.io/on-passportjs-specific-use-cases/
+
+https://github.com/jaredhanson/passport-local
+https://github.com/passport/express-4.x-local-example
+
+google
+https://github.com/jaredhanson/passport-google

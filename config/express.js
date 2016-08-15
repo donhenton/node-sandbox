@@ -17,6 +17,8 @@ var config = require('./config'),
 var fs = require('fs');
 var vm = require('vm');
 var cookieParser = require('cookie-parser');
+var passport = require('passport')  ;
+
 
 // Define the Express configuration method
 module.exports = function () {
@@ -62,6 +64,10 @@ module.exports = function () {
     var motdFilter = require('../app/filters/motd');
     app.use(motdFilter);
     
+    /* set up security */
+    require('../app/authentication/local/initPassport')();
+    app.use(passport.initialize());
+    app.use(passport.session());
     
     
     
@@ -79,6 +85,7 @@ module.exports = function () {
     require('../app/routes/servlets.server.routes.js')(app);
     require('../app/routes/forms.server.routes.js')(app);
     require('../app/routes/promise.demos.routes.js')(app);
+    require('../app/routes/secure.routes.js')(app);
     require('../app/routes/error.handling.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
