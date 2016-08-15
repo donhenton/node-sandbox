@@ -65,7 +65,7 @@ module.exports = function () {
     app.use(motdFilter);
     
     /* set up security */
-    require('../app/authentication/initPassport')();
+    require('../app/authentication/local/initPassport')();
     app.use(passport.initialize());
     app.use(passport.session());
     
