@@ -5,7 +5,9 @@ var authenticationMiddleware = require('./middleware')
 
 var user = {
   username: 'test',
+  officialName: 'Bonzo Dog',
   password: 'test',
+  roles: ['alpha','beta'],
   id: 1
 }
 

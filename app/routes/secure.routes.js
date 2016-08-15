@@ -13,8 +13,10 @@
     };
     var renderSecurePage = function (req, res) {
 
+        console.log(JSON.stringify(req.user))
         res.render('secure/securePage', {
-            title: 'Secured Page'
+            title: 'Secured Page',
+            user: req.user
         });
 
     };
