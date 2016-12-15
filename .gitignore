@@ -3,4 +3,4 @@
 /public/js/bower/
 /public/js/react/
 .DS_Store
-/config/env/development.js
+config/env/development.js

@@ -1,9 +1,12 @@
 var fs = require('fs');
 var EJS = require("ejs");
+var nodemailer = require('nodemailer');
 
 module.exports = function (app) {
 
-    var htmlTemplate = fs.readFileSync('app/views/mailTemplates/mailTemplate.ejs').toString()
+    var htmlTemplate = fs.readFileSync('app/views/mailTemplates/mailTemplate.ejs').toString();
+    
+    var transporter = nodemailer.createTransport('smtps://expcalendar1000@gmail.com:')
     var mailDemoRender = function (req, res) {
 
         res.render('mail/mailDemo', {
