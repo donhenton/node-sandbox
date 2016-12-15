@@ -20433,7 +20433,7 @@ var HorizontalBarChart = function () {
                 key: 'createChart',
                 value: function createChart(data) {
                         var me = this;
-                        this.svg = d3.select(me.element).append('svg').attr('id', me.context).attr('width', me.props.width + 10).style('background-color', 'white').style('border', 'thin solid black').style('padding', '5px').attr('height', me.props.height + 10);
+                        this.svg = d3.select(me.element).append('svg').attr('id', me.context).attr('width', me.props.width + 10).style('background-color', 'white').style('padding', '5px').attr('height', me.props.height + 10);
 
                         this.svg.append('defs').append('pattern').attr('id', 'diagonalStripes').attr('patternUnits', 'userSpaceOnUse').attr('width', 4).attr('height', 4).append('path').attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2').attr('stroke', '#c7d2d8').attr('stroke-width', 1);
 
