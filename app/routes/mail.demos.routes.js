@@ -41,11 +41,7 @@ module.exports = function (app, config) {
     }
     //https://www.npmjs.com/package/ejs
     app.post('/mailGraph', function (req, res) {
-        //req.body  contains a {width: height: imageData}
-       // var imageInfo = {imageData: "data:image/svg+xml;base64,"+req.body };
-        //
-        //console.log(JSON.stringify(req.body.imageData))
-       // var imageData = "data:image/svg+xml;base64,"+req.body.data;
+       
          var uniqueCID = uuid.v4()+"-id";
          var data = {uniqueCID: "cid:"+uniqueCID};
         
@@ -60,7 +56,7 @@ module.exports = function (app, config) {
                 to: 'ddigital9000@gmail.com, expcalendar1000@gmail.com',
                 subject: 'Mailing Test', // Subject line
                 html: html,
-                //html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
+                
                 attachments:[
                     {
                         filename: 'attach.png',
