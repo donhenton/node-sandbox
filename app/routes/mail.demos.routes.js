@@ -1,8 +1,8 @@
 var fs = require('fs');
 var EJS = require("ejs");
 var nodemailer = require('nodemailer');
+var uuid = require('node-uuid');
  
-
 module.exports = function (app, config) {
 
     var htmlTemplate = fs.readFileSync('app/views/mailTemplates/mailTemplate.ejs').toString();
@@ -46,26 +46,27 @@ module.exports = function (app, config) {
         //
         //console.log(JSON.stringify(req.body.imageData))
        // var imageData = "data:image/svg+xml;base64,"+req.body.data;
-         var data = {imageData: req.body.imageData};
+         var uniqueCID = uuid.v4()+"-id";
+         var data = {uniqueCID: "cid:"+uniqueCID};
         
         try
         {
            var html = EJS.render(htmlTemplate, data);
-           //console.log(html);
+           console.log(html);
             var mailOptions = {
                 from: '"Hack A Thon" <expcalendar@gmail.com>', // sender address
                 //to: 'ddigital9000@gmail.com, '+
                 //    'buzz@click.com', // list of receivers
                 to: 'ddigital9000@gmail.com, expcalendar1000@gmail.com',
                 subject: 'Mailing Test', // Subject line
-                
-                html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
+                html: html,
+                //html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
                 attachments:[
                     {
                         filename: 'attach.png',
                         content: req.body.imageData.split('base64')[1],
                         encoding: 'base64',
-                        cid: 'unique@kreata.ee'
+                        cid: uniqueCID
                     }
                     
                     
