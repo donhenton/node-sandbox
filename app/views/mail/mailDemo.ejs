@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <td>
-                     <button onClick="mailImage()" id="mailData" class="spacer pull-right btn btn-primary">Mail Graph</button>
+                     <button onClick="showEmailDialog()" id="mailData" class="spacer pull-right btn btn-primary">Mail Graph</button>
                     <button id="updateHorizontalData" class="spacer pull-left btn btn-primary">Update Data</button></td>
             </tr>
 </table>
@@ -35,6 +35,41 @@
 </div>
 
 </div>
+
+<div id="mailAddressModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+
+<div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input id="emailAddress" onkeyUp="validateEmail(this)" name="emailAddress" type="email"  length="50" size="50" class="form-control" name="email" placeholder="buzz@buzz.com">
+ 
+  </div>
+
+
+        
+      </div>
+      <div class="modal-footer">
+        <button id="dialogMailButton" type="button" onClick="closeDialog('confirm')" class="btn btn-primary">Mail</button>
+        <button type="button" onClick="closeDialog('cancel')" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
  <% include  ../partials/footer %>
 
  <script src="js/mailDemo/simg_modified.js" type="text/javascript"></script>
