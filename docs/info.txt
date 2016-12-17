@@ -132,3 +132,17 @@ session management node js
 http://codeforgeek.com/2014/09/manage-session-using-node-js-express-4/
 
 express.sendfile
+
+D3 image stuff
+======================================================================
+https://davidwalsh.name/convert-image-data-uri-javascript
+https://github.com/krunkosaurus/simg
+http://stackoverflow.com/questions/16049538/how-to-convert-save-d3-js-graph-to-pdf-jpeg
+
+
+Emailing
+
+see this page for using gmail with nodemailer
+https://github.com/nodemailer/nodemailer right above the Setting up heading
+gmail doesn't support svg
+

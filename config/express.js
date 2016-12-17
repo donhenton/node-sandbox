@@ -85,6 +85,7 @@ module.exports = function () {
     require('../app/routes/servlets.server.routes.js')(app);
     require('../app/routes/forms.server.routes.js')(app);
     require('../app/routes/promise.demos.routes.js')(app);
+    require('../app/routes/mail.demos.routes.js')(app,config);
     require('../app/routes/secure.routes.js')(app);
     require('../app/routes/error.handling.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
