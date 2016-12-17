@@ -12,7 +12,7 @@ module.exports = function (app, config) {
             + '@smtp.gmail.com');
 
 
-    console.log("do compile")
+    console.log("do compile "+config.mailPassword);
 
     var mailDemoRender = function (req, res) {
 
@@ -78,7 +78,7 @@ module.exports = function (app, config) {
 
                 ]
             };
-
+/*
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     reportError(res, error)
@@ -88,7 +88,7 @@ module.exports = function (app, config) {
                 res.json({status: 'OK', message: info.response})
                 console.log('Message sent: ' + info.response);
             });
-
+*/
 
 
 
