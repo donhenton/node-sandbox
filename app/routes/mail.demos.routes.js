@@ -78,7 +78,7 @@ module.exports = function (app, config) {
 
                 ]
             };
-/*
+ 
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     reportError(res, error)
@@ -88,7 +88,7 @@ module.exports = function (app, config) {
                 res.json({status: 'OK', message: info.response})
                 console.log('Message sent: ' + info.response);
             });
-*/
+ 
 
 
 

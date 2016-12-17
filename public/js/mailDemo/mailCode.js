@@ -32,7 +32,7 @@ function sendMailData(data)
         mimeType: 'application/json',
         error: handleError,
         success: handleSuccess,
-        timeout: 1500
+        timeout: 2500
 
     }
     $.ajax(setup);
