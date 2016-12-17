@@ -12,7 +12,7 @@ module.exports = function (app, config) {
             + '@smtp.gmail.com');
 
 
-    console.log("do compile '"+config.mailPassword+"'");
+    ///console.log("do compile '"+config.mailPassword+"'");
 
     var mailDemoRender = function (req, res) {
 
