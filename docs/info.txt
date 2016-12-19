@@ -146,3 +146,24 @@ see this page for using gmail with nodemailer
 https://github.com/nodemailer/nodemailer right above the Setting up heading
 gmail doesn't support svg
 
+
+GMAIL USAGE
+talks about getting gmail to work with smtp call
+checkout this section
+also turn on and off again the access to less secure apps
+
+Go to admin.google.com
+From the admin console, select “Security”
+Select “Basic settings”
+Scroll down to “Less secure apps”
+Go to settings for less secure apps ››
+Check the radio button “Allow users to manage their access to less secure apps”
+Save the changes
+Open this link being sign in as the super administrator https://www.google.com/settings/security/lesssecureapps
+Check the radio button Turn On the access for less secure apps
+Unlock Captcha using this link https://accounts.google.com/DisplayUnlockCaptcha
+
+
+
+https://www.digitalocean.com/community/questions/unable-to-send-mail-through-smtp-gmail-com
+
