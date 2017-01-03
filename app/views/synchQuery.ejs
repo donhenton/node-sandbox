@@ -40,7 +40,7 @@
                 </div>
                 
                 <div class="col-sm-4">
-                    <ul  ng-repeat="name in restaurantList">
+                    <ul  ng-repeat="name in restaurantList track by $index">
                         <li>{{name}}</li>
 
                     </ul>
