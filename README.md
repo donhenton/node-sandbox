@@ -53,3 +53,7 @@ or mongod --dbpath=/Users/dhenton/mongo_data/db
 ### Start node server
 node server.js (at root directory)
 
+### For development
+* gulp backend (for working with js and node route changes)
+* gulp frontend (for just frontend work)
+

@@ -23,6 +23,14 @@ module.exports = function (app, daoService) {
 
     });
 
+     app.get('/restaurantAngular4.doc' ,
+      function (req, res) {
+
+        res.render('apps/restaurantAngular4/restaurantAngular4', {
+            title: 'Angular2 Restaurant App'
+        });
+
+    });
 
 
     var reportError = function (res, errorString)
