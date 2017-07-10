@@ -10,6 +10,7 @@
     "express": "~4.8.8",
     "express-session": "~1.7.6",
     "json3": "~3.3.2",
+    "jsonwebtoken": "^7.4.1",
     "log4js": "^0.6.32",
     "method-override": "~2.2.0",
     "mongodb": "~2.0",

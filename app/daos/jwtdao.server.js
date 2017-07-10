@@ -6,9 +6,18 @@ module.exports = function (config) {
 
 
     var mongoClient = require('mongodb').MongoClient;
+    var uuid = require('node-uuid');
+    var jwt = require('jsonwebtoken');
     var ObjectID = require('mongodb').ObjectID;
     var Q = require('q');
-    jwtService.promisedConnect = function ()
+    var secret = config.jwtDb.secret;
+    var COLLECTION_NAME = 'tokens';
+
+
+
+
+
+    function  promisedDBConnect()
     {
         var deferredDbConnection = Q.defer();
         mongoClient.connect(config.jwtDb.url, function (err, database) {
@@ -19,34 +28,26 @@ module.exports = function (config) {
             deferredDbConnection.resolve(database);
         });
         return deferredDbConnection.promise;
-    };
+    }
+    ;
 
 
-/*
-    jwtService.saveData = function (userData)
+
+    function saveTokeInfo(info)
     {
-
-
-
         var success = function (db)
         {
-
-            var col = db.collection('users');
+            //  console.log("my id " + id);
+            var col = db.collection(COLLECTION_NAME);
             var deferredResult = Q.defer();
-            var id = userData._id;
 
 
-            col.update({_id: new ObjectID(id)}
-            , {$set: {
-                    folderData: userData.folderData
-                }},
-            function (err, result) {
-                //console.log(result);
+            col.insert(info, function (err, result) {
+                //  console.log(result);
                 if (err)
                 {
                     deferredResult.reject(err);
-                }
-                else
+                } else
                 {
                     deferredResult.resolve(result);
                 }
@@ -55,19 +56,111 @@ module.exports = function (config) {
             });
             return deferredResult.promise;
         };
-        return   jwtService.promisedConnect().then(success, console.error);
 
 
-    };
-*/
- 
-    jwtService.createError = function (message, classVar)
+        return    promisedDBConnect().then(success, console.error);
+    }
+
+    function getTokenById(guidId)
+    {
+        var success = function (db)
+        {
+            //  console.log("my id " + id);
+            var col = db.collection(COLLECTION_NAME);
+            var deferredResult = Q.defer();
+
+            var searchCriteria = {auth: guidId};
+
+            col.find(searchCriteria).toArray(function (err, items) {
+
+                if (err)
+                {
+                    deferredResult.reject(err);
+                } else
+                {
+                    deferredResult.resolve(items);
+                }
+
+                db.close();
+            });
+            return deferredResult.promise;
+        };
+        return    promisedDBConnect().then(success, console.error)
+    }
+    ;
+
+
+    function generateUUID()
+    {
+        return uuid();
+    }
+
+
+
+
+     function createError(message, classVar)
     {
         var e = {};
         e["message"] = message;
         e["errorClass"] = classVar;
         return e;
     };
+
+
+
+    jwtService.generateToken = function (req, opts) {
+        opts = opts || {};
+
+        // By default, expire the token after 1 days.
+        // NOTE: the value for 'exp' needs to be in seconds since
+        // the epoch as per the spec!
+        var GUID = generateUUID();
+        var expiresDefault = Math.floor(new Date().getTime() / 1000) + 1 * 24 * 60 * 60;
+        var dataObj = {
+            auth: GUID,
+            agent: req.headers['user-agent'],
+            exp: opts.expires || expiresDefault
+        }
+
+
+        return saveTokeInfo(dataObj).then(function(){
+            var token = jwt.sign(dataObj, secret);
+            return token;
+        },
+        function(err)
+        {
+            console.log("generateToken "+JSON.stringify(err))
+        });
+
+ 
+    }
+
+    jwtService.verifyToken = function (token) {
+        var decoded = false;
+        try {
+            decoded = jwt.verify(token, secret);
+        } catch (e) {
+            decoded = false; // still false
+        }
+        return decoded;
+    }
+
+    jwtService.validateWebRequest = function (token, callback)
+    {
+        //token will be in req.header.authorization
+        var decoded = this.verifyToken(token);
+        var callBackMessage = {error: null, message: null, success: false}
+        if (!decoded || (decoded && !decoded.auth))
+        {
+            callBackMessage.error = "Authorization failed";
+            callBackMessage.message = callBackMessage.error;
+            callback(callBackMessage());
+            return;
+        }
+    }
+
+
+
 
     return jwtService;
 
