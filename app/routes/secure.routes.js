@@ -48,6 +48,30 @@ module.exports = function (app) {
         failureRedirect: '/loginLocal',
         successRedirect: '/secureLocalPage.doc'
     }))
+    
+    
+    
+    app.post('/zzzzz', function (req, res, next) {
+        passport.authenticate('local', function (err, user, info) {
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                return res.redirect('/loginLocal');
+            }
+            req.logIn(user, function (err) {
+                if (err) {
+                    return next(err);
+                }
+                return res.redirect('/users/' + user.username);
+            });
+        })(req, res, next);
+    });
+    
+    
+    
+    
+    
 
 
     app.get('/logoutLocal',
@@ -65,7 +89,7 @@ module.exports = function (app) {
 
      app.get('/auth',
             function (req, res,next) {
-                logger.debug("auth hit "+next)
+              //  logger.debug("auth hit "+next)
                 filterAuthenticationMiddleWare(req, res,next);
             });
 
@@ -74,11 +98,13 @@ module.exports = function (app) {
             
             logger.debug("filter 1")
              var sendToPath = '/';
+             var url_parts = url.parse(req.url);
+          //   logger.debug("filter 2 "+JSON.stringify(req.url))
             if (req.query.goToURL)
             {
                 sendToPath = req.query.goToURL;
             }
-            var url_parts = url.parse(req.url);
+             
             //compute the passed q string
             var qString = "";
             if (url_parts.search)
@@ -86,7 +112,7 @@ module.exports = function (app) {
                 var qValues = req.query;
                 Object.keys(qValues).forEach(function (qq)
                 {
-                    if (qq !== 'serviceURL')
+                    if (qq !== 'goToURL')
                     {
                         qString = qString + '&' + qq + '=' + qValues[qq];
                     }
@@ -96,18 +122,22 @@ module.exports = function (app) {
                     qString = qString.substring(1);
                     sendToPath = sendToPath +"?"+ qString;
                 }
+                
+           
+                
             
             }// end search string exists
             
             
-             logger.debug("filter 2");
+             logger.debug("filter 3");
             
             if (req.isAuthenticated()) {
                 return next();
             }
-             logger.debug("filter 3");
+             logger.debug("filter 4");
             res.render('secureLocal/login', {
-                title: 'Login page'
+                title: 'Login page',
+                sendToPath: encodeURIComponent(sendToPath)
             });
         }
     }

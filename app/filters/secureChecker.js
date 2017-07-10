@@ -15,7 +15,7 @@ module.exports =
             return function (req, res, next) {
                 var url_parts = url.parse(req.url);
                    
-                 logger.debug("entering filter")
+            //     logger.debug("entering filter")
                 if (url_parts.path === '/auth')
                 {
                      logger.debug("going to auth")
@@ -36,20 +36,20 @@ module.exports =
                         var totalUrl = "/auth?goToURL="
                                 + encodeURIComponent(url_parts.pathname)
                                 + addedQ;
-                         logger.debug("redirect to total URL "+totalUrl);
-                       // res.redirect(totalUrl);
-                       res.redirect('/auth')
+             //            logger.debug("redirect to total URL "+totalUrl);
+                         res.redirect(totalUrl);
+                       
                         return;
                     }
                     else
                     {
-                        logger.debug("user was found ")
+              //          logger.debug("user was found ")
                         next();
                         return;
                     }
                 } else
                 {
-                    logger.debug("not a security request")
+               //     logger.debug("not a security request")
                     next();
                     return;
                 }
