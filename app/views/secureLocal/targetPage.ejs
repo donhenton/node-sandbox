@@ -1,0 +1,37 @@
+<% include  ../partials/header %>
+	 
+ 
+	 
+	<h3><%= title %></h3>
+
+
+        <div class="row">
+        <div class="well  col-sm-12">
+           This demonstration illustrates security enforced by a middleware module
+           that searches for '/secure/' in the path and redirects to the login page.
+           <br>
+           That login page will have a hidden variable that contains the path to direct to, 
+           in the queryString variable <b>goToURL</b>. The middleware and authentication code
+           rewrites that queryString to the page destination and passes along any other
+           query parameters.
+
+        </div>
+       </div>
+
+       <div class="row">
+        
+            <p><b>Query Parameter Alpha</b>: <%= parms.alpha %></p>
+            <p><b>Query Parameter Beta</b>: <%= parms.beta %></p>
+       </div>
+
+       <p>&nbsp;</p>
+        <div class="row">
+        
+           <p><a href="/logoutLocal">Logout</a></p>
+       </div>
+
+
+
+
+
+ <% include  ../partials/footer %>

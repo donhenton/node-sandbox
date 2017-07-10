@@ -38,7 +38,11 @@
 
 
             </div>
- 
+            <% if (locals.sendToPath) { %>
+                  <input type="hidden"  name="sendToPath" value=<%= sendToPath %> />
+                
+            <% } %>
+            
         </form>
 
 </div>
