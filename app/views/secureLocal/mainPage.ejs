@@ -15,8 +15,8 @@
         <div class="row">
         
             <ul>
-             <li>Click here to access   <a href="/secureLocalPage.doc">Secured Content</a>. <i>(This is through a single secured route)</i></li>
-             <li>Click here to access   <a href="/secure/targetPage.doc?alpha=geta%20job&beta=35">Secured Content</a>. <i>(This is through the secureChecker  middleware)</i></li>
+             <li>Click here to access   <a href="/secureLocalPage.doc">Secured Content</a>. <i>(This is through a single secured route where the passport check is on the route)</i></li>
+             <li>Click here to access   <a href="/secure/targetPage.doc?alpha=geta%20job&beta=35">Secured Content</a>. <i>(This is through the secureChecker  middleware which inspects the path and passes any querystring)</i></li>
             </ul>
        </div>
 

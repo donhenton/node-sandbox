@@ -43,15 +43,16 @@ module.exports = function (app) {
     /**
      * setting up the login form
      */
-    app.post('/loginLocal', passport.authenticate('local', {
-
-        failureRedirect: '/loginLocal',
-        successRedirect: '/secureLocalPage.doc'
-    }))
+   
     
     
-    
-    app.post('/zzzzz', function (req, res, next) {
+    app.post('/loginLocal', function (req, res, next) {
+        var targetLocation = '/secureLocalPage.doc';
+        var sendToPath = req.body.sendToPath;
+        if (sendToPath)
+        {
+            targetLocation = decodeURIComponent(sendToPath);
+        }
         passport.authenticate('local', function (err, user, info) {
             if (err) {
                 return next(err);
@@ -63,7 +64,7 @@ module.exports = function (app) {
                 if (err) {
                     return next(err);
                 }
-                return res.redirect('/users/' + user.username);
+                return res.redirect(targetLocation);
             });
         })(req, res, next);
     });
