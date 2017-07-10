@@ -43,9 +43,9 @@ module.exports = function (app) {
     /**
      * setting up the login form
      */
-   
-    
-    
+
+
+
     app.post('/loginLocal', function (req, res, next) {
         var targetLocation = '/secureLocalPage.doc';
         var sendToPath = req.body.sendToPath;
@@ -68,11 +68,6 @@ module.exports = function (app) {
             });
         })(req, res, next);
     });
-    
-    
-    
-    
-    
 
 
     app.get('/logoutLocal',
@@ -81,66 +76,81 @@ module.exports = function (app) {
                 renderSecureLocalMainPage(req, res);
             });
 
-   
-     
+
+
 
     ///////////////////////////////////////////////////////////////////////
     // routes secureChecker middleware
     /////////////////////////////////////////////////////////////////////// 
 
-     app.get('/auth',
-            function (req, res,next) {
-              //  logger.debug("auth hit "+next)
-                filterAuthenticationMiddleWare(req, res,next);
+    app.get('/secure/targetPage.doc',
+            function (req, res) {
+
+
+                var alpha = req.query.alpha;
+                var beta = req.query.beta;
+
+                res.render('secureLocal/targetPage', {
+                    title: 'MiddleWare Security',
+                    parms: {alpha: alpha, beta: beta}
+                });
+            });
+
+
+
+    app.get('/auth',
+            function (req, res, next) {
+                //  logger.debug("auth hit "+next)
+                filterAuthenticationMiddleWare(req, res, next);
             });
 
 
     function filterAuthenticationMiddleWare(req, res, next) {
-            
-            logger.debug("filter 1")
-             var sendToPath = '/';
-             var url_parts = url.parse(req.url);
-          //   logger.debug("filter 2 "+JSON.stringify(req.url))
-            if (req.query.goToURL)
-            {
-                sendToPath = req.query.goToURL;
-            }
-             
-            //compute the passed q string
-            var qString = "";
-            if (url_parts.search)
-            {
-                var qValues = req.query;
-                Object.keys(qValues).forEach(function (qq)
-                {
-                    if (qq !== 'goToURL')
-                    {
-                        qString = qString + '&' + qq + '=' + qValues[qq];
-                    }
-                });
-                if (qString.length > 0)
-                {
-                    qString = qString.substring(1);
-                    sendToPath = sendToPath +"?"+ qString;
-                }
-                
-           
-                
-            
-            }// end search string exists
-            
-            
-             logger.debug("filter 3");
-            
-            if (req.isAuthenticated()) {
-                return next();
-            }
-             logger.debug("filter 4");
-            res.render('secureLocal/login', {
-                title: 'Login page',
-                sendToPath: encodeURIComponent(sendToPath)
-            });
+
+        logger.debug("filter 1")
+        var sendToPath = '/';
+        var url_parts = url.parse(req.url);
+        //   logger.debug("filter 2 "+JSON.stringify(req.url))
+        if (req.query.goToURL)
+        {
+            sendToPath = req.query.goToURL;
         }
+
+        //compute the passed q string
+        var qString = "";
+        if (url_parts.search)
+        {
+            var qValues = req.query;
+            Object.keys(qValues).forEach(function (qq)
+            {
+                if (qq !== 'goToURL')
+                {
+                    qString = qString + '&' + qq + '=' + qValues[qq];
+                }
+            });
+            if (qString.length > 0)
+            {
+                qString = qString.substring(1);
+                sendToPath = sendToPath + "?" + qString;
+            }
+
+
+
+
+        }// end search string exists
+
+
+        logger.debug("filter 3");
+
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        logger.debug("filter 4");
+        res.render('secureLocal/login', {
+            title: 'Login page',
+            sendToPath: encodeURIComponent(sendToPath)
+        });
     }
+}
 
 
