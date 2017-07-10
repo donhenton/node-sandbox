@@ -69,7 +69,9 @@ module.exports = function () {
     app.use(passport.initialize());
     app.use(passport.session());
     
-    
+    var secureChecker = require('../app/filters/secureChecker')(config);
+    app.use(secureChecker);
+
     
 
     // Set the application view engine and 'views' folder
