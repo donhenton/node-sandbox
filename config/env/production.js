@@ -13,5 +13,6 @@ module.exports = {
        // db: {url: "mongodb://mongouser:#######@ds029811.mongolab.com:29811/restaurant_collection"}
        db: {url: process.env.MONGO_URI},
        morgueDb: {url: process.env.MONGO_MORGUE_URI},
+       jwtDb: {url: process.env.JWTDB_URI},
        mailPassword: process.env.MAIL_PASSWORD
 };
