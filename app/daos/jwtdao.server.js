@@ -14,7 +14,8 @@ module.exports = function (config) {
     var COLLECTION_NAME = 'tokens';
 
 
-
+//https://github.com/dwyl/learn-json-web-tokens/tree/master/example/lib
+//http://www.svlada.com/jwt-token-authentication-with-spring-boot/
 
 
     function  promisedDBConnect()
