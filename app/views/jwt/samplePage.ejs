@@ -8,14 +8,45 @@
 <div class="row">
 <div class="col-sm-6">
 <h4>Input</h4>
- left
+<style>
+#tokenValue
+{
+   
+  height: 300px;
+}
+</style>
+
+<form method="GET" action="/jwt/loadSample.doc">
+<input type="submit" class="btn btn-danger" value="Generate" />
+</form>
+
+
+
 </div>
 <div class="col-sm-6">
 <h4>Results</h4>
- right
+<form method="POST" action="/jwt/validateSample.doc">
+ 
+
+ <textarea class="form form-control" name="tokenValue" id="tokenValue">
+ <%= token %>
+ </textarea>
+<br />
+<input type="submit" class="btn btn-danger" value="Validate" />
+
+
+</form>
+
+
+
+
+
   </div>
 </div>
-
+<br>
+<div class="row">
+<b>Validity Results:</b> <%= isValid %>
+</div>
 
 
 

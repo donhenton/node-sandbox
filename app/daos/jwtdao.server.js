@@ -139,10 +139,13 @@ module.exports = function (config) {
 
     jwtService.verifyToken = function (token) {
         var decoded = false;
+       // token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjoiOTBhYzA1ODEtYTRhNy00YTEzLWEyYzktNDZkZjQwNDIyNWExIiwiYWdlbnQiOiJNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMF8xMV82KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvNTkuMC4zMDcxLjExNSBTYWZhcmkvNTM3LjM2IiwiZXhwIjoxNDk5ODkxMzM1LCJfaWQiOiI1OTY1MzUwNzQyYWQ1ZTY5NWIwZjgxNzYiLCJpYXQiOjE0OTk4MDQ5MzV9.2ve3j-z1K9G6kyp5dmk9XaVHbaxxIdBF68-rukFF2TY"
         try {
             decoded = jwt.verify(token, secret);
+            logger.debug("in verify "+JSON.stringify(decoded))
         } catch (e) {
             decoded = false; // still false
+            logger.error("verify issue "+JSON.stringify(e))
         }
         return decoded;
     }
@@ -155,9 +158,16 @@ module.exports = function (config) {
         if (!decoded || (decoded && !decoded.auth))
         {
             callBackMessage.error = "Authorization failed";
-            callBackMessage.message = callBackMessage.error;
-            callback(callBackMessage());
+            callBackMessage.message = JSON.stringify(decoded);
+            callback(callBackMessage);
             return;
+        }
+        if (decoded && decoded.auth)
+        {
+            callBackMessage.success = true;
+            callBackMessage.message = JSON.stringify(decoded);
+            callback(callBackMessage);
+            
         }
     }
 
