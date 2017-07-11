@@ -12,7 +12,8 @@ module.exports = function (config) {
     var Q = require('q');
     var secret = config.jwtDb.secret;
     var COLLECTION_NAME = 'tokens';
-
+    var log4js = require('log4js');
+    var logger = log4js.getLogger('jwtdao.server.js');
 
 //https://github.com/dwyl/learn-json-web-tokens/tree/master/example/lib
 //http://www.svlada.com/jwt-token-authentication-with-spring-boot/

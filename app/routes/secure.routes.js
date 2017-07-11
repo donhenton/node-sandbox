@@ -140,12 +140,12 @@ module.exports = function (app) {
         }// end search string exists
 
 
-        logger.debug("filter 3");
+      //  logger.debug("filter 3");
 
         if (req.isAuthenticated()) {
             return next();
         }
-        logger.debug("filter 4");
+      //  logger.debug("filter 4");
         res.render('secureLocal/login', {
             title: 'Login page',
             sendToPath: encodeURIComponent(sendToPath)

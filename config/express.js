@@ -81,6 +81,7 @@ module.exports = function () {
     // Load the 'index' routing file
     var daoService = require('../app/daos/restaurantdao.server.js')(config);
     var morgueService = require('../app/daos/morguedao.server.js')(config);
+    var jwtService = require('../app/daos/jwtdao.server.js')(config);
     require('../app/routes/generic.server.routes.js')(app);
     require('../app/routes/session.server.routes.js')(app);
     require('../app/routes/cookies.server.routes.js')(app);
@@ -89,6 +90,7 @@ module.exports = function () {
     require('../app/routes/promise.demos.routes.js')(app);
     require('../app/routes/mail.demos.routes.js')(app,config);
     require('../app/routes/secure.routes.js')(app);
+    require('../app/routes/jwt.routes.js')(app,jwtService);
     require('../app/routes/error.handling.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
