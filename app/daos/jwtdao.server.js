@@ -114,13 +114,13 @@ module.exports = function (config) {
     jwtService.generateToken = function (req, opts) {
         opts = opts || {};
 
-        // By default, expire the token after 1 days.
+        // By default, expire the token after 8 hours.
         // NOTE: the value for 'exp' needs to be in seconds since
         // the epoch as per the spec!
         var GUID = generateUUID();
         var roles = opts.roles || [];
         var subValue = opts.subValue ;
-        var expiresDefault = Math.floor(new Date().getTime() / 1000) + 1 * 24 * 60 * 60;
+        var expiresDefault = Math.floor(new Date().getTime() / 1000) + 1 * 8 * 60 * 60;
         var dataObj = {
             auth: GUID,
             agent: req.headers['user-agent'],
