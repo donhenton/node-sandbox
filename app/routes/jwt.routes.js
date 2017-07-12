@@ -46,47 +46,61 @@ module.exports = function (app, jwtService) {
 
 
             });
-            
-     app.post('/jwt/validateSample.doc',
+
+    app.post('/jwt/validateSample.doc',
             function (req, res) {
 
-               // {error: null, message: null, success: false}
-               validResult = "nothing";
-               function processResult(res)
-               {
-                   validResult = JSON.stringify(res)
-               }
+                // {error: null, message: null, success: false}
+                validResult = "nothing";
+                function processResult(res)
+                {
+                    validResult = JSON.stringify(res)
+                }
 
 
 
-               var tokenValue = decodeURIComponent(req.body.tokenValue);
-               tokenValue = tokenValue.trim();
-               jwtService.validateWebRequest(tokenValue,processResult)
-               res.render('jwt/samplePage', {
-                                title: 'Web Tokens',
-                                token: tokenValue,
-                                isValid:  validResult 
-                            });
+                var tokenValue = decodeURIComponent(req.body.tokenValue);
+                tokenValue = tokenValue.trim();
+                jwtService.validateWebRequest(tokenValue, processResult)
+                res.render('jwt/samplePage', {
+                    title: 'Web Tokens',
+                    token: tokenValue,
+                    isValid: validResult
+                });
 
 
             });
-            
-            
-            
+
+
+
     //////////////////////////////////////////////////////////////////////////
     //angular 4 security demo      
     //////////////////////////////////////////////////////////////////////////
-    
-    
+
+
     app.get('/secure/angular4/demoPage.doc',
             function (req, res) {
 
 
 
                 res.render('jwt/angular4/securityDemo', {
-                    title: 'Angular4 Security' 
+                    title: 'Angular4 Security'
                 });
             });
-    
-    
+
+    //////////////////////////////////////////////////////////////////////////
+    //jwt REST login endpoint
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+
+    app.post('/jwt/requestToken', function (req, res) {
+
+
+
+
+    });
+
+
+
 }
