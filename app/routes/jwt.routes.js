@@ -4,8 +4,8 @@ module.exports = function (app, jwtService) {
     //rendering functions must define these first ////////////////////////////
     var log4js = require('log4js');
     var logger = log4js.getLogger('jwt.routes.js');
-
-
+    var usersService = require('./../services/usersService')();
+ 
 
     ///////////////////////////////////////////////////////////////////////
     // jwtpages
@@ -23,30 +23,7 @@ module.exports = function (app, jwtService) {
                 });
             });
 
-    app.get('/jwt/loadSample.doc',
-            function (req, res) {
-
-                jwtService.generateToken(req, {}).then(function (token)
-                {
-                    res.render('jwt/samplePage', {
-                        title: 'Web Tokens',
-                        token: token,
-                        isValid: ""
-                    });
-                },
-                        function (err)
-                        {
-                            var errorMessage = "ERROR " + JSON.stringify(err)
-                            res.render('jwt/samplePage', {
-                                title: 'Web Tokens',
-                                token: errorMessage,
-                                isValid: ""
-                            });
-                        })
-
-
-            });
-
+    
     app.post('/jwt/validateSample.doc',
             function (req, res) {
 
@@ -96,11 +73,57 @@ module.exports = function (app, jwtService) {
 
     app.post('/jwt/requestToken', function (req, res) {
 
+        var username = req.body.username;
+        var password = req.body.password;
 
+
+
+
+        usersService.findUser(username, function (err, user) {
+
+
+            var token = null;
+
+            if (err) {
+                res.statusCode = 500;
+                res.json({error: "general error"});
+                return;
+            }
+            if (!user) {
+                res.statusCode = 403;
+                res.json({error: "user '" + username + "' not found"});
+                return;
+            }
+            if (password !== user.password) {
+                //  logger.debug("checking password '"+password+"' user '"+user.password+"'")
+                res.statusCode = 403;
+                res.json({error: "user '" + username + "' found but password wrong"});
+                return;
+            }
+
+            opts = {
+                roles: user.roles,
+                subValue: user.id
+            }
+   
+
+
+            jwtService.generateToken(req, opts).then(function (token)
+            {
+                res.statusCode = 200;
+                res.json({officialName: user.officialName, roles: user.roles, id: user.id, token: token})
+            },
+                    function (err)
+                    {
+                        logger.error("problem in token gen " + JSON.stringify(err))
+                    })
+
+            
+
+
+
+        });
 
 
     });
-
-
-
 }

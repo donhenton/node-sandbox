@@ -118,16 +118,18 @@ module.exports = function (config) {
         // NOTE: the value for 'exp' needs to be in seconds since
         // the epoch as per the spec!
         var GUID = generateUUID();
+        var roles = opts.roles || [];
+        var subValue = opts.subValue ;
         var expiresDefault = Math.floor(new Date().getTime() / 1000) + 1 * 24 * 60 * 60;
         var dataObj = {
             auth: GUID,
             agent: req.headers['user-agent'],
             exp: opts.expires || expiresDefault,
-            "scopes": [
-                "ROLE_ADMIN",
-                "ROLE_PREMIUM_MEMBER"
-            ],
-            "sub": "svlada@gmail.com" 
+            "scopes":  roles 
+        }
+        if (subValue)
+        {
+            dataObj['sub'] = subValue;
         }
 
 
@@ -135,10 +137,10 @@ module.exports = function (config) {
             var token = jwt.sign(dataObj, secret);
             return token;
         },
-                function (err)
-                {
-                    console.log("generateToken " + JSON.stringify(err))
-                });
+        function (err)
+        {
+            console.log("generateToken " + JSON.stringify(err))
+        });
 
 
     }

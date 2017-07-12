@@ -14,7 +14,7 @@ module.exports = function () {
     }
     var noRoleUser = {
         username: 'noroles',
-        officialName: 'Bonzo Dog',
+        officialName: 'No Role Loser',
         password: 'noroles',
         roles: [],
         id: 1
