@@ -106,8 +106,7 @@ module.exports = function (config) {
         e["message"] = message;
         e["errorClass"] = classVar;
         return e;
-    }
-    ;
+    };
 
 
 

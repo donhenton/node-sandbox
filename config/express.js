@@ -90,13 +90,13 @@ module.exports = function () {
     require('../app/routes/promise.demos.routes.js')(app);
     require('../app/routes/mail.demos.routes.js')(app,config);
     require('../app/routes/secure.routes.js')(app);
-    require('../app/routes/jwt.routes.js')(app,jwtService);
     require('../app/routes/error.handling.routes.js')(app);
     require('../app/routes/embeddedJS.server.routes.js')(app);
     require('../app/routes/socketPage.server.routes.js')(app);
+    //CORS is activated in the MorgueFile and below
     require('../app/routes/MorgueFile.server.routes.js')(app,morgueService);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
-
+    require('../app/routes/jwt.routes.js')(app,jwtService);
     
 
     /*
