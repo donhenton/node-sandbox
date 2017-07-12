@@ -17,7 +17,7 @@ module.exports = function (config) {
 
 //https://github.com/dwyl/learn-json-web-tokens/tree/master/example/lib
 //http://www.svlada.com/jwt-token-authentication-with-spring-boot/
-
+//https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
 
     function  promisedDBConnect()
     {
@@ -100,13 +100,14 @@ module.exports = function (config) {
 
 
 
-     function createError(message, classVar)
+    function createError(message, classVar)
     {
         var e = {};
         e["message"] = message;
         e["errorClass"] = classVar;
         return e;
-    };
+    }
+    ;
 
 
 
@@ -121,31 +122,36 @@ module.exports = function (config) {
         var dataObj = {
             auth: GUID,
             agent: req.headers['user-agent'],
-            exp: opts.expires || expiresDefault
+            exp: opts.expires || expiresDefault,
+            "scopes": [
+                "ROLE_ADMIN",
+                "ROLE_PREMIUM_MEMBER"
+            ],
+            "sub": "svlada@gmail.com" 
         }
 
 
-        return saveTokeInfo(dataObj).then(function(){
+        return saveTokeInfo(dataObj).then(function () {
             var token = jwt.sign(dataObj, secret);
             return token;
         },
-        function(err)
-        {
-            console.log("generateToken "+JSON.stringify(err))
-        });
+                function (err)
+                {
+                    console.log("generateToken " + JSON.stringify(err))
+                });
 
- 
+
     }
 
     jwtService.verifyToken = function (token) {
         var decoded = false;
-       // token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjoiOTBhYzA1ODEtYTRhNy00YTEzLWEyYzktNDZkZjQwNDIyNWExIiwiYWdlbnQiOiJNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMF8xMV82KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvNTkuMC4zMDcxLjExNSBTYWZhcmkvNTM3LjM2IiwiZXhwIjoxNDk5ODkxMzM1LCJfaWQiOiI1OTY1MzUwNzQyYWQ1ZTY5NWIwZjgxNzYiLCJpYXQiOjE0OTk4MDQ5MzV9.2ve3j-z1K9G6kyp5dmk9XaVHbaxxIdBF68-rukFF2TY"
+        // token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjoiOTBhYzA1ODEtYTRhNy00YTEzLWEyYzktNDZkZjQwNDIyNWExIiwiYWdlbnQiOiJNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMF8xMV82KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvNTkuMC4zMDcxLjExNSBTYWZhcmkvNTM3LjM2IiwiZXhwIjoxNDk5ODkxMzM1LCJfaWQiOiI1OTY1MzUwNzQyYWQ1ZTY5NWIwZjgxNzYiLCJpYXQiOjE0OTk4MDQ5MzV9.2ve3j-z1K9G6kyp5dmk9XaVHbaxxIdBF68-rukFF2TY"
         try {
             decoded = jwt.verify(token, secret);
-            logger.debug("in verify "+JSON.stringify(decoded))
+            logger.debug("in verify " + JSON.stringify(decoded))
         } catch (e) {
             decoded = false; // still false
-            logger.error("verify issue "+JSON.stringify(e))
+            logger.error("verify issue " + JSON.stringify(e))
         }
         return decoded;
     }
@@ -167,7 +173,7 @@ module.exports = function (config) {
             callBackMessage.success = true;
             callBackMessage.message = JSON.stringify(decoded);
             callback(callBackMessage);
-            
+
         }
     }
 
