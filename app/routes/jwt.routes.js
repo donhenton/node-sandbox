@@ -70,7 +70,23 @@ module.exports = function (app, jwtService) {
 
 
             });
-       
             
+            
+            
+    //////////////////////////////////////////////////////////////////////////
+    //angular 4 security demo      
+    //////////////////////////////////////////////////////////////////////////
+    
+    
+    app.get('/secure/angular4/demoPage.doc',
+            function (req, res) {
 
+
+
+                res.render('jwt/angular4/securityDemo', {
+                    title: 'Angular4 Security' 
+                });
+            });
+    
+    
 }
