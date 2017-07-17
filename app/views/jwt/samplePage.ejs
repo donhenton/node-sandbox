@@ -1,13 +1,6 @@
 <% include  ../partials/header %>
 
  
-
-
-
-<h3><%= title %></h3>
-<div class="row">
-<div class="col-sm-6">
-<h4>Input</h4>
 <style>
 #tokenValue
 {
@@ -15,11 +8,16 @@
   height: 300px;
 }
 </style>
-<!--
-<form method="GET" action="/jwt/loadSample.doc">
-<input type="submit" class="btn btn-danger" value="Generate" />
-</form>
--->
+
+
+<h3><%= title %></h3>
+<div class="row">
+<div class="col-sm-6">
+<h4>Input</h4>
+<br/>
+<p>Submit a user name and password to obtain a web token<br> (Username: test Password: test)</p>
+
+ 
 
 <br/>
         <form class="form-horizontal col-sm-10"    name="postDemoForm"  novalidate>
@@ -49,6 +47,7 @@
                     </div>
 
         </form>
+ 
 
 </div>
 <div class="col-sm-6">
@@ -61,7 +60,7 @@
  </textarea>
 <br />
 <input type="submit" class="btn btn-danger" value="Validate" />
-
+(click to validate the token)
 
 </form>
 
