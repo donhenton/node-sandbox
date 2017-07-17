@@ -1,0 +1,55 @@
+{
+	"id": "85b0ea0d-3276-ba00-ad92-627b63d8ea51",
+	"name": "jwtSamples",
+	"requests": [
+		{
+			"id": "0ccb0d0b-83c1-a766-6382-9c055db34c57",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/jwt/requestToken",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "85b0ea0d-3276-ba00-ad92-627b63d8ea51",
+			"data": [
+				{
+					"key": "username",
+					"value": "test",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "test",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "jwtToken Sample",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1500320730895,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	],
+	"order": [
+		"0ccb0d0b-83c1-a766-6382-9c055db34c57"
+	],
+	"timestamp": 1500320730896
+}
