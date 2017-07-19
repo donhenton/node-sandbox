@@ -71,7 +71,7 @@ module.exports = function (app, config) {
 
         var assemble = req.protocol + '://' + req.get('host') + req.originalUrl;
         var parts = url.parse(assemble);
-        var port = config.running_port;
+        var port = parts.port;
        // logger.debug("port is " + port);
         if (!port)
         {
@@ -96,7 +96,7 @@ module.exports = function (app, config) {
         };
 
         logger.info("\noptions "+JSON.stringify(options));
-        console.log("options-----> "+JSON.stringify(options));
+        //console.log("options-----> "+JSON.stringify(options));
 
         var streamRequest = http.request(options, function (streamResponse)
         {
