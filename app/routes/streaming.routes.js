@@ -47,6 +47,15 @@ module.exports = function (app, config) {
 
 
     }
+    
+    app.get('/streaming/explanationPage.doc',function(req,res)
+    {
+       res.render('streaming/streamingDemo', {
+            title: 'Streaming Demo'
+        });
+    });
+    
+    
 
     /* the csv generator */
     app.get('/streaming/csvdownload/:type',

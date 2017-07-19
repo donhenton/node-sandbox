@@ -1,0 +1,34 @@
+<% include  ../partials/header %>
+
+ 
+
+
+
+<h3><%= title %></h3>
+<div class="row">
+<div class="col-md-offset-1 col-sm-8">
+ 
+<p class="row">The link below will call a route that proxies a streaming download, and will
+stream that download as well. </p>
+
+<p class="row">The routes are located in routes/streaming.routes.js</p>
+<p class="row">The download is at '/streaming/csvdownload/:type' and the proxy route is 
+'/secure/proxyDownload'.</p>
+
+<p class="row">The link below, is to the proxy, which calls the download via http, and streams
+the results. Note that if you are not logged in you will be prompted for access.
+(Username: test, Password: test)</p>
+
+<p>&nbsp;</p>
+
+
+<a class="btn btn-primary" href="/secure/proxyDownload">Download</a>
+
+</p>
+
+</div>
+ 
+ <% include  ../partials/footer %>
+ 
+ 
+        
