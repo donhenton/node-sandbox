@@ -96,6 +96,7 @@ module.exports = function (app, config) {
         };
 
         logger.info("options "+JSON.stringify(options));
+        console.log("options-----> "+JSON.stringify(options));
 
         var streamRequest = http.request(options, function (streamResponse)
         {

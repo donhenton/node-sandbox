@@ -17,6 +17,16 @@ var json3 = require('json3');
 var log4js = require('log4js');
 var logger = log4js.getLogger('server.js');
 
+log4js.configure({
+  appenders: {
+    out: { type: 'stdout' } 
+  },
+  categories: {
+    default: { appenders: [ 'out' ], level: 'info' }
+  }
+});
+
+
 // Use the Express application instance to listen to the '3000' port
 
 require("./app/websockets/socketServer.js")(io,daoService,json3);
