@@ -9,7 +9,7 @@ var http = require('http');
 
 module.exports = function (app, config) {
 
-    
+
 
     function generateCSV(type, res, req)
     {
@@ -29,12 +29,12 @@ module.exports = function (app, config) {
 
         for (var i = 0; i < limit; i++)
         {
-            chunk = chunk + "" + i + "," + (10 * i) + ","+(chunkCt)+ "\n";
+            chunk = chunk + "" + i + "," + (10 * i) + "," + (chunkCt) + "\n";
             if (i % 20 === 0)
             {
                 res.write(chunk);
                 chunk = '';
-                chunkCt ++ ;
+                chunkCt++;
             }
 
         }
@@ -67,53 +67,56 @@ module.exports = function (app, config) {
 //https://stackoverflow.com/questions/4771614/download-large-file-with-node-js-avoiding-high-memory-consumption
 //https://nodejs.org/api/http.html#http_http_request_options_callback
 
-app.get("/secure/proxyDownload", function (req, res, next) {
+    app.get("/secure/proxyDownload", function (req, res, next) {
 
-
+        var assemble = req.protocol + '://' + req.get('host') + req.originalUrl;
+        var parts = url.parse(assemble);
         var port = config.running_port;
-        logger.debug("port is "+port)
- 
-         var options = {
+       // logger.debug("port is " + port);
+        if (!port)
+        {
+            port = 80;
+        }
+        
+
+        var options = {
             method: 'GET',
-            path:   "/streaming/csvdownload/large",
+            path: "/streaming/csvdownload",
             port: port,
-            hostname: 'localhost',
-            host: 'localhost',
+            hostname: parts.hostname,
+            
 
             headers:
                     {
-                        
+
                         'Transfer-Encoding': 'chunked'
                     }
 
 
         };
-        
-        // var body;
-        // var dlprogress = 0;
-         logger.debug("options "+JSON.stringify(options))
-         
-             
-        var streamRequest = http.request(options,function(streamResponse)
+
+     
+
+        var streamRequest = http.request(options, function (streamResponse)
         {
-            logger.debug("File size: " + streamResponse.headers['content-length'] + " bytes.");
-            
+            //logger.debug("File size: " + streamResponse.headers['content-length'] + " bytes.");
+
             res.setHeader('Content-disposition', 'attachment; filename=proxy_list.csv');
             res.set('Content-Type', 'text/csv');
             streamResponse.on('data', function (chunk) {
-              //  dlprogress += chunk.length;
-              //  body += chunk;
+                //  dlprogress += chunk.length;
+                //  body += chunk;
                 res.write(chunk);
-            }).on('end',function() {
+            }).on('end', function () {
                 res.status(200).end();
-                logger.debug("After download finished");
+               // logger.debug("After download finished");
             })
         });
-        streamRequest.on('error', function(e) {
-                 next(e);
+        streamRequest.on('error', function (e) {
+            next(e);
         });
 
-       streamRequest.end();
+        streamRequest.end();
 
 
     });
