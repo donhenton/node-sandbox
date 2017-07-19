@@ -14,6 +14,8 @@ var io = require('socket.io')(server);
 var daoService = 
   require('./app/daos/restaurantdao.server.js')(config);
 var json3 = require('json3');
+var log4js = require('log4js');
+var logger = log4js.getLogger('server.js');
 
 // Use the Express application instance to listen to the '3000' port
 
@@ -23,7 +25,11 @@ var portVar = 3000;
 if (process.env.NODE_ENV === 'production') {
     portVar = process.env.PORT;
 }  
-server.listen(portVar);
+var listener = server.listen(portVar,function(){
+    config.running_port = listener.address().port;
+     
+  // logger.info("start listening " +config.running_port )
+});
 // Log the server status to the console
 console.log('Server running at http://localhost:' + portVar+" ("+process.env.NODE_ENV+")");
 

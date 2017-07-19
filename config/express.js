@@ -94,7 +94,7 @@ module.exports = function () {
     require('../app/routes/socketPage.server.routes.js')(app);
     require('../app/routes/MorgueFile.server.routes.js')(app,morgueService);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
-
+    require('../app/routes/streaming.routes.js')(app, config);
     
 
     /*
