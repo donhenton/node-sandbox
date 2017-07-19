@@ -16,16 +16,38 @@ var daoService =
 var json3 = require('json3');
 var log4js = require('log4js');
 var logger = log4js.getLogger('server.js');
-
+var $depth = 10;
 log4js.configure({
-  appenders: {
-    out: { type: 'stdout' } 
-  },
-  categories: {
-    default: { appenders: [ 'out' ], level: 'info' }
-  }
-});
+    appenders: [
+        {type: 'console',
+            "layout": {
+                "type": "pattern",
+                //"pattern": "%d %[%p%] %[%c%] - %m%n"
 
+                pattern: "%d %c %[%p {%x{ln}} -%]\t%m%n",
+                tokens: {
+                    ln: function () {
+                        // The caller:
+                        return (new Error).stack.split("\n")[$depth]
+                                // Just the namespace, filename, line:
+                                .replace(/^\s+at\s+(\S+)\s\((.+?)([^\/]+):(\d+):\d+\)$/, function () {
+                                    // return arguments[1] +' '+ arguments[3] +' line '+ arguments[4];
+                                    //   return arguments[0] +' '+ arguments[2] +' line '+arguments[3]
+                                    return arguments[3] + ':' + arguments[4];
+                                });
+                    }
+                }
+
+
+
+            }
+        } 
+    ],
+    "levels": {
+        "[all]": "DEBUG" 
+    }
+
+});
 
 // Use the Express application instance to listen to the '3000' port
 
