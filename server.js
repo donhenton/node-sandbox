@@ -44,7 +44,7 @@ log4js.configure({
         } 
     ],
     "levels": {
-        "[all]": "DEBUG" 
+        "[all]": "INFO" 
     }
 
 });
@@ -58,6 +58,9 @@ if (process.env.NODE_ENV === 'production') {
     portVar = process.env.PORT;
 }  
 var listener = server.listen(portVar,function(){
+    //on heroku this is a backing port eg 33833, not 80
+    //heroku serves on on one directs on 80 to this service
+    //not true with local dev
     config.running_port = listener.address().port;
      
   // logger.info("start listening " +config.running_port )
