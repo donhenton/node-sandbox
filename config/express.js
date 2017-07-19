@@ -96,6 +96,7 @@ module.exports = function () {
     //CORS is activated in the MorgueFile and below
     require('../app/routes/MorgueFile.server.routes.js')(app,morgueService);
     require('../app/routes/restaurant.server.routes.js')(app, daoService);
+    require('../app/routes/streaming.routes.js')(app, config);
     require('../app/routes/jwt.routes.js')(app,jwtService);
     
 
