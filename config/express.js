@@ -43,17 +43,18 @@ module.exports = function () {
     }));
     app.use(bodyParser.json());
     app.use(methodOverride());
-
+    //2 hr sessions
     var MongoStore = require('connect-mongo')(session);
     app.use(session({
         secret: config.sessionSecret,
-        resave: true,
-        saveUninitialized: true,        
+        cookie: {maxAge:(1*3600*1000)},
+        resave: false,
+        saveUninitialized: false,        
         store: new MongoStore({
             url: config.db.url,
         })
     }));
-
+       
 //    app.dynamicHelpers({
 //        mySession: function(req,res){
 //        return req.session;}
