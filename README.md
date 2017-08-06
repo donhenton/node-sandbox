@@ -8,7 +8,7 @@ persistence is via Mongodb.
 Additionally, it demonstrates REST services with Node and Express, and
 Websockets with socket.io.
 
-Also included are  an Angular JS applications which use Mongodb for persistence, and a ReactJS application
+Also included are Angular JS applications which use Mongodb for persistence, and a ReactJS application
 
 This project is the source code for a node demonstration application. The
 application is housed at  
