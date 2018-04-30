@@ -1,3 +1,4 @@
 {
-    "directory": "public/js/bower"
+    "directory": "public/js/bower",
+    "strict-ssl": false
 }

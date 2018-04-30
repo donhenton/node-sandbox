@@ -57,3 +57,23 @@ node server.js (at root directory)
 * gulp backend (for working with js and node route changes)
 * gulp frontend (for just frontend work)
 
+### Using docker for mongodb
+
+```
+docker run -d \
+    --name mongodb \
+    -p 27017:27017 \
+    -v ~/mongo/data:/data/db \
+    khezen/mongo:latest
+```
+For the shell
+
+```
+docker exec -ti mongodb mongo  (exit exit to return to cmd line)
+```
+
+### Importing Mongo Data Locally
+
+Use the netbeans Mongodb plugin, create a database called restaurant_collections,
+and a collection called restaurants, select import on the db and use the
+restaurants.json file in the docs folder.
