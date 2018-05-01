@@ -89,7 +89,7 @@ module.exports = function (app) {
       employeeChoices = [];
     }
     
-    // if only one select it's returned as an array
+    // if only one select it's returned as a string
     
     if ((typeof employeeChoices) === 'string') {
       employeeChoices = [employeeChoices]; 
