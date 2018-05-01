@@ -14,6 +14,10 @@ This project is the source code for a node demonstration application. The
 application is housed at  
 <a href="http://donhenton-node.herokuapp.com/">http://donhenton-node.herokuapp.com/</a> .
 
+### Node Version
+
+This application is tested for Node 8.11.1
+
 
 ### Enabling CORS
 
