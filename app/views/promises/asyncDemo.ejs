@@ -1,0 +1,113 @@
+<% include  ../partials/header %>
+<% include  ../partials/functions %>
+	 
+<div class="container">
+    <div class="row">
+    <h3>References</h3>
+        <ul>
+            <li>
+                <a href="https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016">
+                    https://medium.com/@Abazhenov/using-async-await-in-express-with-node-8-b8af872c0016</a>
+            </li>
+            <li>
+                <a href="https://davidwalsh.name/async-await">https://davidwalsh.name/async-await</a>
+            </li>
+            <li>
+                <a href="https://gist.github.com/wesbos/1866f918824936ffb73d8fd0b02879b4">
+                    https://gist.github.com/wesbos/1866f918824936ffb73d8fd0b02879b4</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+    These examples use <a target="_blank" href="http://donhenton-spring-boot.herokuapp.com/swagger-ui.html">these services</a>.
+    It can take a while to load the service, so click on this link first to spin up the dyno on heroku
+    </div>
+</div>
+<hr/>
+
+<% if (offices.length === 0) { %>
+<form action="/asyncDemo/getOffices.doc" method="GET">
+<input type="submit" class="btn btn-primary" value="Get Offices">
+</form>
+<p>&nbsp;</p>
+<% } %>
+<% if (offices.length > 0) { %>
+<div class="row">
+<form class="form-horizontal col-sm-8" action="/asyncDemo/changeOffice.doc" method="GET">
+    <div class="form-group">
+            <label class="col-sm-2 control-label" for="office">Office</label>
+            <div class="col-sm-5">
+                <select class="form-control" name="office">
+                <% offices.forEach((o,idx) => { %>
+                    <option  <%= idx === 0 ? ' selected': '' %>  value='<%= o.officeCode %>'><%= o.addressLine1 %></option>
+                <% }) %>
+                </select>
+            </div>
+            <div class="col-sm-5">
+                <input type="submit" class="btn btn-primary" value="Change Office">
+            </div>
+    </div>
+
+</form>
+</div>
+
+<p>&nbsp;</p>
+ 
+<form class="col-sm-8" action="/asyncDemo/employeeCustomers.doc" method="GET">
+
+<table class="table  table-striped">
+    <% offices[0].employees.forEach(e => { %>
+        <tr><td><%= e.lastName+" "+e.firstName %></td><td><%= e.email %></td>
+        <td><input type='checkbox' name='selectedEmployees' 
+
+          <%= computeCheck(e.id, selectedEmployees) %>
+
+          value=<%= e.id %>></td>
+        </tr>
+    <% }) %>
+
+</table>
+
+<p><input type="submit" class='btn btn-primary' value="Get Customers"></p>
+
+</form>
+
+<hr/>
+
+<% if (customers && customers.length > 0) { %>
+<div class="container">
+    
+        <% customers.forEach(c => { %>
+           <div class="row col-sm-12">
+           <h3><%= c.employeeName %></h3>
+                <div class="col-sm-5">
+                    <% if (c.customers && c.customers.length > 0 ) { %>
+                        <table class="table table-striped">
+                           <% c.customers.forEach(cc => { %>
+                           <tr><td><%= cc.customerName %></td><td><%= cc.country %></td></tr>
+
+                           <% }) %>
+                        </table>
+                    <% } else { %>
+
+                        <blockquote><h4>No Customers</h4></blockquote>
+                    <% } %>
+                </div>
+           </div>
+
+        <% }) %>
+
+   
+</div>
+<% } %> 
+<!-- customers length if -->
+
+
+<% } %> 
+<!-- office length if -->
+
+ <p>&nbsp;</p>
+ <% include  ../partials/footer %>
+
+ 
+ 
