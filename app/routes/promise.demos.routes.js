@@ -142,6 +142,33 @@ module.exports = function (app) {
       next(e)
     }
   }
+  
+
+  let changeOfficeRender = function(req,res) {
+    
+    
+    let officeId = req.query.office;
+    foundOffice = req.session.enrichedOffices.filter(o => {
+      return o.officeCode === officeId;
+    })
+
+    foundOffice = foundOffice[0];
+    
+    req.session.selectedOffice = foundOffice;
+    res.render('promises/asyncDemo', {
+      title: 'Async Demonstation',
+      offices: req.session.enrichedOffices,
+      customers: [],
+      selectedOffice:  foundOffice,
+      selectedEmployees: []
+    });
+    
+    
+  }
+  
+  
+  
+  
 
   // routes
 
@@ -149,6 +176,7 @@ module.exports = function (app) {
   app.get('/asyncDemo.doc', asyncDemoRender);
   app.get('/asyncDemo/getOffices.doc', getOfficesRender);
   app.get('/asyncDemo/employeeCustomers.doc', getEmployeeCustomersRender);
+  app.get('/asyncDemo/changeOffice.doc', changeOfficeRender);
 
 
 }

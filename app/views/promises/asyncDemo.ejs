@@ -39,7 +39,8 @@
             <div class="col-sm-5">
                 <select class="form-control" name="office">
                 <% offices.forEach((o,idx) => { %>
-                    <option  <%= idx === 0 ? ' selected': '' %>  value='<%= o.officeCode %>'><%= o.addressLine1 %></option>
+                    <option  <%= o.officeCode === selectedOffice.officeCode ?
+                       ' selected': '' %>  value='<%= o.officeCode %>'><%= o.addressLine1 %></option>
                 <% }) %>
                 </select>
             </div>
@@ -52,11 +53,11 @@
 </div>
 
 <p>&nbsp;</p>
- 
+ <h4>Office Employees</h4>
 <form class="col-sm-8" action="/asyncDemo/employeeCustomers.doc" method="GET">
 
 <table class="table  table-striped">
-    <% offices[0].employees.forEach(e => { %>
+    <% selectedOffice.employees.forEach(e => { %>
         <tr><td><%= e.lastName+" "+e.firstName %></td><td><%= e.email %></td>
         <td><input type='checkbox' name='selectedEmployees' 
 
@@ -79,7 +80,7 @@
     
         <% customers.forEach(c => { %>
            <div class="row col-sm-12">
-           <h3><%= c.employeeName %></h3>
+           <h4>Customers For <%= c.employeeName %></h4>
                 <div class="col-sm-5">
                     <% if (c.customers && c.customers.length > 0 ) { %>
                         <table class="table table-striped">
